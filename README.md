@@ -71,41 +71,216 @@ chown -R bcuser:bcuser /app
 Install Hyperledger Fabric binaries and docker images
 
 ```bash
+sudo su - bcuser
 cd /app
 curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.2.1 1.4.9
 docker pull couchdb:3.1.1
 ```
 
-# Network setup (e.g. mytest-network)
-Clone the repo for the scripts to setup the network
+# Network setup & configuration (e.g. mytest-network)
+- Clone the repo for the scripts to setup & configure the network
 
 ```bash
 cd /app
 git clone https://github.com/dammsri/hyperledger-fabric.git
-# The below step is optional as the above said version binaries alredy present in this repo
+# The below mv step is optional as the above said version binaries alredy present in this repo
 mv ../fabric-samples/bin/* hyperledger-fabric/bin/
+echo "export PATH=\$PATH:/app/hyperledger-fabric/bin" >> ~/.bash_profile
+. ~/.bash_profile
+```
+- Prepare the Organization configuration (network.conf)
+    - CAs (TLS, Orderer & Org)
+    - Orderer if the Organization hosting and managing Orderer node
+    - Peers
+    - Network directory and Channel ID etc.,
+
+```
+$ tree -L 1 hyperledger-fabric
+../hyperledger-fabric/
+├── bin
+├── config
+├── configtx
+├── configuration_ref.txt
+├── network.conf
+├── README.md
+├── scripts
+└── templates
+
+7 directories, 3 files
+$ tree templates
+templates
+├── ca.cfg
+├── ccp-template.json
+├── ccp-template.yaml
+├── config.cfg
+├── configtx.cfg
+├── docker-compose-ca.cfg
+├── docker-compose-orderer.cfg
+├── docker-compose-org.cfg
+├── extra_hosts.txt
+├── fabric-ca-client.cfg
+├── fabric-ca-server.cfg
+├── org_configtx.cfg
+└── peer.cfg
+
+0 directories, 13 files
+$ tree scripts/
+scripts/
+├── add_new_org.sh
+├── ccp-generate.sh
+├── clean.sh
+├── endorse_new_org.sh
+├── hlf_setup.sh
+├── network-down.sh
+├── network-up.sh
+├── new_org_request.sh
+├── set_env
+├── start_orderer.sh
+├── start_peers.sh
+└── t.sh
+
+0 directories, 12 files
+#------------------------------------------------------------------------------------------------------------
+
+network.conf               # Org's network configuration
+templates                  # The templates to generate the Org's network configuration files
+scripts/hlf_setup.sh       # To generate the Organization network configuration and prepare the CAs, Identies and MSP
+scripts/start_orderer.sh   # To generate genesis block and start the Orderer
+scripts/start_peers.sh     # To create the Channel (if it is the first Org), join the channel and start the peers & update anchor peers
+scripts/new_org_request.sh # To generate the new Org request to join the network/channel
+scripts/add_new_org.sh     # To add the new Org configuration to the network/channel
+scripts/endorse_new_org.sh # To endorse the new Org configuration joining request
+scripts/set_env            # To set the environment to interact with the network
+scripts/network-up.sh      # To Start the Network (if already setup)
+scripts/network-down.sh    # To stop the Network
+scripts/clean.sh           # To remove the Network
 ```
 
-Note: you refer the org-samples for directory structure reference.
+- Once the configuration is ready (netowrk.conf), Setup the network for Org1
+Run the scripts/hlf_setup.sh to prepare the network configuration
 
-# Form network with Org1 & Org2
-- update the hlf_vars & templates/extra_hosts.txt files to your Org requirements
-- Run the hlf_setup.sh script to create the CAs and the network structure for Org1
-- Run the hlf_setup.sh script to create the CAs and the network structure for Org2
-- Copy/share the Org2 MSP to Org1 server 
-- Run the start_org1.sh to start the Org1
-- Run the start_org2.sh to start the Org2
+```bash
+cd /app/hyperledger-fabric
+sh scripts/hlf_setup.sh
+```
 
-# Add Org3
-- update the hlf_vars & templates/extra_hosts.txt files to your Org requirements
-- Run the hlf_setup.sh script to create the CAs and the network structure for Org3
-- Run add_org_req.sh to generate Org3 request
-- Please share this request file to Org1 to update in the network channel
-- Run add_org.sh in Org1 server (after placing the Org3 request file in channel-artifacts directory)
-- Please share the Chennal pb file to Org2 to endorse
-- Run add_org_endorse.sh in Org2 server (after placing the pb file in channel-artifacts directory)
-- Then run start_org3.sh to start the Org3 in Org3 server.
+- First Organization's configuration is ready and do the same setup for Second Organization configuration. You need at least 2 Organizations to form Networm consortium
+- Second Organization needs to share it's MSP to the first Organization to setup the network/channel.
+- Place the Second Org's MSP (e.g Org2MSP) into Org2 directory (Please create Org2 dir)
 
+```
+$ tree -L 1 mytest-network/organizations/peerOrganizations/
+mytest-network/organizations/peerOrganizations/
+├── Org1
+└── Org2
 
-Note: Orderer MSP must be shared to all Organizations (Tested with One Orderer running at Org1)
+2 directories, 0 files
+$ tree -L 2 Org1/msp/
+Org1/msp/
+├── cacerts
+│   ├── cacert.pem
+│   └── hlf-node1-7056.pem
+├── config.yaml
+└── tlscacerts
+    ├── tls-cacert.pem
+    └── tls-hlf-node1-7054.pem
+
+2 directories, 5 files
+$ tree -L 2 Org2/msp/
+Org2/msp/
+├── cacerts
+│   ├── cacert.pem
+│   └── hlf-node2-7056.pem
+├── config.yaml
+└── tlscacerts
+    ├── tls-cacert.pem
+    └── tls-hlf-node2-7054.pem
+
+2 directories, 5 files
+```
+
+- Run the Orderer setup to create the genesis block (Org1)
+
+```bash
+sh scripts/start_orderer.sh
+```
+
+- Start the Peers for Org1
+
+```bash
+sh scripts/start_peers.sh
+```
+
+- Share the first Organization's Orderer MSP to Second Organization (to be place in the same location at Second Organization)
+
+```
+$ tree ordererOrganizations/Org1/msp/
+ordererOrganizations/Org1/msp/
+├── cacerts
+│   ├── cacert.pem
+│   └── hlf-node1-7055.pem
+├── config.yaml
+└── tlscacerts
+    ├── tls-cacert.pem
+    └── tls-hlf-node1-7054.pem
+
+2 directories, 5 files
+```
+
+- Second Organization to start the Peers (this will join the Second Org to the network)
+
+```bash
+scripts/start_peers.sh
+```
+### Note: Network is formed with 2 Organizations and ready.
+
+## Join the Third Organization to the Network (3rd or 4th etc.,)
+
+- Prepare the network configuration and setup.
+
+```bash
+sh scripts/hlf_setup.sh
+```
+
+- Generate Network Joining request (The request file Org3.json will be generated in the channel-artifacts) and share the request file to First Organization who is managing the Orderer
+
+```bash
+sh scripts/new_org_request.sh
+```
+
+- First Organization to place the file into same directory channel-artifacts and execute the below. This will update the Channel configuration and generate the .pb file to endorse the request
+
+```bash
+sh scripts/add_new_org.sh
+```
+
+- Share the .pb file to Second Organization to endorse. Second Org to place the file into channel-artifacts and execute
+
+```bash
+sh scripts/endorse_new_org.sh
+```
+
+### Note: Now Third Organization configuration is updated in the Network/channel and Third Organization can join the Network
+
+- Third Organization to join the Netowrk and start Peers
+
+```bash
+sh scripts/start_peers.sh
+```
+
+## Note: This setup is tested with One Orderer running at Org1. 
+
+# Verify the network
+To verify the network with the peer and discovery utilities.
+
+```bash
+# Set the environment 
+. scripts/set_env
+peer channel list
+peer channel getinfo -c $HLF_NETWORK_CHANNEL_ID
+discover --configFile conf.yaml --peerTLSCA $CORE_PEER_TLS_ROOTCERT_FILE --userKey organizations/peerOrganizations/Org1/users/User1\@Org1/msp/keystore/4ab467433c71156308add823b9e509c51496288f797dfb9d913186c7248a961a_sk --userCert organizations/peerOrganizations/Org1/users/User1\@Org1/msp/signcerts/cert.pem --MSP Org1MSP saveConfig
+discover --configFile conf.yaml peers --channel $HLF_NETWORK_CHANNEL_ID --server $CORE_PEER_ADDRESS
+discover --configFile conf.yaml config --channel $HLF_NETWORK_CHANNEL_ID --server $CORE_PEER_ADDRESS
+```
+
 
