@@ -283,4 +283,17 @@ discover --configFile conf.yaml peers --channel $HLF_NETWORK_CHANNEL_ID --server
 discover --configFile conf.yaml config --channel $HLF_NETWORK_CHANNEL_ID --server $CORE_PEER_ADDRESS
 ```
 
+# Deploy Chaincode 
+To deploy the chaincode 
+
+```bash
+# Set the environment 
+. scripts/set_env
+peer lifecycle chaincode package kychcaincode.tar.gz --lang node --path ./kycchaincode --label kyc_0
+peer lifecycle chaincode install kychcaincode.tar.gz
+export PACKAGE_ID=$(peer lifecycle chaincode queryinstalled --output json | jq -r '.installed_chaincodes[0].package_id')
+echo $PACKAGE_ID
+peer lifecycle chaincode approveformyorg  --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name kyccontract -v 0 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA
+peer lifecycle chaincode checkcommitreadiness --channelID $HLF_NETWORK_CHANNEL_ID --name kyccontract -v 0 --sequence 1
+```
 
