@@ -275,7 +275,7 @@ To verify the network with the peer and discovery utilities.
 
 ```bash
 # Set the environment 
-. scripts/set_env
+. ../scripts/set_env
 peer channel list
 peer channel getinfo -c $HLF_NETWORK_CHANNEL_ID
 discover --configFile conf.yaml --peerTLSCA $CORE_PEER_TLS_ROOTCERT_FILE --userKey organizations/peerOrganizations/Org1/users/User1\@Org1/msp/keystore/4ab467433c71156308add823b9e509c51496288f797dfb9d913186c7248a961a_sk --userCert organizations/peerOrganizations/Org1/users/User1\@Org1/msp/signcerts/cert.pem --MSP Org1MSP saveConfig
@@ -288,7 +288,7 @@ To deploy the chaincode
 
 ```bash
 # Set the environment 
-. scripts/set_env
+. ../scripts/set_env
 peer lifecycle chaincode package kychcaincode.tar.gz --lang node --path ./kycchaincode --label kyc_0
 peer lifecycle chaincode install kychcaincode.tar.gz
 export PACKAGE_ID=$(peer lifecycle chaincode queryinstalled --output json | jq -r '.installed_chaincodes[0].package_id')

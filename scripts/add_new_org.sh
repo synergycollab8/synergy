@@ -14,7 +14,7 @@ cd $HLF_NETWORK_DIR
 while [ -z "${_new_org_id}" ]; do
     read -p "Enter New Org ID: " _new_org_id
 done
-[[ ! -f ./channel-artifacts/${_new_org_id}.json ]] && {{ echo "Required File ./channel-artifacts/${_new_org_id}.json Not Found. Exiting..."; exit 1; }
+[[ ! -f ./channel-artifacts/${_new_org_id}.json ]] && { echo "Required File ./channel-artifacts/${_new_org_id}.json Not Found. Exiting..."; exit 1; }
 
 peer channel fetch config ./channel-artifacts/config_block.pb -o ${HLF_ORDR_HOST}:${HLF_ORDR_PORT} --ordererTLSHostnameOverride $HLF_ORDR_ID -c ${HLF_NETWORK_CHANNEL_ID} --tls --cafile $ORDERER_CA
 
