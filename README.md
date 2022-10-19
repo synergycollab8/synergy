@@ -274,7 +274,7 @@ sh scripts/start_peers.sh
 To verify the network with the peer and discovery utilities.
 
 ```bash
-# Set the environment 
+# Set the environment (CWD is NETWORK_DIR)
 . ../scripts/set_env
 peer channel list
 peer channel getinfo -c $HLF_NETWORK_CHANNEL_ID
@@ -283,11 +283,20 @@ discover --configFile conf.yaml peers --channel $HLF_NETWORK_CHANNEL_ID --server
 discover --configFile conf.yaml config --channel $HLF_NETWORK_CHANNEL_ID --server $CORE_PEER_ADDRESS
 ```
 
+# Install Node from the CentOS AppStream Repository (CentOS 8)
+```bash
+sudo dnf module list nodejs
+sudo dnf module enable nodejs:12         # Press 'y' when prompted
+sudo dnf install nodejs                  # Press 'y' when prompted
+node --version
+npm --version
+```
+
 # Deploy Chaincode 
 To deploy the chaincode 
 
 ```bash
-# Set the environment 
+# Set the environment (CWD is NETWORK_DIR)
 . ../scripts/set_env
 peer lifecycle chaincode package kychcaincode.tar.gz --lang node --path ./kycchaincode --label kyc_0
 peer lifecycle chaincode install kychcaincode.tar.gz
