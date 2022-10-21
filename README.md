@@ -284,6 +284,8 @@ discover --configFile conf.yaml config --channel $HLF_NETWORK_CHANNEL_ID --serve
 ```
 
 # Install Node from the CentOS AppStream Repository (CentOS 8)
+To install node and npm
+
 ```bash
 sudo dnf module list nodejs
 sudo dnf module enable nodejs:12         # Press 'y' when prompted
@@ -298,11 +300,41 @@ To deploy the chaincode
 ```bash
 # Set the environment (CWD is NETWORK_DIR)
 . ../scripts/set_env
-peer lifecycle chaincode package kychcaincode.tar.gz --lang node --path ./kycchaincode --label kyc_0
-peer lifecycle chaincode install kychcaincode.tar.gz
+# Nodejs application
+cd fabcar
+npm install --save   # May ignore if any nyc errors
+cd ..
+# chaincode
+cd chaincode/fabcar
+npm install --save
+# Package the Chaincode
+peer lifecycle chaincode package chaincode/fabcar.tar.gz --lang node --path chaincode/fabcar --label fabcar_1
+peer lifecycle chaincode install chaincode/fabcar.tar.gz
 export PACKAGE_ID=$(peer lifecycle chaincode queryinstalled --output json | jq -r '.installed_chaincodes[0].package_id')
 echo $PACKAGE_ID
-peer lifecycle chaincode approveformyorg  --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name kyccontract -v 0 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA
-peer lifecycle chaincode checkcommitreadiness --channelID $HLF_NETWORK_CHANNEL_ID --name kyccontract -v 0 --sequence 1
+peer lifecycle chaincode approveformyorg --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name fabcar -v 1.0 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA
+peer lifecycle chaincode checkcommitreadiness --channelID $HLF_NETWORK_CHANNEL_ID --name fabcar -v 1.0 --sequence 1
+# Once the chaincode is approved by members of the channel, commit the chaincode
+peer lifecycle chaincode commit --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name fabcar -v 1.0 --sequence 1 --tls --cafile $ORDERER_CA --peerAddresses $CORE_PEER_ADDRESS --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem
+peer lifecycle chaincode querycommitted --channelID $HLF_NETWORK_CHANNEL_ID --name fabcar --cafile $ORDERER_CA
+# Invoke the chaincode (initLedger)
+peer chaincode invoke --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name fabcar --tls --cafile $ORDERER_CA --peerAddresses $CORE_PEER_ADDRESS --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem -c '{"function":"initLedger","Args":[]}'
+# Query chaincode
+peer chaincode query -C mytestchannel -n fabcar -c '{"Args":["queryAllCars"]}'
+# Invoke the chaincode (createCar)
+peer chaincode invoke --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name fabcar --tls --cafile $ORDERER_CA --peerAddresses $CORE_PEER_ADDRESS --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem -c '{"function":"createCar","Args":["CAR11","Honda","Accord","Black","Tom"]}'
+peer chaincode query -C mytestchannel -n fabcar -c '{"Args":["queryAllCars"]}'
+# Upgrade chaincode
+peer lifecycle chaincode package chaincode/fabcar.tar.gz --lang node --path chaincode/fabcar --label fabcar_2
+peer lifecycle chaincode install chaincode/fabcar.tar.gz
+peer lifecycle chaincode queryinstalled
+# export new package ID to PACKAGE_ID
+peer lifecycle chaincode approveformyorg --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name fabcar -v 2.0 --package-id $PACKAGE_ID --sequence 2 --tls --cafile $ORDERER_CA
+peer lifecycle chaincode checkcommitreadiness --channelID $HLF_NETWORK_CHANNEL_ID --name fabcar -v 2.0 --sequence 2
+# Once the chaincode is approved by members of the channel, commit the chaincode
+peer lifecycle chaincode commit --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name fabcar -v 2.0 --sequence 2 --tls --cafile $ORDERER_CA --peerAddresses $CORE_PEER_ADDRESS --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem
+# Invoke the chaincode (createCar)
+peer chaincode invoke --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name fabcar --tls --cafile $ORDERER_CA --peerAddresses $CORE_PEER_ADDRESS --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem -c '{"function":"createCar","Args":["CAR11","Honda","Accord","Black","Tom"]}'
+peer chaincode query -C mytestchannel -n fabcar -c '{"Args":["queryAllCars"]}'
 ```
 

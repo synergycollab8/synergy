@@ -3,22 +3,18 @@
 ### Dammavalam, Srirangam
 ### 01-JUN-2021
 
-
 [[ "${0}" = "-bash" ]] && { __script_dir__=${PWD}; } || { __script_dir__=$(dirname $0); }
 __conf_file__=${__script_dir__}/../network.conf
+__helper_utils__=${__script_dir__}/../scripts/helper_utils
+if [ ! -f ${__helper_utils__} ]; then echo "${__helper_utils__} file NOT found. Exiting ..."; return; fi
+. ${__helper_utils__}
 if [ $# -eq 0 ]; then
-    if [ ! -f ${__conf_file__} ]; then
-        echo "${__conf_file__} file NOT found. Exiting ..."
-        exit 1
-    fi
+    if [ ! -f ${__conf_file__} ]; then echo "${__conf_file__} file NOT found. Exiting ..."; return; fi
     . ${__conf_file__}
 else
-    vars_file=$1
-    if [ ! -f $vars_file ]; then
-        echo "$vars_file NOT found. Exiting ..."
-        exit 1
-    fi
-    . ${vars_file}
+    __vars_file__=$1
+    if [ ! -f ${__vars_file__} ]; then echo "${__vars_file__} NOT found. Exiting ..."; return; fi
+    . ${__vars_file__}
 fi
 
 export FABRIC_CFG_PATH=${HLF_HOME}/config/

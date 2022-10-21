@@ -1,0 +1,38 @@
+#!/bin/bash
+
+### Dammavalam, Srirangam
+### 20-OCT-2022
+
+#---------------------------------------------
+# get_val function to get value of a variable
+# get_val <var>
+#---------------------------------------------
+get_val() {
+   _var1=$1
+   echo ${!_var1}
+}
+
+#-------------------------------------------------------
+# wait_for_event function to display wait/progress bar
+# while waiting for a process or event to be completed
+# wait_for_event <wait_seconds>
+#-------------------------------------------------------
+wait_for_event() {
+  _wait_sec=$1
+  _cur_sec=1
+  #_pchar="▇"
+  _pchar="#"
+  _pstr="["
+  #for __sec__ in $(seq 1 $_wait_sec); do _pstr=$(echo "${_pstr}."); done
+  for ((_sec=1; _sec<=$_wait_sec; _sec++)); do _pstr=$(echo "${_pstr}."); done
+  _pstr=$(echo "${_pstr}]")
+  echo -ne "$_pstr\r["
+  while [ $_cur_sec -le $_wait_sec ];
+  do
+    echo -n "$_pchar"
+    sleep 1
+    let _cur_sec++
+  done
+  echo
+}
+
