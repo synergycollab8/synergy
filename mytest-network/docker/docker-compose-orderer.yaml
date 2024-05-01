@@ -34,19 +34,23 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
     command: orderer
     volumes:
-        - /app/hlf/mytest-network/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-        - /app/hlf/mytest-network/organizations/ordererOrganizations/Org1/orderers/orderer1-org1/msp:/var/hyperledger/orderer/msp
-        - /app/hlf/mytest-network/organizations/ordererOrganizations/Org1/orderers/orderer1-org1/tls:/var/hyperledger/orderer/tls
+        - /app/hyperledger-fabric/mytest-network/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - /app/hyperledger-fabric/mytest-network/organizations/ordererOrganizations/Org1/orderers/orderer1-org1/msp:/var/hyperledger/orderer/msp
+        - /app/hyperledger-fabric/mytest-network/organizations/ordererOrganizations/Org1/orderers/orderer1-org1/tls:/var/hyperledger/orderer/tls
         - orderer1-org1:/var/hyperledger/production/orderer
     ports:
       - 7050:7050
     extra_hosts:
-      - "centos81:192.168.56.21"
-      - "centos82:192.168.56.22"
-      - "centos83:192.168.56.23"
-      - "orderer1-org1:192.168.56.21"
-      - "peer1-org1:192.168.56.21"
-      - "peer1-org2:192.168.56.22"
-      - "peer1-org3:192.168.56.23"
+      - "hlf-node1:10.148.0.11"
+      - "orderer1-org1:10.148.0.11"
+      - "peer1-org1:10.148.0.11"
+      - "peer2-org1:10.148.0.11"
+      - "hlf-node2:10.148.0.12"
+      - "peer1-org2:10.148.0.12"
+      - "peer2-org2:10.148.0.12"
+      - "hlf-node3:10.148.0.13"
+      - "peer1-org3:10.148.0.13"
+      - "peer2-org3:10.148.0.13"
+      
     networks:
       - mytest

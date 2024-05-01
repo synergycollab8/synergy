@@ -40,7 +40,7 @@
 version: 1.4.9
 
 # Server's listening port (default: 7054)
-port: 7055
+port: 7065
 
 # Cross-Origin Resource Sharing (CORS)
 cors:
@@ -49,7 +49,7 @@ cors:
       - "*"
 
 # Enables debug logging (default: false)
-debug: true
+debug: false
 
 # Size limit of an acceptable CRL in bytes (default: 512000)
 crlsizelimit: 512000
@@ -316,7 +316,7 @@ csr:
         O: Org1
         OU: bc
    hosts:
-     - centos81
+     - hlf-node1
    ca:
       expiry: 131400h
       pathlength: 0

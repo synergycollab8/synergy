@@ -117,7 +117,7 @@ csr:
       O: Org1
       OU: bc
   hosts:
-    - centos81
+    - hlf-node1
 
 #############################################################################
 #  Registration section used to register a new identity with fabric-ca server

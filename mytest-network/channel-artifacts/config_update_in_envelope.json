@@ -97,6 +97,10 @@
                           {
                             "host": "peer1-org1",
                             "port": 7051
+                          },
+                          {
+                            "host": "peer2-org1",
+                            "port": 7053
                           }
                         ]
                       },

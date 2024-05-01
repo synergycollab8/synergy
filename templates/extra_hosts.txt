@@ -1,1 +1,1 @@
-- \"ip-172-31-23-227.ap-southeast-1.compute.internal:18.140.67.251\"\n      - \"orderer1-org1:18.140.67.251\"\n      - \"peer1-org1:18.140.67.251\"\n      - \"peer2-org1:18.140.67.251\"\n      
+- \"hlf-node1:10.148.0.11\"\n      - \"orderer1-org1:10.148.0.11\"\n      - \"peer1-org1:10.148.0.11\"\n      - \"peer2-org1:10.148.0.11\"\n      

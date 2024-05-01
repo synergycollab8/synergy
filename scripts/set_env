@@ -3,7 +3,8 @@
 ### Dammavalam, Srirangam
 ### 01-JUN-2021
 
-[[ "${0}" = "-bash" ]] && { __script_dir__=${PWD}; } || { __script_dir__=$(dirname $0); }
+#[[ "${0}" = "-bash" ]] && { __script_dir__=${PWD}; } || { __script_dir__=$(dirname $0); }
+__script_dir__=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 __conf_file__=${__script_dir__}/../network.conf
 __helper_utils__=${__script_dir__}/../scripts/helper_utils
 if [ ! -f ${__helper_utils__} ]; then echo "${__helper_utils__} file NOT found. Exiting ..."; return; fi
@@ -17,6 +18,8 @@ else
     . ${__vars_file__}
 fi
 
+export COMPOSE_PROJECT_NAME=net
+export NETWORK_DIR=${HLF_HOME}/mytest-network
 export FABRIC_CFG_PATH=${HLF_HOME}/config/
 
 export CORE_PEER_LOCALMSPID=${ORG_MSPID}
@@ -26,3 +29,7 @@ export CORE_PEER_TLS_ENABLED=true
 export CORE_PEER_TLS_ROOTCERT_FILE=$HLF_NETWORK_DIR/organizations/peerOrganizations/${ORG_NAME}/peers/${HLF_ORG_PEER1_ID}/tls/tlscacerts/tls-cacert.pem
 export ORDERER_CA=$HLF_NETWORK_DIR/organizations/ordererOrganizations/${HLF_ORDR_ORG_NAME}/msp/tlscacerts/tls-cacert.pem
 export ORDERER_ADDRESS=${HLF_ORDR_HOST}:${HLF_ORDR_PORT}
+
+## IPFS
+export IPFS_CLUSTER_SECRET=64d0be1e4a0a2713bda4aa5be8462ae6103eb6ac77e760ce6f9d11b2bb6faff8
+

@@ -20,7 +20,7 @@ Organizations:
         ID: Orderer1MSP
 
         # MSPDir is the filesystem path which contains the MSP configuration
-        MSPDir: /app/hlf/mytest-network/organizations/ordererOrganizations/Org1/msp
+        MSPDir: /app/hyperledger-fabric/mytest-network/organizations/ordererOrganizations/Org1/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -47,7 +47,7 @@ Organizations:
         # ID to load the MSP definition as
         ID: Org1MSP
 
-        MSPDir: /app/hlf/mytest-network/organizations/peerOrganizations/Org1/msp
+        MSPDir: /app/hyperledger-fabric/mytest-network/organizations/peerOrganizations/Org1/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -74,7 +74,7 @@ Organizations:
         # ID to load the MSP definition as
         ID: Org2MSP
 
-        MSPDir: /app/hlf/mytest-network/organizations/peerOrganizations/Org1/../Org2/msp
+        MSPDir: /app/hyperledger-fabric/mytest-network/organizations/peerOrganizations/Org1/../Org2/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -210,8 +210,8 @@ Orderer: &OrdererDefaults
         Consenters:
         - Host: orderer1-org1
           Port: 7050
-          ClientTLSCert: /app/hlf/mytest-network/organizations/ordererOrganizations/Org1/orderers/orderer1-org1/tls/signcerts/cert.pem
-          ServerTLSCert: /app/hlf/mytest-network/organizations/ordererOrganizations/Org1/orderers/orderer1-org1/tls/signcerts/cert.pem
+          ClientTLSCert: /app/hyperledger-fabric/mytest-network/organizations/ordererOrganizations/Org1/orderers/orderer1-org1/tls/signcerts/cert.pem
+          ServerTLSCert: /app/hyperledger-fabric/mytest-network/organizations/ordererOrganizations/Org1/orderers/orderer1-org1/tls/signcerts/cert.pem
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
