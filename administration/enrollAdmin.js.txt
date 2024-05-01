@@ -1,0 +1,85 @@
+/*
+ * Copyright IBM Corp. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+'use strict';
+
+const FabricCAServices = require('fabric-ca-client');
+const { Wallets } = require('fabric-network');
+const fs = require('fs');
+const path = require('path');
+console.log('fs path ',fs);
+console.log('path ',path);
+console.log('process.cwd ', process.cwd());
+const cert_org1 = fs.readFileSync(path.join(process.cwd(), '../organizations/peerOrganizations/Org1/users/Admin@Org1/msp/signcerts/cert.pem')).toString();
+const key_org1 = fs.readFileSync(path.join(process.cwd(), '../organizations/peerOrganizations/Org1/users/Admin@Org1/msp/keystore/27fc68f131e250e75221fcf9b897a2891512a173ab9eef89ce4b41670bf0589f_sk')).toString();
+
+const cert_org2 = fs.readFileSync(path.join(process.cwd(), '../organizations/peerOrganizations/Org2/users/Admin@Org2/msp/signcerts/cert.pem')).toString();
+const key_org2 = fs.readFileSync(path.join(process.cwd(), '../organizations/peerOrganizations/Org2/users/Admin@Org2/msp/keystore/6703a42aa2213f907d5cedea14781d07f28ef7a6840a60c1ddbd268ba1f27bde_sk')).toString();
+
+const cert_org3 = fs.readFileSync(path.join(process.cwd(), '../organizations/peerOrganizations/Org3/users/Admin@Org2/msp/signcerts/cert.pem')).toString();
+const key_org3 = fs.readFileSync(path.join(process.cwd(), '../organizations/peerOrganizations/Org3/users/Admin@Org2/msp/keystore/9a0642134c9113f2bc9e390b8dfc387e9560333883a8f9ce5365801e10a8ff6d_sk')).toString();
+
+async function main(org) {
+    try {
+        // load the network configuration
+ /*       const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
+
+        // Create a new CA client for interacting with the CA.
+        const caInfo = ccp.certificateAuthorities['ca.org1.example.com'];
+        const caTLSCACerts = caInfo.tlsCACerts.pem;
+        const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName); */
+
+        const cert_path = "";
+        const keystore_path = "";
+        const orgmsp = "";
+        if(org === 'org1'){
+            cert_path = cert_org1;
+            keystore_path= key_org1;
+            orgmsp = "Org1MSP";
+        }else if(org === 'org2'){
+            cert_path = cert_org2;
+            keystore_path= key_org2;
+            orgmsp = "Org2MSP";
+        }else if(org === 'org3'){
+            cert_path = cert_org3;
+            keystore_path= key_org3;
+            orgmsp = "Org3MSP";
+        }
+        // Create a new file system based wallet for managing identities.
+        const walletPath = path.join(process.cwd(), 'wallet');
+        const wallet = await Wallets.newFileSystemWallet(walletPath);
+        console.log(`Wallet path: ${walletPath}`);
+
+        // Check to see if we've already enrolled the admin user.
+        const identity = await wallet.get('admin');
+        if (identity) {
+            console.log('An identity for the admin user "admin" already exists in the wallet');
+            return;
+        }
+
+        // Enroll the admin user, and import the new identity into the wallet.
+        //const enrollment = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'adminpw' });
+        const x509Identity = {
+            credentials: {
+                certificate: cert_path,
+                privateKey: keystore_path,
+            },
+            mspId: orgmsp,
+            type: 'X.509',
+        };
+        await wallet.put('admin', x509Identity);
+        console.log('Successfully enrolled admin user "admin" and imported it into the wallet');
+
+    } catch (error) {
+        console.error(`Failed to enroll admin user "admin": ${error}`);
+        process.exit(1);
+    }
+}
+
+main("org1");
+main("org2");
+main("org3");
