@@ -1,0 +1,38 @@
+'use strict';
+
+const path = require('path');
+const pg = require('pg');
+require('dotenv').config();
+const { Client } = require('pg');
+
+const client = new Client({
+    user: process.env.PG_USER,
+    host: process.env.PG_HOST,
+    database: process.env.PG_DBNAME,
+    password: process.env.PG_PWD,
+    port: process.env.PG_DBPORT,
+});
+
+client.connect();
+
+const USER_VERIFICATION = `SELECT * FROM CONTACTS WHERE EMAIL = $1`;
+
+const validateUser = (request, response) => {
+    const params = [];
+    params.push(request.body.email);
+    console.log("inside validateuser ",params);
+    client.query(USER_VERIFICATION, params).then(results => {
+        const data = results.rows;
+        if(data.length === 0){
+            response.status(401).json("NOT FOUND");
+        }else{
+            data.forEach(row => console.log(row));
+            response.status(200).json(results.rows[0]);
+        }
+      }).catch(error => {
+            console.log(error);
+            response.status(500).json("error occurred")
+      })
+  }
+
+module.exports = {validateUser}
