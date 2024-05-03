@@ -6,3 +6,21 @@ peer lifecycle chaincode queryinstalled
 5) echo $PACKAGE_ID
 6) peer lifecycle chaincode approveformyorg --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc -v 1.0 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA
 7) peer lifecycle chaincode checkcommitreadiness --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc -v 1.0 --sequence 1
+
+*************************************************************************************************************************
+
+
+1) peer lifecycle chaincode package chaincode/clientservicecc.tar.gz --lang node --path chaincode/clientservicecc --label clientservicecc_4
+2) peer lifecycle chaincode install chaincode/clientservicecc.tar.gz
+2) ***peer chaincode install -n mytestchannel -p "chaincode/clientservicecc.tar.gz" -v 1.0 -l "node"
+peer chaincode list --installed -C mytestchannel
+peer lifecycle chaincode queryinstalled
+3) need to get the package id deployed
+4) export PACKAGE_ID=d5d751c389f27b4feecfb127252a1f7fe49e61d42bfda8bcefbe6ddb95bde6a
+5) echo $PACKAGE_ID
+6) peer lifecycle chaincode approveformyorg --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc -v 1.1 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA
+7) peer lifecycle chaincode checkcommitreadiness --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc -v 1.0 --sequence 4
+peer lifecycle chaincode checkcommitreadiness --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc -v 1.1 --sequence 4
+
+
+8)peer lifecycle chaincode commit --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc --version 1.0 --sequence 1 --cafile $ORDERER_CA --tls
