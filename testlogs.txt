@@ -1,0 +1,830 @@
+[bcuser@hlf-node1 hyperledger-fabric]$ 
+[bcuser@hlf-node1 hyperledger-fabric]$ 
+[bcuser@hlf-node1 hyperledger-fabric]$ 
+[bcuser@hlf-node1 hyperledger-fabric]$ peer lifecycle chaincode checkcommitreadiness --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc -v 1.0 --sequence 1
+Chaincode definition for chaincode 'clientservicecc', version '1.0', sequence '1' on channel 'mytestchannel' approval status by org:
+Org1MSP: true
+Org2MSP: false
+Org3MSP: false
+[bcuser@hlf-node1 hyperledger-fabric]$ ls -rlt
+total 68
+-rw-rw-r--.  1 bcuser bcuser 13280 Feb 29 16:32 README.md
+-rw-rw-r--.  1 bcuser bcuser 18133 Feb 29 16:32 configuration_ref.txt
+drwxrwxr-x.  2 bcuser bcuser    27 Feb 29 16:32 configtx
+drwxrwxr-x.  2 bcuser bcuser    64 Feb 29 16:32 config
+drwxrwxr-x.  5 bcuser bcuser    42 Feb 29 16:32 org-samples
+-rw-rw-r--.  1 bcuser bcuser  3376 Feb 29 17:02 network.conf
+drwxrwxr-x.  2 bcuser bcuser  4096 Feb 29 17:06 templates
+drwxrwxr-x.  3 bcuser bcuser  4096 Mar 27 14:24 fabcar
+drwxrwxr-x.  3 bcuser bcuser    18 Apr 16 13:25 identity
+drwxrwxr-x.  2 bcuser bcuser  4096 Apr 26 02:32 bin
+-rw-rw-r--.  1 bcuser bcuser   217 Apr 26 07:47 ipfs.txt
+drwxrwxr-x.  2 bcuser bcuser  4096 Apr 26 08:35 scripts
+drwxrwxr-x. 13 bcuser bcuser  4096 May  1 07:45 mytest-network
+drwxrwxr-x. 11 bcuser bcuser  4096 May  3 11:02 chaincode
+[bcuser@hlf-node1 hyperledger-fabric]$ cd chaincode
+[bcuser@hlf-node1 chaincode]$ ls -rlt
+total 120
+drwxrwxr-x. 23 bcuser bcuser   4096 Nov  1  2021 fabric-samples-2.2.1
+drwxrwxr-x.  4 bcuser bcuser    178 Mar 29 07:58 fabcar
+drwxrwxr-x.  6 bcuser bcuser   4096 Mar 30 09:59 magnetocontract
+drwxr-xr-x.  4 bcuser bcuser    176 Mar 31 07:49 collabchaincode
+drwxrwxr-x.  5 bcuser bcuser   4096 Mar 31 08:04 synergy
+drwxr-xr-x.  9 bcuser bcuser   4096 Apr  2 14:18 chaincodeclient
+drwxrwxr-x.  3 bcuser bcuser     21 May  3 10:40 test
+drwxrwxr-x.  5 bcuser bcuser    100 May  3 10:58 clientservicecc
+drwxrwxr-x.  5 bcuser bcuser    161 May  3 10:59 chaincodeserviceclient
+-rw-------.  1 bcuser bcuser 102894 May  3 11:02 clientservicecc.tar.gz
+[bcuser@hlf-node1 chaincode]$ mv chaincodeserviceclient ../
+bin/                   configtx/              .git/                  mytest-network/        README.md              
+chaincode/             configuration_ref.txt  identity/              network.conf           scripts/               
+config/                fabcar/                ipfs.txt               org-samples/           templates/             
+[bcuser@hlf-node1 chaincode]$ mv chaincodeserviceclient ../
+bin/                   configtx/              .git/                  mytest-network/        README.md              
+chaincode/             configuration_ref.txt  identity/              network.conf           scripts/               
+config/                fabcar/                ipfs.txt               org-samples/           templates/             
+[bcuser@hlf-node1 chaincode]$ mv chaincodeserviceclient ../mytest-network/
+[bcuser@hlf-node1 chaincode]$ cd ../mytest-network/
+[bcuser@hlf-node1 mytest-network]$ ls -rlt
+total 32
+drwxrwxr-x.  4 bcuser bcuser   59 Feb 29 17:06 organizations
+drwxrwxr-x.  6 bcuser bcuser   66 Feb 29 17:06 fabric-ca
+drwxrwxr-x.  2 bcuser bcuser   27 Feb 29 17:07 configtx
+drwxrwxr-x.  2 bcuser bcuser   27 Feb 29 17:31 system-genesis-block
+-rw-------.  1 bcuser bcuser  554 Feb 29 17:40 conf.yaml
+drwxrwxr-x.  2 bcuser bcuser 4096 Mar  1 16:48 channel-artifacts
+drwxr-xr-x.  3 bcuser bcuser  131 Mar 18 13:59 administration
+-rw-rw-r--.  1 bcuser bcuser    0 Mar 31 07:06 log.txt
+drwxr-xr-x. 10 bcuser bcuser 4096 Apr 17 14:16 chaincodeclient
+drwxr-xr-x.  4 bcuser bcuser 4096 Apr 18 13:07 eventhandler
+drwxrwxr-x.  4 bcuser bcuser   48 Apr 26 07:22 ipfs-data
+drwxrwxr-x.  4 bcuser bcuser 4096 Apr 27 06:45 docker
+-rw-rw-r--.  1 bcuser bcuser   22 Apr 27 06:55 test_ipfs.txt
+-rw-rw-r--.  1 bcuser bcuser   38 Apr 27 07:04 test_ipfs2.txt
+drwxrwxr-x.  4 bcuser bcuser 4096 May  2 11:29 fabcar
+drwxrwxr-x.  5 bcuser bcuser  161 May  3 10:59 chaincodeserviceclient
+[bcuser@hlf-node1 mytest-network]$ cd fabcar/
+[bcuser@hlf-node1 fabcar]$ ls -rlt
+total 212
+-rw-rw-r--.   1 bcuser bcuser   2073 Feb 29 16:32 enrollAdmin.js_O
+-rw-rw-r--.   1 bcuser bcuser   2865 Mar 18 14:04 registerUser.js_O
+-rw-rw-r--.   1 bcuser bcuser   1027 Mar 23 17:46 package.json
+-rw-rw-r--.   1 bcuser bcuser 164242 Mar 23 18:02 package-lock.json
+drwxrwxr-x. 281 bcuser bcuser   8192 Mar 23 18:02 node_modules
+-rw-rw-r--.   1 bcuser bcuser   1694 Mar 23 18:17 addToWallet.js
+-rw-rw-r--.   1 bcuser bcuser   2063 Mar 23 18:51 enrollAdmin.js
+drwxrwxr-x.   2 bcuser bcuser     64 Mar 23 19:46 wallet
+-rw-rw-r--.   1 bcuser bcuser   2815 Mar 23 19:48 registerUser.js
+-rw-rw-r--.   1 bcuser bcuser   2293 Mar 30 09:16 invoke.js
+-rw-rw-r--.   1 bcuser bcuser   2279 Mar 30 11:10 query.js
+-rw-rw-r--.   1 bcuser bcuser   2654 May  2 11:29 createContact.js
+[bcuser@hlf-node1 fabcar]$ cp -r wallet ../chaincodeserviceclient/
+[bcuser@hlf-node1 fabcar]$ cd ../chaincodeserviceclient/
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -rlt
+total 388
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 10:44 util
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser    896 May  3 10:44 package.json
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+-rw-rw-r--.   1 bcuser bcuser 351982 May  3 10:59 package-lock.json
+drwxrwxr-x. 388 bcuser bcuser  12288 May  3 10:59 node_modules
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+[bcuser@hlf-node1 chaincodeserviceclient]$ pwd
+/app/hyperledger-fabric/mytest-network/chaincodeserviceclient
+[bcuser@hlf-node1 chaincodeserviceclient]$ cd ..
+[bcuser@hlf-node1 mytest-network]$ pwd
+/app/hyperledger-fabric/mytest-network
+[bcuser@hlf-node1 mytest-network]$ ls -lrt
+total 32
+drwxrwxr-x.  4 bcuser bcuser   59 Feb 29 17:06 organizations
+drwxrwxr-x.  6 bcuser bcuser   66 Feb 29 17:06 fabric-ca
+drwxrwxr-x.  2 bcuser bcuser   27 Feb 29 17:07 configtx
+drwxrwxr-x.  2 bcuser bcuser   27 Feb 29 17:31 system-genesis-block
+-rw-------.  1 bcuser bcuser  554 Feb 29 17:40 conf.yaml
+drwxrwxr-x.  2 bcuser bcuser 4096 Mar  1 16:48 channel-artifacts
+drwxr-xr-x.  3 bcuser bcuser  131 Mar 18 13:59 administration
+-rw-rw-r--.  1 bcuser bcuser    0 Mar 31 07:06 log.txt
+drwxr-xr-x. 10 bcuser bcuser 4096 Apr 17 14:16 chaincodeclient
+drwxr-xr-x.  4 bcuser bcuser 4096 Apr 18 13:07 eventhandler
+drwxrwxr-x.  4 bcuser bcuser   48 Apr 26 07:22 ipfs-data
+drwxrwxr-x.  4 bcuser bcuser 4096 Apr 27 06:45 docker
+-rw-rw-r--.  1 bcuser bcuser   22 Apr 27 06:55 test_ipfs.txt
+-rw-rw-r--.  1 bcuser bcuser   38 Apr 27 07:04 test_ipfs2.txt
+drwxrwxr-x.  4 bcuser bcuser 4096 May  2 11:29 fabcar
+drwxrwxr-x.  6 bcuser bcuser  175 May  3 11:21 chaincodeserviceclient
+[bcuser@hlf-node1 mytest-network]$ cd chaincodeserviceclient/
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -rlt
+total 388
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 10:44 util
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser    896 May  3 10:44 package.json
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+-rw-rw-r--.   1 bcuser bcuser 351982 May  3 10:59 package-lock.json
+drwxrwxr-x. 388 bcuser bcuser  12288 May  3 10:59 node_modules
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+[bcuser@hlf-node1 chaincodeserviceclient]$ node services/createClientServiceReq.js 
+Error processing transaction. TypeError: getNetwork(...).getContract is not a function
+TypeError: getNetwork(...).getContract is not a function
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/services/createClientServiceReq.js:28:38)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/services/createClientServiceReq.js:49:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+Disconnect from Fabric gateway.
+ClientServiceRequest created successfully.
+/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:63
+                const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
+                                ^
+
+ReferenceError: path is not defined
+    at module.exports.getNetwork (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:63:19)
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/services/createClientServiceReq.js:28:25)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/services/createClientServiceReq.js:49:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+
+Node.js v18.9.1
+[bcuser@hlf-node1 chaincodeserviceclient]$ cp services/createClientServiceReq.js .
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -rlt
+total 392
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 10:44 util
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser    896 May  3 10:44 package.json
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+-rw-rw-r--.   1 bcuser bcuser 351982 May  3 10:59 package-lock.json
+drwxrwxr-x. 388 bcuser bcuser  12288 May  3 10:59 node_modules
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+-rw-rw-r--.   1 bcuser bcuser   1903 May  3 11:26 createClientServiceReq.js
+[bcuser@hlf-node1 chaincodeserviceclient]$ node createClientServiceReq.js 
+node:internal/modules/cjs/loader:958
+  throw err;
+  ^
+
+Error: Cannot find module '../util/networkutil'
+Require stack:
+- /app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:955:15)
+    at Module._load (node:internal/modules/cjs/loader:803:27)
+    at Module.require (node:internal/modules/cjs/loader:1021:19)
+    at require (node:internal/modules/cjs/helpers:103:18)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:22:36)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js'
+  ]
+}
+
+Node.js v18.9.1
+[bcuser@hlf-node1 chaincodeserviceclient]$ vi createClientServiceReq.js 
+[bcuser@hlf-node1 chaincodeserviceclient]$ node createClientServiceReq.js 
+node:internal/modules/cjs/loader:958
+  throw err;
+  ^
+
+Error: Cannot find module 'util/networkutil'
+Require stack:
+- /app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:955:15)
+    at Module._load (node:internal/modules/cjs/loader:803:27)
+    at Module.require (node:internal/modules/cjs/loader:1021:19)
+    at require (node:internal/modules/cjs/helpers:103:18)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:22:36)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js'
+  ]
+}
+
+Node.js v18.9.1
+[bcuser@hlf-node1 chaincodeserviceclient]$ vi createClientServiceReq.js 
+[bcuser@hlf-node1 chaincodeserviceclient]$ 
+[bcuser@hlf-node1 chaincodeserviceclient]$ node createClientServiceReq.js 
+Error processing transaction. TypeError: getNetwork(...).getContract is not a function
+TypeError: getNetwork(...).getContract is not a function
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:28:38)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:49:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+Disconnect from Fabric gateway.
+ClientServiceRequest created successfully.
+/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:63
+                const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
+                                ^
+
+ReferenceError: path is not defined
+    at module.exports.getNetwork (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:63:19)
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:28:25)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:49:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+
+Node.js v18.9.1
+[bcuser@hlf-node1 chaincodeserviceclient]$ vi createClientServiceReq.js 
+[bcuser@hlf-node1 chaincodeserviceclient]$ cd util
+[bcuser@hlf-node1 util]$ ls -rlt
+total 8
+-rw-rw-r--. 1 bcuser bcuser 4179 May  3 10:44 networkutil.js
+[bcuser@hlf-node1 util]$ vi networkutil.js 
+[bcuser@hlf-node1 util]$ cd -
+/app/hyperledger-fabric/mytest-network/chaincodeserviceclient
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -rlt
+total 392
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser    896 May  3 10:44 package.json
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+-rw-rw-r--.   1 bcuser bcuser 351982 May  3 10:59 package-lock.json
+drwxrwxr-x. 388 bcuser bcuser  12288 May  3 10:59 node_modules
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+-rw-rw-r--.   1 bcuser bcuser   1904 May  3 11:28 createClientServiceReq.js
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 11:31 util
+[bcuser@hlf-node1 chaincodeserviceclient]$ node createClientServiceReq.js 
+Error processing transaction. TypeError: getNetwork(...).getContract is not a function
+TypeError: getNetwork(...).getContract is not a function
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:28:38)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:49:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+Disconnect from Fabric gateway.
+ClientServiceRequest created successfully.
+/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:65
+                const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
+                                ^
+
+ReferenceError: path is not defined
+    at module.exports.getNetwork (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:65:19)
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:28:25)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:49:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+
+Node.js v18.9.1
+[bcuser@hlf-node1 chaincodeserviceclient]$ pwd
+/app/hyperledger-fabric/mytest-network/chaincodeserviceclient
+[bcuser@hlf-node1 chaincodeserviceclient]$ cp createClientServiceReq.js ../../fabcar/
+[bcuser@hlf-node1 chaincodeserviceclient]$ pwd
+/app/hyperledger-fabric/mytest-network/chaincodeserviceclient
+[bcuser@hlf-node1 chaincodeserviceclient]$ pwd
+/app/hyperledger-fabric/mytest-network/chaincodeserviceclient
+[bcuser@hlf-node1 chaincodeserviceclient]$ cd ..
+[bcuser@hlf-node1 mytest-network]$ ls -rlt
+total 36
+drwxrwxr-x.  4 bcuser bcuser   59 Feb 29 17:06 organizations
+drwxrwxr-x.  6 bcuser bcuser   66 Feb 29 17:06 fabric-ca
+drwxrwxr-x.  2 bcuser bcuser   27 Feb 29 17:07 configtx
+drwxrwxr-x.  2 bcuser bcuser   27 Feb 29 17:31 system-genesis-block
+-rw-------.  1 bcuser bcuser  554 Feb 29 17:40 conf.yaml
+drwxrwxr-x.  2 bcuser bcuser 4096 Mar  1 16:48 channel-artifacts
+drwxr-xr-x.  3 bcuser bcuser  131 Mar 18 13:59 administration
+-rw-rw-r--.  1 bcuser bcuser    0 Mar 31 07:06 log.txt
+drwxr-xr-x. 10 bcuser bcuser 4096 Apr 17 14:16 chaincodeclient
+drwxr-xr-x.  4 bcuser bcuser 4096 Apr 18 13:07 eventhandler
+drwxrwxr-x.  4 bcuser bcuser   48 Apr 26 07:22 ipfs-data
+drwxrwxr-x.  4 bcuser bcuser 4096 Apr 27 06:45 docker
+-rw-rw-r--.  1 bcuser bcuser   22 Apr 27 06:55 test_ipfs.txt
+-rw-rw-r--.  1 bcuser bcuser   38 Apr 27 07:04 test_ipfs2.txt
+drwxrwxr-x.  4 bcuser bcuser 4096 May  2 11:29 fabcar
+drwxrwxr-x.  6 bcuser bcuser 4096 May  3 11:30 chaincodeserviceclient
+[bcuser@hlf-node1 mytest-network]$ cd fabcar/
+[bcuser@hlf-node1 fabcar]$ ls -rlt
+total 212
+-rw-rw-r--.   1 bcuser bcuser   2073 Feb 29 16:32 enrollAdmin.js_O
+-rw-rw-r--.   1 bcuser bcuser   2865 Mar 18 14:04 registerUser.js_O
+-rw-rw-r--.   1 bcuser bcuser   1027 Mar 23 17:46 package.json
+-rw-rw-r--.   1 bcuser bcuser 164242 Mar 23 18:02 package-lock.json
+drwxrwxr-x. 281 bcuser bcuser   8192 Mar 23 18:02 node_modules
+-rw-rw-r--.   1 bcuser bcuser   1694 Mar 23 18:17 addToWallet.js
+-rw-rw-r--.   1 bcuser bcuser   2063 Mar 23 18:51 enrollAdmin.js
+drwxrwxr-x.   2 bcuser bcuser     64 Mar 23 19:46 wallet
+-rw-rw-r--.   1 bcuser bcuser   2815 Mar 23 19:48 registerUser.js
+-rw-rw-r--.   1 bcuser bcuser   2293 Mar 30 09:16 invoke.js
+-rw-rw-r--.   1 bcuser bcuser   2279 Mar 30 11:10 query.js
+-rw-rw-r--.   1 bcuser bcuser   2654 May  2 11:29 createContact.js
+[bcuser@hlf-node1 fabcar]$ pwd
+/app/hyperledger-fabric/mytest-network/fabcar
+[bcuser@hlf-node1 fabcar]$ cp /app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js .
+[bcuser@hlf-node1 fabcar]$ ls-lrt
+-bash: ls-lrt: command not found
+[bcuser@hlf-node1 fabcar]$ ls -lrt
+total 216
+-rw-rw-r--.   1 bcuser bcuser   2073 Feb 29 16:32 enrollAdmin.js_O
+-rw-rw-r--.   1 bcuser bcuser   2865 Mar 18 14:04 registerUser.js_O
+-rw-rw-r--.   1 bcuser bcuser   1027 Mar 23 17:46 package.json
+-rw-rw-r--.   1 bcuser bcuser 164242 Mar 23 18:02 package-lock.json
+drwxrwxr-x. 281 bcuser bcuser   8192 Mar 23 18:02 node_modules
+-rw-rw-r--.   1 bcuser bcuser   1694 Mar 23 18:17 addToWallet.js
+-rw-rw-r--.   1 bcuser bcuser   2063 Mar 23 18:51 enrollAdmin.js
+drwxrwxr-x.   2 bcuser bcuser     64 Mar 23 19:46 wallet
+-rw-rw-r--.   1 bcuser bcuser   2815 Mar 23 19:48 registerUser.js
+-rw-rw-r--.   1 bcuser bcuser   2293 Mar 30 09:16 invoke.js
+-rw-rw-r--.   1 bcuser bcuser   2279 Mar 30 11:10 query.js
+-rw-rw-r--.   1 bcuser bcuser   2654 May  2 11:29 createContact.js
+-rw-rw-r--.   1 bcuser bcuser   1904 May  3 11:34 createClientServiceReq.js
+[bcuser@hlf-node1 fabcar]$ more createContact.js 
+/*
+ * Copyright IBM Corp. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+'use strict';
+
+const { Gateway, Wallets } = require('fabric-network');
+const path = require('path');
+const fs = require('fs');
+
+
+async function main() {
+    try {
+        // load the network configuration
+        const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
+        const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
+
+        // Create a new file system based wallet for managing identities.
+        const walletPath = path.join(process.cwd(), 'wallet');
+        const wallet = await Wallets.newFileSystemWallet(walletPath);
+        console.log(`Wallet path: ${walletPath}`);
+        console.log(`ccpPath: ${ccpPath}`);
+
+        // Check to see if we've already enrolled the user.
+        const identity = await wallet.get('User1@Org1');
+        if (!identity) {
+            console.log('An identity for the user "appUser" does not exist in the wallet');
+            console.log('Run the registerUser.js application before retrying');
+            return;
+        }
+
+        // Create a new gateway for connecting to our peer node.
+        const gateway = new Gateway();
+        //await gateway.connect(ccp, { wallet, identity: 'User1@Org1', discovery: { enabled: true, asLocalhost: true } });
+        await gateway.connect(ccp, { wallet, identity: 'User1@Org1', discovery: { enabled: true, asLocalhost: false } });
+
+        // Get the network (channel) our contract is deployed to.
+        const network = await gateway.getNetwork('mytestchannel');
+
+        // Get the contract from the network.
+        const contract = network.getContract('collaborationcontract');
+
+            console.log("contract ",contract);
+        // Evaluate the specified transaction.
+        // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
+        // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
+        //const result = await contract.evaluateTransaction('queryAllCars');
+        //console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+
+
+            const contactBuffer = await contract.submitTransaction("createContact","100006", "Srirangam3", "+65 22222222","srirangam3@org1.com","online","org1",
+"allinall2");
+        //let newContact = JSON.parse(contactBuffer.toString());
+        console.log(contactBuffer, ' successfully created');
+        // Disconnect from the gateway.
+        await gateway.disconnect();
+        
+    } catch (error) {
+        console.error(`Failed to evaluate transaction: ${error}`);
+        process.exit(1);
+    }
+}
+
+main();
+[bcuser@hlf-node1 fabcar]$      cd -
+/app/hyperledger-fabric/mytest-network
+[bcuser@hlf-node1 mytest-network]$ ls -rlt
+total 36
+drwxrwxr-x.  4 bcuser bcuser   59 Feb 29 17:06 organizations
+drwxrwxr-x.  6 bcuser bcuser   66 Feb 29 17:06 fabric-ca
+drwxrwxr-x.  2 bcuser bcuser   27 Feb 29 17:07 configtx
+drwxrwxr-x.  2 bcuser bcuser   27 Feb 29 17:31 system-genesis-block
+-rw-------.  1 bcuser bcuser  554 Feb 29 17:40 conf.yaml
+drwxrwxr-x.  2 bcuser bcuser 4096 Mar  1 16:48 channel-artifacts
+drwxr-xr-x.  3 bcuser bcuser  131 Mar 18 13:59 administration
+-rw-rw-r--.  1 bcuser bcuser    0 Mar 31 07:06 log.txt
+drwxr-xr-x. 10 bcuser bcuser 4096 Apr 17 14:16 chaincodeclient
+drwxr-xr-x.  4 bcuser bcuser 4096 Apr 18 13:07 eventhandler
+drwxrwxr-x.  4 bcuser bcuser   48 Apr 26 07:22 ipfs-data
+drwxrwxr-x.  4 bcuser bcuser 4096 Apr 27 06:45 docker
+-rw-rw-r--.  1 bcuser bcuser   22 Apr 27 06:55 test_ipfs.txt
+-rw-rw-r--.  1 bcuser bcuser   38 Apr 27 07:04 test_ipfs2.txt
+drwxrwxr-x.  6 bcuser bcuser 4096 May  3 11:30 chaincodeserviceclient
+drwxrwxr-x.  4 bcuser bcuser 4096 May  3 11:34 fabcar
+[bcuser@hlf-node1 mytest-network]$ cd chaincodeserviceclient
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -rlt
+total 392
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser    896 May  3 10:44 package.json
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+-rw-rw-r--.   1 bcuser bcuser 351982 May  3 10:59 package-lock.json
+drwxrwxr-x. 388 bcuser bcuser  12288 May  3 10:59 node_modules
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+-rw-rw-r--.   1 bcuser bcuser   1904 May  3 11:28 createClientServiceReq.js
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 11:31 util
+[bcuser@hlf-node1 chaincodeserviceclient]$ cp ../fabcar/package.json .
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -rlt
+total 392
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+-rw-rw-r--.   1 bcuser bcuser 351982 May  3 10:59 package-lock.json
+drwxrwxr-x. 388 bcuser bcuser  12288 May  3 10:59 node_modules
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+-rw-rw-r--.   1 bcuser bcuser   1904 May  3 11:28 createClientServiceReq.js
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 11:31 util
+-rw-rw-r--.   1 bcuser bcuser   1027 May  3 11:36 package.json
+[bcuser@hlf-node1 chaincodeserviceclient]$ rm package-lock.json 
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -rlt
+total 48
+drwxrwxr-x.   2 bcuser bcuser   185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser  3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser    90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser 12875 May  3 10:44 index.js
+drwxrwxr-x. 388 bcuser bcuser 12288 May  3 10:59 node_modules
+drwxrwxr-x.   2 bcuser bcuser    64 May  3 11:21 wallet
+-rw-rw-r--.   1 bcuser bcuser  1904 May  3 11:28 createClientServiceReq.js
+drwxrwxr-x.   2 bcuser bcuser    28 May  3 11:31 util
+-rw-rw-r--.   1 bcuser bcuser  1027 May  3 11:36 package.json
+[bcuser@hlf-node1 chaincodeserviceclient]$ npm install
+npm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+npm WARN deprecated mkdirp@0.5.1: Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)
+npm WARN deprecated sinon@7.5.0: 16.1.1
+
+added 196 packages, removed 322 packages, changed 32 packages, and audited 368 packages in 14s
+
+26 packages are looking for funding
+  run `npm fund` for details
+
+8 vulnerabilities (1 moderate, 6 high, 1 critical)
+
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+[bcuser@hlf-node1 chaincodeserviceclient]$ node createClientServiceReq.js 
+Error processing transaction. TypeError: getNetwork(...).getContract is not a function
+TypeError: getNetwork(...).getContract is not a function
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:28:38)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:49:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+Disconnect from Fabric gateway.
+ClientServiceRequest created successfully.
+/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:65
+                const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
+                                ^
+
+ReferenceError: path is not defined
+    at module.exports.getNetwork (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:65:19)
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:28:25)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:49:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+
+Node.js v18.9.1
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -rlt
+total 360
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+-rw-rw-r--.   1 bcuser bcuser   1904 May  3 11:28 createClientServiceReq.js
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 11:31 util
+-rw-rw-r--.   1 bcuser bcuser   1027 May  3 11:36 package.json
+drwxrwxr-x. 280 bcuser bcuser  20480 May  3 11:37 node_modules
+-rw-rw-r--.   1 bcuser bcuser 310834 May  3 11:37 package-lock.json
+[bcuser@hlf-node1 chaincodeserviceclient]$ vi createClientServiceReq.js
+[bcuser@hlf-node1 chaincodeserviceclient]$ 
+[bcuser@hlf-node1 chaincodeserviceclient]$ node createClientServiceReq.js 
+Error processing transaction. TypeError: getNetwork(...).getContract is not a function
+TypeError: getNetwork(...).getContract is not a function
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:29:38)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:50:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+Disconnect from Fabric gateway.
+ClientServiceRequest created successfully.
+/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:65
+                const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
+                                ^
+
+ReferenceError: path is not defined
+    at module.exports.getNetwork (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:65:19)
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:29:25)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:50:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+
+Node.js v18.9.1
+[bcuser@hlf-node1 chaincodeserviceclient]$ vi createClientServiceReq.js 
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -rlt
+total 360
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 11:31 util
+-rw-rw-r--.   1 bcuser bcuser   1027 May  3 11:36 package.json
+drwxrwxr-x. 280 bcuser bcuser  20480 May  3 11:37 node_modules
+-rw-rw-r--.   1 bcuser bcuser 310834 May  3 11:37 package-lock.json
+-rw-rw-r--.   1 bcuser bcuser   1935 May  3 11:39 createClientServiceReq.js
+[bcuser@hlf-node1 chaincodeserviceclient]$ cd  util
+[bcuser@hlf-node1 util]$ ls -rlt
+total 8
+-rw-rw-r--. 1 bcuser bcuser 4237 May  3 11:31 networkutil.js
+[bcuser@hlf-node1 util]$ vi networkutil.js 
+[bcuser@hlf-node1 util]$ cd ..
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -rlt
+total 360
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+-rw-rw-r--.   1 bcuser bcuser   1027 May  3 11:36 package.json
+drwxrwxr-x. 280 bcuser bcuser  20480 May  3 11:37 node_modules
+-rw-rw-r--.   1 bcuser bcuser 310834 May  3 11:37 package-lock.json
+-rw-rw-r--.   1 bcuser bcuser   1935 May  3 11:39 createClientServiceReq.js
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 11:41 util
+[bcuser@hlf-node1 chaincodeserviceclient]$ 
+[bcuser@hlf-node1 chaincodeserviceclient]$ node createClientServiceReq.js 
+Error processing transaction. TypeError: getNetwork(...).getContract is not a function
+TypeError: getNetwork(...).getContract is not a function
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:29:38)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:50:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+Disconnect from Fabric gateway.
+ClientServiceRequest created successfully.
+node:fs:599
+  handleErrorFromBinding(ctx);
+  ^
+
+Error: ENOENT: no such file or directory, open '/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/organizations/peerOrganizations/Org1/ccp-Org1.json'
+    at Object.openSync (node:fs:599:3)
+    at Object.readFileSync (node:fs:467:35)
+    at module.exports.getNetwork (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:67:27)
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:29:25)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:50:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12) {
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/organizations/peerOrganizations/Org1/ccp-Org1.json'
+}
+
+Node.js v18.9.1
+[bcuser@hlf-node1 chaincodeserviceclient]$ vi createClientServiceReq.js 
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -lrt
+total 360
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+-rw-rw-r--.   1 bcuser bcuser   1027 May  3 11:36 package.json
+drwxrwxr-x. 280 bcuser bcuser  20480 May  3 11:37 node_modules
+-rw-rw-r--.   1 bcuser bcuser 310834 May  3 11:37 package-lock.json
+-rw-rw-r--.   1 bcuser bcuser   1935 May  3 11:39 createClientServiceReq.js
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 11:41 util
+[bcuser@hlf-node1 chaincodeserviceclient]$ vi util/networkutil.js 
+[bcuser@hlf-node1 chaincodeserviceclient]$ cd ..
+[bcuser@hlf-node1 mytest-network]$ cd fabcar
+[bcuser@hlf-node1 fabcar]$ ls -lrt
+total 216
+-rw-rw-r--.   1 bcuser bcuser   2073 Feb 29 16:32 enrollAdmin.js_O
+-rw-rw-r--.   1 bcuser bcuser   2865 Mar 18 14:04 registerUser.js_O
+-rw-rw-r--.   1 bcuser bcuser   1027 Mar 23 17:46 package.json
+-rw-rw-r--.   1 bcuser bcuser 164242 Mar 23 18:02 package-lock.json
+drwxrwxr-x. 281 bcuser bcuser   8192 Mar 23 18:02 node_modules
+-rw-rw-r--.   1 bcuser bcuser   1694 Mar 23 18:17 addToWallet.js
+-rw-rw-r--.   1 bcuser bcuser   2063 Mar 23 18:51 enrollAdmin.js
+drwxrwxr-x.   2 bcuser bcuser     64 Mar 23 19:46 wallet
+-rw-rw-r--.   1 bcuser bcuser   2815 Mar 23 19:48 registerUser.js
+-rw-rw-r--.   1 bcuser bcuser   2293 Mar 30 09:16 invoke.js
+-rw-rw-r--.   1 bcuser bcuser   2279 Mar 30 11:10 query.js
+-rw-rw-r--.   1 bcuser bcuser   2654 May  2 11:29 createContact.js
+-rw-rw-r--.   1 bcuser bcuser   1904 May  3 11:34 createClientServiceReq.js
+[bcuser@hlf-node1 fabcar]$ more createContact.js 
+/*
+ * Copyright IBM Corp. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+'use strict';
+
+const { Gateway, Wallets } = require('fabric-network');
+const path = require('path');
+const fs = require('fs');
+
+
+async function main() {
+    try {
+        // load the network configuration
+        const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
+        const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
+
+        // Create a new file system based wallet for managing identities.
+        const walletPath = path.join(process.cwd(), 'wallet');
+        const wallet = await Wallets.newFileSystemWallet(walletPath);
+        console.log(`Wallet path: ${walletPath}`);
+        console.log(`ccpPath: ${ccpPath}`);
+
+        // Check to see if we've already enrolled the user.
+        const identity = await wallet.get('User1@Org1');
+        if (!identity) {
+            console.log('An identity for the user "appUser" does not exist in the wallet');
+            console.log('Run the registerUser.js application before retrying');
+            return;
+        }
+
+        // Create a new gateway for connecting to our peer node.
+        const gateway = new Gateway();
+[bcuser@hlf-node1 fabcar]$ ls -lrt
+total 216
+-rw-rw-r--.   1 bcuser bcuser   2073 Feb 29 16:32 enrollAdmin.js_O
+-rw-rw-r--.   1 bcuser bcuser   2865 Mar 18 14:04 registerUser.js_O
+-rw-rw-r--.   1 bcuser bcuser   1027 Mar 23 17:46 package.json
+-rw-rw-r--.   1 bcuser bcuser 164242 Mar 23 18:02 package-lock.json
+drwxrwxr-x. 281 bcuser bcuser   8192 Mar 23 18:02 node_modules
+-rw-rw-r--.   1 bcuser bcuser   1694 Mar 23 18:17 addToWallet.js
+-rw-rw-r--.   1 bcuser bcuser   2063 Mar 23 18:51 enrollAdmin.js
+drwxrwxr-x.   2 bcuser bcuser     64 Mar 23 19:46 wallet
+-rw-rw-r--.   1 bcuser bcuser   2815 Mar 23 19:48 registerUser.js
+-rw-rw-r--.   1 bcuser bcuser   2293 Mar 30 09:16 invoke.js
+-rw-rw-r--.   1 bcuser bcuser   2279 Mar 30 11:10 query.js
+-rw-rw-r--.   1 bcuser bcuser   2654 May  2 11:29 createContact.js
+-rw-rw-r--.   1 bcuser bcuser   1904 May  3 11:34 createClientServiceReq.js
+[bcuser@hlf-node1 fabcar]$  cd -
+/app/hyperledger-fabric/mytest-network
+[bcuser@hlf-node1 mytest-network]$ ls -rlt
+total 36
+drwxrwxr-x.  4 bcuser bcuser   59 Feb 29 17:06 organizations
+drwxrwxr-x.  6 bcuser bcuser   66 Feb 29 17:06 fabric-ca
+drwxrwxr-x.  2 bcuser bcuser   27 Feb 29 17:07 configtx
+drwxrwxr-x.  2 bcuser bcuser   27 Feb 29 17:31 system-genesis-block
+-rw-------.  1 bcuser bcuser  554 Feb 29 17:40 conf.yaml
+drwxrwxr-x.  2 bcuser bcuser 4096 Mar  1 16:48 channel-artifacts
+drwxr-xr-x.  3 bcuser bcuser  131 Mar 18 13:59 administration
+-rw-rw-r--.  1 bcuser bcuser    0 Mar 31 07:06 log.txt
+drwxr-xr-x. 10 bcuser bcuser 4096 Apr 17 14:16 chaincodeclient
+drwxr-xr-x.  4 bcuser bcuser 4096 Apr 18 13:07 eventhandler
+drwxrwxr-x.  4 bcuser bcuser   48 Apr 26 07:22 ipfs-data
+drwxrwxr-x.  4 bcuser bcuser 4096 Apr 27 06:45 docker
+-rw-rw-r--.  1 bcuser bcuser   22 Apr 27 06:55 test_ipfs.txt
+-rw-rw-r--.  1 bcuser bcuser   38 Apr 27 07:04 test_ipfs2.txt
+drwxrwxr-x.  4 bcuser bcuser 4096 May  3 11:34 fabcar
+drwxrwxr-x.  6 bcuser bcuser 4096 May  3 11:42 chaincodeserviceclient
+[bcuser@hlf-node1 mytest-network]$ cd chaincode
+-bash: cd: chaincode: No such file or directory
+[bcuser@hlf-node1 mytest-network]$ cd chaincodeserviceclient/
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -lrt
+total 360
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+-rw-rw-r--.   1 bcuser bcuser   1027 May  3 11:36 package.json
+drwxrwxr-x. 280 bcuser bcuser  20480 May  3 11:37 node_modules
+-rw-rw-r--.   1 bcuser bcuser 310834 May  3 11:37 package-lock.json
+-rw-rw-r--.   1 bcuser bcuser   1935 May  3 11:39 createClientServiceReq.js
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 11:43 util
+[bcuser@hlf-node1 chaincodeserviceclient]$ vi util/networkutil.js 
+[bcuser@hlf-node1 chaincodeserviceclient]$ node createClientServiceReq.js 
+Error processing transaction. TypeError: getNetwork(...).getContract is not a function
+TypeError: getNetwork(...).getContract is not a function
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:29:38)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:50:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+Disconnect from Fabric gateway.
+ClientServiceRequest created successfully.
+node:fs:599
+  handleErrorFromBinding(ctx);
+  ^
+
+Error: ENOENT: no such file or directory, open '/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/organizations/peerOrganizations/Org1/ccp-Org1.json'
+    at Object.openSync (node:fs:599:3)
+    at Object.readFileSync (node:fs:467:35)
+    at module.exports.getNetwork (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/util/networkutil.js:67:27)
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:29:25)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:50:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12) {
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/organizations/peerOrganizations/Org1/ccp-Org1.json'
+}
+
+Node.js v18.9.1
+[bcuser@hlf-node1 chaincodeserviceclient]$ ls -lrt
+total 360
+drwxrwxr-x.   2 bcuser bcuser    185 May  3 10:44 services
+-rw-rw-r--.   1 bcuser bcuser   3201 May  3 10:44 server.js
+-rw-rw-r--.   1 bcuser bcuser     90 May  3 10:44 README.md
+-rw-rw-r--.   1 bcuser bcuser  12875 May  3 10:44 index.js
+drwxrwxr-x.   2 bcuser bcuser     64 May  3 11:21 wallet
+-rw-rw-r--.   1 bcuser bcuser   1027 May  3 11:36 package.json
+drwxrwxr-x. 280 bcuser bcuser  20480 May  3 11:37 node_modules
+-rw-rw-r--.   1 bcuser bcuser 310834 May  3 11:37 package-lock.json
+-rw-rw-r--.   1 bcuser bcuser   1935 May  3 11:39 createClientServiceReq.js
+drwxrwxr-x.   2 bcuser bcuser     28 May  3 11:46 util
+[bcuser@hlf-node1 chaincodeserviceclient]$ vi util/networkutil.js 
+[bcuser@hlf-node1 chaincodeserviceclient]$ vi util/networkutil.js 
+[bcuser@hlf-node1 chaincodeserviceclient]$ node createClientServiceReq.js 
+Error processing transaction. TypeError: getNetwork(...).getContract is not a function
+TypeError: getNetwork(...).getContract is not a function
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:29:38)
+    at Object.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeserviceclient/createClientServiceReq.js:50:1)
+    at Module._compile (node:internal/modules/cjs/loader:1119:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1173:10)
+    at Module.load (node:internal/modules/cjs/loader:997:32)
+    at Module._load (node:internal/modules/cjs/loader:838:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:18:47
+Disconnect from Fabric gateway.
+ClientServiceRequest created successfully.
+Wallet path: /app/hyperledger-fabric/mytest-network/chaincodeserviceclient/wallet
+Use network channel for new services: synergychannel.
+[bcuser@hlf-node1 chaincodeserviceclient]$ 
+[bcuser@hlf-node1 chaincodeserviceclient]$ 
+[bcuser@hlf-node1 chaincodeserviceclient]$ 
