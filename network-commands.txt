@@ -24,3 +24,25 @@ peer lifecycle chaincode checkcommitreadiness --channelID $HLF_NETWORK_CHANNEL_I
 
 
 8)peer lifecycle chaincode commit --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc --version 1.0 --sequence 1 --cafile $ORDERER_CA --tls
+******************************Correct steps **************************************************************************
+
+
+
+1) peer lifecycle chaincode package chaincode/clientservicecc.tar.gz --lang node --path chaincode/clientservicecc --label clientservicecc_11
+2) peer lifecycle chaincode install chaincode/clientservicecc.tar.gz
+peer lifecycle chaincode queryinstalled
+3) need to get the package id deployed
+4) export PACKAGE_ID=a39a6698ff6d7d9b5a78fe3bacde4502e0f5a80b963f8ddd5a71058aa4c3300e
+5) echo $PACKAGE_ID
+6) peer lifecycle chaincode approveformyorg --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc -v 1.0 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA
+7) peer lifecycle chaincode checkcommitreadiness --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc -v 1.0 --sequence 1
+
+**  from node1 : use this 
+8) peer lifecycle chaincode commit --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc_1 -v 1.0 --sequence 1 --tls --cafile $ORDERER_CA --peerAddresses $CORE_PEER_ADDRESS --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem
+
+
+9) peer lifecycle chaincode querycommitted --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc_11 --cafile $ORDERER_CA
+
+
+
+peer chaincode invoke --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecc_11 --tls --cafile $ORDERER_CA --peerAddresses $CORE_PEER_ADDRESS --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem -c '{"function":"createClientServiceRequest","Args":["12345", "Issue", "BG","Subjecton Guarantee","Request for Guarantee product"]}'
