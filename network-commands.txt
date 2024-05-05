@@ -60,7 +60,7 @@ repeat below step in all nodes( 2 & 3)
 4) export PACKAGE_ID=4d787e0434354034e13d1e4242dd83288786c4bc7705018492e9865a90e6cd0b
 
 repeat below step on all nodes: (1 & 2 & 3)
-5) peer lifecycle chaincode approveformyorg -o hlf-node1:7050 --name ${USER}-chaincode6 --channelID $HLF_NETWORK_CHANNEL_ID --package-id ${PACKAGEID} --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
+5) peer lifecycle chaincode approveformyorg -o hlf-node1:7050 --name ${USER}-chaincode6 --channelID $HLF_NETWORK_CHANNEL_ID --package-id ${PACKAGE_ID} --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
 
 6) peer lifecycle chaincode checkcommitreadiness -o hlf-node1:7050 --name ${USER}-chaincode6 --channelID $HLF_NETWORK_CHANNEL_ID --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
 
