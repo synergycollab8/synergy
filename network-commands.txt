@@ -51,23 +51,21 @@ peer chaincode invoke --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $H
 
 
 **************Updated from me **********************
-1) peer lifecycle chaincode package chaincode/clientservicecc.tar.gz --lang node --path chaincode/clientservicecc --label ${USER}-chaincode
-repeat on all nodes: (2 & 3 )
+1) peer lifecycle chaincode package chaincode/clientservicecc.tar.gz --lang node --path chaincode/clientservicecc --label ${USER}-chaincode6
+repeat on all nodes: (2 & 3 ) ( copy the package clientservicecc.tar.gz to other 2 nodes )
 2) peer lifecycle chaincode install chaincode/clientservicecc.tar.gz
 3) peer lifecycle chaincode queryinstalled
 
-4) export PACKAGE_ID=c7518e2b498e1594734af149f5ba7385c14959d55b8d0598ea02020f4825b85a
+repeat below step in all nodes( 2 & 3)
+4) export PACKAGE_ID=4d787e0434354034e13d1e4242dd83288786c4bc7705018492e9865a90e6cd0b
 
 repeat below step on all nodes: (1 & 2 & 3)
-5) peer lifecycle chaincode approveformyorg -o hlf-node1:7050 --name ${USER}-chaincode --channelID $HLF_NETWORK_CHANNEL_ID --package-id ${PACKAGEID} --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
+5) peer lifecycle chaincode approveformyorg -o hlf-node1:7050 --name ${USER}-chaincode6 --channelID $HLF_NETWORK_CHANNEL_ID --package-id ${PACKAGEID} --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
 
-6) peer lifecycle chaincode checkcommitreadiness -o hlf-node1:7050 --name ${USER}-chaincode --channelID $HLF_NETWORK_CHANNEL_ID --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
+6) peer lifecycle chaincode checkcommitreadiness -o hlf-node1:7050 --name ${USER}-chaincode6 --channelID $HLF_NETWORK_CHANNEL_ID --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
 
-7) peer lifecycle chaincode commit -o hlf-node1:7050 --tls --cafile $ORDERER_CA --name ${USER}-chaincode --channelID $HLF_NETWORK_CHANNEL_ID --version 0 -v 0 --sequence 1 --peerAddresses hlf-node1:7051 --tlsRootCertFiles organizations/peerOrganizations/Org1/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node3:7051 --tlsRootCertFiles organizations/peerOrganizations/Org3/msp/tlscacerts/tls-cacert.pem
-
-
-8) peer lifecycle chaincode querycommitted --channelID $HLF_NETWORK_CHANNEL_ID --name ${USER}-chaincode
+7) peer lifecycle chaincode commit -o hlf-node1:7050 --tls --cafile $ORDERER_CA --name ${USER}-chaincode2 --channelID $HLF_NETWORK_CHANNEL_ID --version 0 -v 0 --sequence 1 --peerAddresses hlf-node1:7051 --tlsRootCertFiles organizations/peerOrganizations/Org1/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node3:7051 --tlsRootCertFiles organizations/peerOrganizations/Org3/msp/tlscacerts/tls-cacert.pem
 
 
-peer chaincode invoke --orderer $ORDERER_ADDRESS --channelID $HLF_NETWORK_CHANNEL_ID --name ${USER}-chaincode --tls --cafile $ORDERER_CA --peerAddresses hlf-node1:7051 --tlsRootCertFiles organizations/peerOrganizations/Org1/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node3:7051 --tlsRootCertFiles organizations/peerOrganizations/Org3/msp/tlscacerts/tls-cacert.pem -c '{"function":"createClientServiceRequest","Args":["12345", "Issue", "BG","Subjecton Guarantee","Request for Guarantee product"]}'
-***************************************************
+8) peer lifecycle chaincode querycommitted --channelID $HLF_NETWORK_CHANNEL_ID --name ${USER}-chaincode6
+*****************************************************
