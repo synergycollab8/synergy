@@ -69,3 +69,5 @@ repeat below step on all nodes: (1 & 2 & 3)
 
 8) peer lifecycle chaincode querycommitted --channelID $HLF_NETWORK_CHANNEL_ID --name ${USER}-chaincode6
 *****************************************************
+
+asset-transfer-basic/chaincode-javascript/.eslintrc.js -- add this file along with index.js into the chaincode
