@@ -51,23 +51,39 @@ peer chaincode invoke --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $H
 
 
 **************Updated from me **********************
-1) peer lifecycle chaincode package chaincode/clientservicecc.tar.gz --lang node --path chaincode/clientservicecc --label ${USER}-chaincode6
-repeat on all nodes: (2 & 3 ) ( copy the package clientservicecc.tar.gz to other 2 nodes )
+1) peer lifecycle chaincode package chaincode/clientservicecc.tar.gz --lang node --path chaincode/clientservicecc --label  clientservicecontract
+repeat on all nodes: (2 & 3 ) ( copy the package clientservicecc.tar.gz to other 2 nodes ) --scp -r chaincode/clientservicecc.tar.gz bcuser@hlf-node2:/app/hyperledger-fabric/chaincode
 2) peer lifecycle chaincode install chaincode/clientservicecc.tar.gz
 3) peer lifecycle chaincode queryinstalled
 
 repeat below step in all nodes( 2 & 3)
-4) export PACKAGE_ID=4d787e0434354034e13d1e4242dd83288786c4bc7705018492e9865a90e6cd0b
+4) export PACKAGE_ID=clientservicecontract:d5adf665a6ca42c127defba16f0be6aaf732518c4b07a1bf0458fa89f0d03c32
 
 repeat below step on all nodes: (1 & 2 & 3)
-5) peer lifecycle chaincode approveformyorg -o hlf-node1:7050 --name ${USER}-chaincode6 --channelID $HLF_NETWORK_CHANNEL_ID --package-id ${PACKAGE_ID} --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
+5) peer lifecycle chaincode approveformyorg -o hlf-node1:7050 --name clientservicecontract --channelID $HLF_NETWORK_CHANNEL_ID --package-id ${PACKAGE_ID} --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
 
-6) peer lifecycle chaincode checkcommitreadiness -o hlf-node1:7050 --name ${USER}-chaincode6 --channelID $HLF_NETWORK_CHANNEL_ID --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
+6) peer lifecycle chaincode checkcommitreadiness -o hlf-node1:7050 --name clientservicecontract --channelID $HLF_NETWORK_CHANNEL_ID --version 0 -v 0 --sequence 1 --tls --cafile $ORDERER_CA
 
-7) peer lifecycle chaincode commit -o hlf-node1:7050 --tls --cafile $ORDERER_CA --name ${USER}-chaincode2 --channelID $HLF_NETWORK_CHANNEL_ID --version 0 -v 0 --sequence 1 --peerAddresses hlf-node1:7051 --tlsRootCertFiles organizations/peerOrganizations/Org1/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node3:7051 --tlsRootCertFiles organizations/peerOrganizations/Org3/msp/tlscacerts/tls-cacert.pem
+7) peer lifecycle chaincode commit -o hlf-node1:7050 --tls --cafile $ORDERER_CA --name clientservicecontract --channelID $HLF_NETWORK_CHANNEL_ID --version 0 -v 0 --sequence 1 --peerAddresses hlf-node1:7051 --tlsRootCertFiles organizations/peerOrganizations/Org1/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node3:7051 --tlsRootCertFiles organizations/peerOrganizations/Org3/msp/tlscacerts/tls-cacert.pem
 
 
-8) peer lifecycle chaincode querycommitted --channelID $HLF_NETWORK_CHANNEL_ID --name ${USER}-chaincode6
+8) peer lifecycle chaincode querycommitted --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecontract
 *****************************************************
 
-asset-transfer-basic/chaincode-javascript/.eslintrc.js -- add this file along with index.js into the chaincode
+
+
+peer chaincode invoke --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecontract --tls --cafile $ORDERER_CA --peerAddresses $CORE_PEER_ADDRESS --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem -c '{"function":"createClientServiceRequest","Args":["12345", "Issue", "BG","Subjecton Guarantee","Request for Guarantee product"]}'
+
+peer chaincode invoke --orderer $ORDERER_ADDRESS --ordererTLSHostnameOverride $HLF_ORDR_ID --channelID $HLF_NETWORK_CHANNEL_ID --name clientservicecontract --tls --cafile $ORDERER_CA --peerAddresses $CORE_PEER_ADDRESS --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE --peerAddresses hlf-node2:7051 --tlsRootCertFiles organizations/peerOrganizations/Org2/msp/tlscacerts/tls-cacert.pem --peerAddresses hlf-node3:7051 --tlsRootCertFiles organizations/peerOrganizations/Org3/msp/tlscacerts/tls-cacert.pem -c '{"function":"createClientServiceRequest","Args":["8934", "Issue", "BG","Subjecton Guarantee","Request for Guarantee product"]}'
+
+
+peer chaincode query -C mytestchannel -n clientservicecontract -c '{"Args":["getClientServiceRequest","9456"]}'
+
+peer chaincode query -C mytestchannel -n collaborationcontract -c '{"Args":["getContact","100007"]}'
+
+
+peer chaincode list --instantiated -C mytestchannel
+peer chaincode list --installed
+
+
+peer chaincode instantiate -C mytestchannel -n clientservicecontract -- this should show the list of the installed chaincode packages
