@@ -87,3 +87,5 @@ peer chaincode list --installed
 
 
 peer chaincode instantiate -C mytestchannel -n clientservicecontract -- this should show the list of the installed chaincode packages
+
+peer chaincode query -C mytestchannel -n clientservicecontract1 -c '{"function":"queryAllData","Args":[]}'
