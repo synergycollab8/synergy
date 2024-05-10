@@ -152,9 +152,10 @@ async function main() {
                   }
                    //console.log(res);
                  });
-                const query = `INSERT INTO postgres.mynetwork."clientservicerequest"(requestid, issue_type, product, subject, description) VALUES ('${event.requ
-estId}', '${event.issue_type}', '${event.product}', '${event.subject}','${event.description}')`;
-                        
+                const query = `INSERT INTO public."client_service_request"("requestId", issue_type, product, subject, description,date) VALUES ('${event.request
+Id}', '${event.issue_type}', '${event.product}', '${event.subject}','${event.description}',current_timestamp) ON CONFLICT ("requestId") DO UPDATE SET "requestId
+"=excluded."requestId", issue_type=excluded.issue_type, product=excluded.product, subject=excluded.subject, description=excluded.description,date=current_timest
+amp`;
                 client.query(query, (err, res) => {
                     if (err) {
                         console.error(err);
