@@ -9,18 +9,17 @@
 // Utility class for collections of ledger states --  a state list
 const StateList = require('../ledger-api/statelist.js');
 
-const clientservicerequest = require('./clientservicerequest.js');
+const ClientServiceRequest = require('./clientservicerequest.js');
 
-const clientservicerequestEvent = "clientservicerequestEvent";
 class ClientServiceRequestList extends StateList {
 
     constructor(ctx) {
-        super(ctx, 'com.org1.synergy.clientcervicerequestlist');
-        this.use(clientservicerequest);
+        super(ctx, 'com.org1.synergy.ClientServiceRequestList');
+        this.use(ClientServiceRequest);
     }
 
     async addClientServiceRequest(clientservicerequest) {
-        return this.addState(clientservicerequest,clientservicerequestEvent);
+        return this.addState(clientservicerequest,"ClientServiceRequestEvent");
     }
 
     async getClientServiceRequest(requestId) {
@@ -28,10 +27,11 @@ class ClientServiceRequestList extends StateList {
     }
 
     async updateClientServiceRequest(clientservicerequest) {
-        return this.updateState(clientservicerequest,clientservicerequestEvent);
+        return this.updateState(clientservicerequest,"ClientServiceRequestEvent");
     }
 
     async getClientServiceRequestList(){
         return this.getList();
     }
 }
+module.exports = ClientServiceRequestList;
