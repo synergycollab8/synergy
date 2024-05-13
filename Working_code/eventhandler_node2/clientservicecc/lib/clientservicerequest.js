@@ -10,7 +10,7 @@
 const State = require('../ledger-api/state.js');
 
 /**
- * Docume nt class extends State class
+ * ClientServiceRequest class extends State class
  * Class will be used by application and smart contract to define a paper
  */
 class ClientServiceRequest extends State {
@@ -19,9 +19,23 @@ class ClientServiceRequest extends State {
         super(ClientServiceRequest.getClass(), [obj.requestId]);
         Object.assign(this, obj);
     }
-    setCurrentState(newState) {
-        this.currentState = newState;
+
+    getOwner() {
+        return this.owner;
     }
+
+    setOwnerMSP(mspid) {
+        this.mspid = mspid;
+    }
+
+    getOwnerMSP() {
+        return this.mspid;
+    }
+
+    setOwner(newOwner) {
+        this.owner = newOwner;
+    }
+
     
     static fromBuffer(buffer) {
         return ClientServiceRequest.deserialize(buffer);
@@ -44,7 +58,7 @@ class ClientServiceRequest extends State {
     }
 
     static getClass() {
-        return 'com.org1.synergy.ClientServiceRequest';
+        return 'com.org1.synergy.clientservicerequest';
     }
 }
 
