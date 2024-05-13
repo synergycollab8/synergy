@@ -2,90 +2,40 @@
  * Copyright IBM Corp. All Rights Reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
-*/
+ */
 
 'use strict';
 
-// Fabric smart contract classes
-const { Contract} = require('fabric-contract-api');
+const { Contract } = require('fabric-contract-api');
 
-// PaperNet specifc classes
-
-const ClientServiceRequestList = require('./clientservicerequestlist.js');
-const ClientServiceRequest = require('./clientservicerequest.js');
-
-
-/**
- * A custom context provides easy access to list of all commercial papers
- */
-class ClientServiceContext extends Context {
-    constructor() {
-        super();
-        // All papers are held in a list of papers
-        this.clientservicerequestList = new ClientServiceRequestList(this);
-    }
-}
-
-/**
- * Define commercial paper smart contract by extending Fabric Contract class
- *
- */
 class ClientServiceContract extends Contract {
 
-   
-   // constructor() {
-        // Unique namespace when multiple contracts per chaincode file
-     //   super('com.org1.synergy.ClientServiceRequest');
-   // }
-       /**
-     * Define a custom context for commercial paper
-    */
-    createContext() {
-        return new ClientServiceContext();
+    async initLedger(ctx) {
+        console.info('============= START : Initialize Ledger ===========');
+        const clientservicecontract = [
+            {
+                requestId: 'test123',
+                issue_type: 'Toyota_issue',
+                product: 'Guarantee',
+                subject: 'Toyota issue on guarantee',
+                description: 'Toyota issue description'
+            },
+        ];
+
+        for (let i = 0; i < clientservicecontract.length; i++) {
+            clientservicecontract[i].docType = 'clientservice';
+            await ctx.stub.putState('clientservice' + i, Buffer.from(JSON.stringify(clientservicecontract[i])));
+            console.info('Added <--> ', clientservicecontract[i]);
+        }
+        console.info('============= END : Initialize Ledger ===========');
     }
 
-    /**
-     * Instantiate to perform any setup of the ledger that might be required.
-     * @param {Context} ctx the transaction context
-     */
-    async instantiate(ctx) {
-        // No implementation required with this example
-        // It could be where data migration is performed, if necessary
-        console.log('Instantiate the client service contract');
-    }
-
-  
-
-        /**
-     * Create a new contact  on the network
-     * @param {Context} ctx - The transaction context object
-     * @param {String} requestId - ID to be used for identifying a client request
-     * @param {String} userid - user who create the request
-     * @param {String} username - user name
-     * @param {String} subject - client service request subject
-     * @param {String} description - client service request subject
-     * @param {String} productid - product id 
-     * @returns
-     */
-
-
-    async createClientServiceRequest(ctx,requestId,issue_type,product,subject,description) {
-        let newClientServiceRequest = ClientServiceRequest(requestId,issue_type,product,subject,description);
-        console.log("new client request initiated .... ",newClientServiceRequest);
-        await ctx.clientrequestList.addClientRequest(newClientServiceRequest);
-        return newClientServiceRequest;
-
-    }
-
-    async sendResponse(ctx,requestId, response){
-        
-    }
-    /**
+         /**
      * Function to retrieve a specific contact detail
      * @param {Context} ctx
      * @param {String} requestId 
      */
-    async getClientServiceRequest(ctx,requestId){
+     async getClientServiceRequest(ctx,requestId){
         const clientServiceRequestBytes = await ctx.stub.getState(requestId);
         if(!clientServiceRequestBytes || clientServiceRequestBytes.length === 0){
             throw new Error (`${requestId} does not exist`);
@@ -93,9 +43,53 @@ class ClientServiceContract extends Contract {
         console.log(clientServiceRequestBytes.toString());
         return clientServiceRequestBytes.toString();
     }
-    
 
-  
+    async createClientServiceRequest(ctx,requestId,issue_type,product,subject,description) {
+        console.log('=========== Start: createClientServiceRequest =========');
+        const clientservicerequest = {
+            requestId,issue_type,product,subject,description
+        };
+        await ctx.stub.putState(requestId, Buffer.from(JSON.stringify(clientservicerequest)));
+        await ctx.stub.setEvent('eventForClientserviceRequest', Buffer.from(JSON.stringify(clientservicerequest)));    
+        console.info('============= END : createClientServiceRequest ===========');
+       
+        //return ctx.stub.getState(requestId);
+         return clientservicerequest;
+
+    }
+
+    async queryAllData(ctx) {
+        const startKey = '';
+        const endKey = '';
+        const allResults = [];
+        for await (const {key, value} of ctx.stub.getStateByRange(startKey, endKey)) {
+            const strValue = Buffer.from(value).toString('utf8');
+            let record;
+            try {
+                record = JSON.parse(strValue);
+            } catch (err) {
+                console.log(err);
+                record = strValue;
+            }
+            allResults.push({ Key: key, Record: record });
+        }
+        console.info(allResults);
+        return JSON.stringify(allResults);
+    }
+
+    async changeIssueType(ctx, requestId, newvalue) {
+        console.info('============= START : changeissueType ===========');
+
+        const clientServiceRequestAsBytes = await ctx.stub.getState(requestId); // get the car from chaincode state
+        if (!clientServiceRequestAsBytes || clientServiceRequestAsBytes.length === 0) {
+            throw new Error(`${requestId} does not exist`);
+        }
+        const clientServiceRequest = JSON.parse(clientServiceRequestAsBytes.toString());
+        clientServiceRequest.issue_type = newvalue;
+
+        await ctx.stub.putState(requestId, Buffer.from(JSON.stringify(clientServiceRequest)));
+        console.info('============= END : changeissueType ===========');
+    }
 
 }
 
