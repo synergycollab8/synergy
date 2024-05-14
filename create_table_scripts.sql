@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS public.client_service_request
     subject character varying(100) COLLATE pg_catalog."default",
     description character varying(1000) COLLATE pg_catalog."default",
     date timestamp without time zone,
+    message character varying(1000) COLLATE pg_catalog."default",
     CONSTRAINT "requestId_unique_constraint" UNIQUE ("requestId")
 )
 
