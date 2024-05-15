@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS public.document
     doc_name character varying(1000) COLLATE pg_catalog."default",
     doc_type character varying(1000) COLLATE pg_catalog."default",
     "timestamp" time without time zone,
-    CONSTRAINT "doc_requestId_unique_constraint" UNIQUE ("requestId")
+    CONSTRAINT "doc_hashcode_unique_constraint" UNIQUE (doc_hash_code)
 )
 
 TABLESPACE pg_default;
