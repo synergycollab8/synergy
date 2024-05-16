@@ -52,10 +52,12 @@ CREATE TABLE IF NOT EXISTS public.client_service_request
     date timestamp without time zone,
     message character varying(1000) COLLATE pg_catalog."default",
     created_by character varying(1000) COLLATE pg_catalog."default",
+	status character varying(1000) COLLATE pg_catalog."default",
     CONSTRAINT "requestId_unique_constraint" UNIQUE ("requestId")
 )
 
 TABLESPACE pg_default;
+--message , message from , requestID
 
 ALTER TABLE IF EXISTS public.client_service_request
     OWNER to postgres;
