@@ -1,1 +1,1 @@
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/createClientServiceRequest -d '{"requestId":"GGG","issue_type":"request","product":"BG","subject":"subject on Bg","description":"latestDetails"}'
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/createClientServiceRequest -d '{"requestId":"GGG","issue_type":"request","product":"BG","subject":"subject on Bg","description":"latestDetails","message":"message_on_creation","created_by":"testorg1","status":"Inprogress","message_from":"","messageinsert":""}'
