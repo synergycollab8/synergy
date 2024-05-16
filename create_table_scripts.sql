@@ -21,8 +21,9 @@ ALTER TABLE IF EXISTS public.chat
 create table if not exists public.client_service_req_extn
 	(
 	   message character varying(1000) COLLATE pg_catalog."default",
-	   message_from character varying(1000) COLLATE pg_catalog."default",
-	   "requestId" character varying(100) COLLATE pg_catalog."default"
+           message_from character varying(1000) COLLATE pg_catalog."default",
+           "requestId" character varying(100) COLLATE pg_catalog."default",
+            date timestamp without time zone
 	)
 TABLESPACE pg_default;
 
