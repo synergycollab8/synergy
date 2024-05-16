@@ -18,6 +18,17 @@ ALTER TABLE IF EXISTS public.chat
     OWNER to postgres;
 
 
+create table if not exists public.client_service_req_extn
+	(
+	   message character varying(1000) COLLATE pg_catalog."default",
+	   message_from character varying(1000) COLLATE pg_catalog."default",
+	   "requestId" character varying(100) COLLATE pg_catalog."default"
+	)
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.client_service_req_extn
+    OWNER to postgres;
+
 -- Table: public.chat_history
 
 -- DROP TABLE IF EXISTS public.chat_history;
