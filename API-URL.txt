@@ -5,8 +5,7 @@ curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/createC
 curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getContactRequests -d '{"email":"testuser1@org1.com"}'
 
 -- client_messages_list API
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getClientRequestExtn -d '{"requestId":"GGG"}
-
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getClientRequestExtn -d '{"requestId":"GGG"}'
 
 --Client_request_API
 curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getClientRequests -d '{"requestId":"GGG"}'
