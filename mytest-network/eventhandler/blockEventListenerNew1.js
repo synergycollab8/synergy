@@ -58,6 +58,7 @@ const couchdb_address = config.couchdb_address;
 
 // Define the API URL
 const apiUrl = 'http://localhost:3000/api/refreshComponent?component=servicerequest';
+const apiUrl2 = 'http://localhost:3000/api/refreshComponent?component=servicerequest&requestId=';
 
 const configPath = path.resolve(__dirname, 'nextblock.txt');
 
@@ -116,14 +117,14 @@ async function main() {
         }
 
         // Create a new file system based wallet for managing identities.
-        const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
+        const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org2', 'ccp-Org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
-           const issue_typeName = 'User1@Org1';
+           const issue_typeName = 'User1@Org2';
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
         await gateway.connect(ccp, { wallet, identity: issue_typeName, discovery: { enabled: true, asLocalhost: false } });
@@ -141,10 +142,11 @@ async function main() {
             event = JSON.parse(event);
             console.log("******************************************");
             console.log(event);
-            console.log(`${event.requestId}, ${event.issue_type}, ${event.product}, ${event.subject},${event.description},${event.message},${event.created_by}`);
+            console.log(`${event.requestId}, ${event.issue_type}, ${event.product}, ${event.subject},${event.description},${event.message},${event.created_by}`)
+;
             console.log("******************************************");
             const requestId =  event.requestId;
-	    const messageinsert = event.messageinsert;
+            const messageinsert = event.messageinsert;
             
             if(requestId){
 
@@ -157,17 +159,39 @@ async function main() {
                   }
                    //console.log(res);
                  });
-                const query = `INSERT INTO public."client_service_request"("requestId", issue_type, product, subject, description,message,created_by,status,date) VALUES ('${event.requestId}', '${event.issue_type}', '${event.product}', '${event.subject}','${event.description}','${event.message}','${event.created_by}','${event.status}',current_timestamp) ON CONFLICT ("requestId") DO UPDATE SET "requestId"=excluded."requestId", issue_type=excluded.issue_type, product=excluded.product, subject=excluded.subject, description=excluded.description,message=excluded.message,created_by=excluded.created_by,status=excluded.status,date=current_timestamp`;
+                const query = `INSERT INTO public."client_service_request"("requestId", issue_type, product, subject, description,message,created_by,status,date
+) VALUES ('${event.requestId}', '${event.issue_type}', '${event.product}', '${event.subject}','${event.description}','${event.message}','${event.created_by}','$
+{event.status}',current_timestamp) ON CONFLICT ("requestId") DO UPDATE SET "requestId"=excluded."requestId", issue_type=excluded.issue_type, product=excluded.pr
+oduct, subject=excluded.subject, description=excluded.description,message=excluded.message,created_by=excluded.created_by,status=excluded.status,date=current_ti
+mestamp`;
                 client.query(query, (err, res) => {
                     if (err) {
                         console.error(err);
                         return;
                     }
-                    console.log('Data insert successful');   
-                }); 
-		if (messageinsert){
-		console.log('message insert triggered');
-	       const queryextn = `INSERT INTO public."client_service_req_extn"("requestId",message,message_from,date) VALUES ('${event.requestId}','${event.message}','${event.message_from}',current_timestamp)`;
+                    console.log('Data insert successful'); 
+                });
+
+                // Make a POST request
+                fetch(apiUrl,{
+                     // body: '{\"message\":\"Request acknowledgment message from ${event.message_from} for request ID:${event.requestId}\"}'
+                      method: 'POST',
+                      body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
+
+                }).then(response => {
+                    if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                    }
+                    }).then(data => {
+                   console.log(data);
+                }).catch(error => {
+                console.error('Error:', error);
+                });
+
+                if (messageinsert){
+                console.log('message insert triggered');
+               const queryextn = `INSERT INTO public."client_service_req_extn"("requestId",message,message_from,date) VALUES ('${event.requestId}','${event.mess
+age}','${event.message_from}',current_timestamp)`;
                 client.query(queryextn, (err, res) => {
                     if (err) {
                         console.error(err);
@@ -175,19 +199,24 @@ async function main() {
                     }
                     console.log('Message data insert successful');
                 });
-	      }
-	     
-                // Make a GET request
-                fetch(apiUrl).then(response => {
+              //}
+             
+                // Make a POST request
+                fetch(apiUrl,{
+                      method: 'POST',
+                      body: '{\"message\":\"Request acknowledgment message from ${event.message_from} for request ID:${event.requestId}\"}'
+                      // body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
+                     
+                }).then(response => {
                     if (!response.ok) {
                     throw new Error('Network response was not ok');
                     }
-                    return response.json();
                     }).then(data => {
                    console.log(data);
                 }).catch(error => {
                 console.error('Error:', error);
                 });
+               }
             
         }} );
        // console.log(`Listening for block events, nextblock: ${nextBlock}`);
