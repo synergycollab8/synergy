@@ -21,7 +21,7 @@ client.connect();
 
 // async function getContactRequest(req,response) {
    //     console.log('=========== Start: getContactServiceRequest =========',req.body);
-//	console.log("select * from contact where email='"+req.body.email+"'");
+//      console.log("select * from contact where email='"+req.body.email+"'");
 
 //        client.query("select * from contact where email='"+req.body.email+"'", (error, results) => {
   //    if (error) {
@@ -40,14 +40,14 @@ async function getContactRequest(req,response) {
     var query = "select * from contact where email='"+req+"'";
 
     return new Promise(function (resolve, reject) {
-	console.log(query);
+        console.log(query);
        client.query(query, function(err, result) {
            if (err) {
-	      console.log(err);
+              console.log(err);
               return reject(err);
            } else {
               if (result.rowCount > 0) {
-		  console.log(result);
+                  console.log(result);
                   return resolve(result.rows);
               }
            }
@@ -60,9 +60,11 @@ async function getContactRequest(req,response) {
 async function getClientRequest(req,response) {
 
     console.log('=========== Start: getClientServiceRequet =========',req);
-    console.log("select * from client_service_request where requestId='"+req+"'");
-	var query = "select * from client_service_request where "+"\"requestId\""+"='"+req+"'";
-	
+    console.log("select \"requestId\",issue_type,product,subject,description,message,created_by,status,to_char(date,'MON-DD-YYYY HH12:MIPM') as date from client
+_service_request where requestId='"+req+"'");
+        var query = "select \"requestId\",issue_type,product,subject,description,message,created_by,status,to_char(date,'MON-DD-YYYY HH12:MIPM') as date from cl
+ient_service_request where "+"\"requestId\""+"='"+req+"'";
+
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {         
            if (err) {
@@ -80,8 +82,10 @@ async function getClientRequest(req,response) {
 async function getClientRequestextn(req,response) {
 
     console.log('=========== Start: getClientServiceRequest extn =========',req);
-    console.log("select * from client_service_req_extn where requestId='"+req+"'");
-    var query = "select * from client_service_req_extn where "+"\"requestId\""+"='"+req+"'";
+    console.log("select split_part(message,'-','1') as event,split_part(message,'-','2') as message,message as act_message,message_from,\"requestId\",to_char(da
+te,'MON-DD-YYYY HH12:MIPM') from client_service_req_extn where requestId='"+req+"'");
+    var query = "select split_part(message,'-','1') as event,split_part(message,'-','2') as message,message as act_message,message_from,\"requestId\",to_char(da
+te,'MON-DD-YYYY HH12:MIPM')  from client_service_req_extn where "+"\"requestId\""+"='"+req+"'";
 
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {
