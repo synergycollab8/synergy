@@ -10,3 +10,33 @@ curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getClie
 
 --Client_request_API
 curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getClientRequests -d '{"requestId":"GGG"}'
+************************************************
+***************************************************************************************************************
+********************************************************************************************************************
+
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:creation-message_on_creation","created_by":"testorg1","status":"Inprogress","message_from":"","messageinsert":""}'
+
+
+curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:Response-message update from team on LC details segment ","created_by":"testorg1","status":"Under-evaluation","message_from":"RMOrg2","messageinsert":"yes"}'
+
+
+
+curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:Response-Data evaluation completed ","created_by":"testorg1","status":"Evaluated","message_from":"RM-Akesh-Org2","messageinsert":"yes"}'
+
+
+curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:System update-upgraded the priority","created_by":"testorg1","status":"In_System_Check","message_from":"Auto-Bot","messageinsert":"yes"}'
+
+
+
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:Query need clarification on field segment","created_by":"testorg1","status":"In_System_Check","message_from":"testuserOrg1","messageinsert":"yes"}'
+
+
+curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:Response field value under segment is updated with old data","created_by":"testorg1","status":"pending with user","message_from":"RM-Akesh-Org2","messageinsert":"yes"}'
+
+
+
+curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:Response All fields are cleared and processed the request","created_by":"testorg1","status":"Processed","message_from":"RM-Akesh-Org2","messageinsert":"yes"}'
+
+
+
+curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:System Update-All the steps completed for LC segment","created_by":"testorg1","status":"Closed","message_from":"Auto-Bot","messageinsert":"yes"}'
