@@ -16,7 +16,8 @@ const client = new Client({
 
 client.connect();
 
-const GET_ALL_CLIENT_SERVICE_REQUEST = "SELECT * FROM client_service_request ORDER BY date DESC";
+const GET_ALL_CLIENT_SERVICE_REQUEST = "SELECT \"requestId\",issue_type,product,subject,description,message,created_by,status,to_char(date,'MON-DD-YYYY HH12:MIP
+M') as date FROM client_service_request ORDER BY date DESC";
 
 const getClientServiceRequest = (request, response) => {
     console.log("inside get client service request ...",client);
