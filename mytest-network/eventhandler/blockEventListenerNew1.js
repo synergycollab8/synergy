@@ -58,7 +58,7 @@ const couchdb_address = config.couchdb_address;
 
 // Define the API URL
 const apiUrl = 'http://localhost:3000/api/refreshComponent?component=servicerequest';
-const apiUrl2 = 'http://localhost:3000/api/refreshComponent?component=servicerequest&requestId=';
+const apiUrl2 = 'http://localhost:3000/api/refreshComponent?component=servicerequest&message=';
 
 const configPath = path.resolve(__dirname, 'nextblock.txt');
 
@@ -117,14 +117,14 @@ async function main() {
         }
 
         // Create a new file system based wallet for managing identities.
-        const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org2', 'ccp-Org2.json');
+        const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
-           const issue_typeName = 'User1@Org2';
+           const issue_typeName = 'User1@Org1';
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
         await gateway.connect(ccp, { wallet, identity: issue_typeName, discovery: { enabled: true, asLocalhost: false } });
@@ -172,11 +172,18 @@ mestamp`;
                     console.log('Data insert successful'); 
                 });
 
+                var eventString = '${event.message}';
+                var index = eventString.indexOf("-"); // Gets the first index where a space occours
+                var eventid = eventString.substr(0, index); // Gets the first part
+                var text = eventString.substr(index + 1); // Gets the text part
+                var requestid = '${event.requestId}';
+                var createdby = '${event.created_by}';
+
                 // Make a POST request
                 fetch(apiUrl,{
                      // body: '{\"message\":\"Request acknowledgment message from ${event.message_from} for request ID:${event.requestId}\"}'
                       method: 'POST',
-                      body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
+                      body: `{"user":createdby,"title":eventid+"for"+requestid ,"message":text, "time":''}`
 
                 }).then(response => {
                     if (!response.ok) {
@@ -204,8 +211,8 @@ age}','${event.message_from}',current_timestamp)`;
                 // Make a POST request
                 fetch(apiUrl,{
                       method: 'POST',
-                      body: '{\"message\":\"Request acknowledgment message from ${event.message_from} for request ID:${event.requestId}\"}'
-                      // body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
+                      body: `{"user":createdby,"title":eventid+"for"+requestid ,"message":text, "time":''}`
+                        // body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
                      
                 }).then(response => {
                     if (!response.ok) {
