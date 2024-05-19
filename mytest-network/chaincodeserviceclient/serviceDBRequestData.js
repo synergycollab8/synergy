@@ -61,9 +61,9 @@ async function getClientRequest(req,response) {
 
     console.log('=========== Start: getClientServiceRequet =========',req);
     console.log("select \"requestId\",issue_type,product,subject,description,message,created_by,status,to_char(date,'MON-DD-YYYY HH12:MIPM') as date from client
-_service_request where requestId='"+req+"'");
+_service_request where requestId='"+req+"' order by date desc");
         var query = "select \"requestId\",issue_type,product,subject,description,message,created_by,status,to_char(date,'MON-DD-YYYY HH12:MIPM') as date from cl
-ient_service_request where "+"\"requestId\""+"='"+req+"'";
+ient_service_request where "+"\"requestId\""+"='"+req+"' order by date desc";
 
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {         
@@ -83,9 +83,9 @@ async function getClientRequestextn(req,response) {
 
     console.log('=========== Start: getClientServiceRequest extn =========',req);
     console.log("select split_part(message,'-','1') as event,split_part(message,'-','2') as message,message as act_message,message_from,\"requestId\",to_char(da
-te,'MON-DD-YYYY HH12:MIPM') from client_service_req_extn where requestId='"+req+"'");
+te,'MON-DD-YYYY HH12:MIPM') from client_service_req_extn where requestId='"+req+"' order by date desc");
     var query = "select split_part(message,'-','1') as event,split_part(message,'-','2') as message,message as act_message,message_from,\"requestId\",to_char(da
-te,'MON-DD-YYYY HH12:MIPM')  from client_service_req_extn where "+"\"requestId\""+"='"+req+"'";
+te,'MON-DD-YYYY HH12:MIPM')  from client_service_req_extn where "+"\"requestId\""+"='"+req+"' order by date desc";
 
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {
