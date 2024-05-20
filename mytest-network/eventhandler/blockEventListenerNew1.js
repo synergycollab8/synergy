@@ -142,8 +142,8 @@ async function main() {
             event = JSON.parse(event);
             console.log("******************************************");
             console.log(event);
-            console.log(`${event.requestId}, ${event.issue_type}, ${event.product}, ${event.subject},${event.description},${event.message},${event.created_by}`)
-;
+            console.log(`${event.requestId}, ${event.issue_type}, ${event.product}, ${event.subject},${event.description},${event.message},${event.created_by},$
+{event.messageid}`);
             console.log("******************************************");
             const requestId =  event.requestId;
             const messageinsert = event.messageinsert;
@@ -172,18 +172,21 @@ mestamp`;
                     console.log('Data insert successful'); 
                 });
 
-                var eventString = '${event.message}';
+                var eventString = `${event.message}`;
                 var index = eventString.indexOf("-"); // Gets the first index where a space occours
                 var eventid = eventString.substr(0, index); // Gets the first part
                 var text = eventString.substr(index + 1); // Gets the text part
-                var requestid = '${event.requestId}';
-                var createdby = '${event.created_by}';
-
+                var requestid = `${event.requestId}`;
+                var createdby = `${event.created_by}`;
+                var date = Date.now();
+                console.log('print date format');
+                console.log('print values:',eventString,index,eventid,text,requestid,createdby,date);
+                      
                 // Make a POST request
                 fetch(apiUrl,{
                      // body: '{\"message\":\"Request acknowledgment message from ${event.message_from} for request ID:${event.requestId}\"}'
                       method: 'POST',
-                      body: `{"user":createdby,"title":eventid+"for"+requestid ,"message":text, "time":''}`
+                      body: `{"user":createdby,"title":eventid+"for"+requestid ,"message":text,"component":"notificationBar", "time":''}`
 
                 }).then(response => {
                     if (!response.ok) {
@@ -197,8 +200,8 @@ mestamp`;
 
                 if (messageinsert){
                 console.log('message insert triggered');
-               const queryextn = `INSERT INTO public."client_service_req_extn"("requestId",message,message_from,date) VALUES ('${event.requestId}','${event.mess
-age}','${event.message_from}',current_timestamp)`;
+               const queryextn = `INSERT INTO public."client_service_req_extn"("requestId",message,message_from,messageid,date) VALUES ('${event.requestId}','${
+event.message}','${event.message_from}','${event.messageid}',current_timestamp)`;
                 client.query(queryextn, (err, res) => {
                     if (err) {
                         console.error(err);
@@ -211,7 +214,7 @@ age}','${event.message_from}',current_timestamp)`;
                 // Make a POST request
                 fetch(apiUrl,{
                       method: 'POST',
-                      body: `{"user":createdby,"title":eventid+"for"+requestid ,"message":text, "time":''}`
+                      body: `{"user":createdby,"title":eventid+"for"+requestid ,"message":text,"component":"notificationBar", "time":''}`
                         // body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
                      
                 }).then(response => {
