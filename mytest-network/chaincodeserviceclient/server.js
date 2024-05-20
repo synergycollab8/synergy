@@ -40,7 +40,7 @@ app.post('/createClientServiceRequest',async(req,res) => {
     //requestId,issue_type,product,subject,description
     console.log(req.body.requestId,`create clientServiceRequest`);
     const reqdata = await clientservicerequest.createRequestDetails(`${req.body.requestId}`,`${req.body.issue_type}`,`${req.body.product}`,`${req.body.subject}`
-,`${req.body.description}`,`${req.body.message}`,`${req.body.created_by}`,`${req.body.status}`,`${req.body.message_from}`,`${req.body.messageinsert},`${req.body
+,`${req.body.description}`,`${req.body.message}`,`${req.body.created_by}`,`${req.body.status}`,`${req.body.message_from}`,`${req.body.messageinsert}`,`${req.body
 .messageid}`);
     console.log(reqdata);
     res.setHeader('Content-Type', 'application/json');
