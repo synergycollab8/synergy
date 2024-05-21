@@ -179,14 +179,20 @@ mestamp`;
                 var requestid = `${event.requestId}`;
                 var createdby = `${event.created_by}`;
                 var date = Date.now();
+                    // Create a Date
+                const time = new Date();
+                let text1 = time.toLocaleString();
                 console.log('print date format');
-                console.log('print values:',eventString,index,eventid,text,requestid,createdby,date);
+                console.log('print values:',eventString,index,eventid,text,requestid,createdby,date,time,text1);
+                console.log(`{"user":"${createdby}","title":"${eventid} for ${requestid}" ,"message":"${text}","component":"notificationBar", "time":"${text1}"}
+`);
                       
                 // Make a POST request
                 fetch(apiUrl,{
                      // body: '{\"message\":\"Request acknowledgment message from ${event.message_from} for request ID:${event.requestId}\"}'
                       method: 'POST',
-                      body: `{"user":createdby,"title":eventid+"for"+requestid ,"message":text,"component":"notificationBar", "time":''}`
+                      body: `{"user":"${createdby}","title":"${eventid} for ${requestid}" ,"message":"${text}","component":"notificationBar", "time":"${text1}"}
+`
 
                 }).then(response => {
                     if (!response.ok) {
@@ -214,7 +220,7 @@ event.message}','${event.message_from}','${event.messageid}',current_timestamp)`
                 // Make a POST request
                 fetch(apiUrl,{
                       method: 'POST',
-                      body: `{"user":createdby,"title":eventid+"for"+requestid ,"message":text,"component":"notificationBar", "time":''}`
+                      body: `{"user":"${createdby}","title":"${eventid} for ${requestid}","message":"${text}","component":"notificationBar", "time":"${text1}"}`
                         // body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
                      
                 }).then(response => {
