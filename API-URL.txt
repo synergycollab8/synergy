@@ -38,4 +38,35 @@ curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createC
 
 
 
+
+
+
+
+
+
+
+
+
+**********************************
+Chat
+****************************************
+
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/createChat -d '{"room_id":"room_id123","room_name":"roomname_456","userId":"1113466","userName":"testUser1","message":"Chatinitiationmessage"}'
+
+
+-- contacts API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getChatRequest -d '{"room_id":"room_id123"}'
+
+-- client_messages_list API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000//getUserChatRequest -d '{"userId":"1113466"}'
+
+--Client_request_API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getChathistory -d '{"room_id":"room_id123"}'
+
+
+--Client_request_API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getUserChathistory -d '{"userId":"1113466"}'
+
+
+
 curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:System Update-All the steps completed for LC segment","created_by":"testorg1","status":"Closed","message_from":"Auto-Bot","messageinsert":"yes"}'
