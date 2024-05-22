@@ -59,3 +59,17 @@ curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000/getChat
 
 --Chathistory request with userID API
 curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000/getUserChathistory -d '{"userId":"1113466"}'
+
+
+**********************************
+Document
+****************************************
+
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:7000/createDocumentRequest -d '{"doc_hash_code":"doc_hash_code123","requestId":"1234request","doc_name":"doc_name_456","doc_type":"docx"}'
+
+
+-- ChatRequest-withroomid API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:7000/getDocumentbyHashcode -d '{"doc_hash_code":"doc_hash_code123"}'
+
+-- ChatRequest with userID API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:7000/getDocumentbyRequestId -d '{"requestId":"1234request"}'
