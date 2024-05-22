@@ -22,7 +22,7 @@ const yaml = require('js-yaml');
 const path = require('path');
 const { getNetworkInstance, disconnect } = require('./util/networkutil');
 // Main program function
-async function main(room_id,room_name,userId,userName) {
+async function main(room_id,room_name,userId,userName,message) {
 
     try {
        //const contract = await getContractInstance();
@@ -30,7 +30,7 @@ async function main(room_id,room_name,userId,userName) {
        const contract = network.getContract('chatcc');
         console.log('Submit Chat Contact creation transaction.');
     
-        const chatRequestBuffer = await contract.submitTransaction("createChatRequest",room_id,room_name,userId,userName);
+        const chatRequestBuffer = await contract.submitTransaction("createChatRequest",room_id,room_name,userId,userName,message);
         
         let newChatRequest = JSON.parse(chatRequestBuffer.toString());
         console.log(`${newChatRequest.room_id}  successfully created`);
@@ -47,7 +47,7 @@ async function main(room_id,room_name,userId,userName) {
 }
 
 module.exports = {
-    chatRequestDetails: async function(room_id,room_name,userId,userName) {
+    chatRequestDetails: async function(room_id,room_name,userId,userName,message) {
 
     try {
        //const contract = await getContractInstance();
@@ -55,7 +55,7 @@ module.exports = {
        const contract = network.getContract('chatcc');
         console.log('Submit Chat Contact creation transaction.');
     
-        const chatRequestBuffer = await contract.submitTransaction("createChatRequest",room_id,room_name,userId,userName);
+        const chatRequestBuffer = await contract.submitTransaction("createChatRequest",room_id,room_name,userId,userName,message);
         
         let newChatRequest = JSON.parse(chatRequestBuffer.toString());
         console.log(`${newChatRequest.room_id}  successfully created`);
@@ -74,7 +74,7 @@ module.exports = {
 }
 
 
-main("10000_room", "Suresh_chat_room", "user_1234","user_name_1234" ).then(() => {
+main("10000_room", "Suresh_chat_room", "user_1234","user_name_1234","message_123" ).then(() => {
 
     console.log('ChatRequest created successfully.');
 
