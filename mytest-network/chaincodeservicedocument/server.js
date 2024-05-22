@@ -19,25 +19,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 //start app 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 7000;
 
 
-const clientservicerequest = require('./createClientServiceReq');
+const documentservicerequest = require('./createDocumentRequest');
 
 
-const getclientservicereq = require('./getClientServiceReq');
+const getdocumentservicereq = require('./serviceDBRequestData');
 
-const clientServiceData = require("./clientServiceData");
+//const clientServiceData = require("./clientServiceData");
 
 
 
-app.post('/createClientServiceRequest',async(req,res) => {
+app.post('/createDocumentRequest',async(req,res) => {
 
   try{
     //main("12345", "Issue", "BG","Subjecton Guarantee","Request for Guarantee product" );
     //requestId,issue_type,product,subject,description
-    console.log(req.body.requestId,`create clientServiceRequest`);
-    const reqdata = await clientservicerequest.createRequestDetails(`${req.body.requestId}`,`${req.body.issue_type}`,`${req.body.product}`,`${req.body.subject}`,`${req.body.description}`,`${req.body.message}`,`${req.body.created_by}`,`${req.body.status}`,`${req.body.message_from}`,`${req.body.messageinsert}`);
+    console.log(req.body.doc_hash_code,req.body.doc_name,`create documentRequest`);
+    const reqdata = await documentservicerequest.createDocumentRequest(`${req.body.doc_hash_code}`,`${req.body.requestId}`,`${req.body.doc_name}`,`${req.body.do
+c_type}`);
     console.log(reqdata);
     res.setHeader('Content-Type', 'application/json');
     res.json(reqdata);
@@ -47,14 +48,14 @@ app.post('/createClientServiceRequest',async(req,res) => {
   }
 })
 
-app.get("/getAllClientServiceRequests",clientServiceData.getClientServiceRequest);
 
-app.get('/getClientServiceReq',async(req,res) => {
+
+app.post('/getDocumentbyHashcode',async(req,res) => {
 
   try{
     console.log(req.body);
-    console.log(`received req`);
-    const reqdata = await getclientservicereq.getClientServiceRequestdata(req.requestId);
+    console.log(`received req for querying documentbyHashcode`);
+    const reqdata = await getdocumentservicereq.getDocumentbyhashcode(`${req.body.doc_hash_code}`);
     console.log(reqdata);
     res.setHeader('Content-Type', 'application/json');
     res.json(reqdata);
@@ -64,11 +65,11 @@ app.get('/getClientServiceReq',async(req,res) => {
   }
 })
 
-app.get('/queryAllClientServiceData',async(req,res) => {
+app.post('/getDocumentbyRequestId',async(req,res) => {
 
   try{
-   console.log(`received call for querying allServiceData`);
-   const reqdata = await getclientservicereq.getAllData(req.requestId);
+   console.log(`received call for querying documentby requestId`);
+   const reqdata = await getdocumentservicereq.getDocumentbyRequestId(`${req.body.requestId}`);
    console.log(reqdata);
    res.setHeader('Content-Type', 'application/json');
    res.json(reqdata);
