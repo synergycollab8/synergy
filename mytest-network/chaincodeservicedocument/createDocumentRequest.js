@@ -47,7 +47,7 @@ async function main(doc_hash_code,requestId,doc_name,doc_type) {
 }
 
 module.exports = {
-    documentRequestDetails: async function(doc_hash_code,requestId,doc_name,doc_type) {
+    createDocumentRequest: async function(doc_hash_code,requestId,doc_name,doc_type) {
 
     try {
        //const contract = await getContractInstance();
