@@ -21,7 +21,7 @@ client.connect();
 
 // async function getContactRequest(req,response) {
    //     console.log('=========== Start: getContactServiceRequest =========',req.body);
-//	console.log("select * from contact where email='"+req.body.email+"'");
+//      console.log("select * from contact where email='"+req.body.email+"'");
 
 //        client.query("select * from contact where email='"+req.body.email+"'", (error, results) => {
   //    if (error) {
@@ -40,14 +40,14 @@ async function getContactRequest(req,response) {
     var query = "select * from contact where email='"+req+"'";
 
     return new Promise(function (resolve, reject) {
-	console.log(query);
+        console.log(query);
        client.query(query, function(err, result) {
            if (err) {
-	      console.log(err);
+              console.log(err);
               return reject(err);
            } else {
               if (result.rowCount > 0) {
-		  console.log(result);
+                  console.log(result);
                   return resolve(result.rows);
               }
            }
@@ -57,12 +57,12 @@ async function getContactRequest(req,response) {
 };
 
 
-async function getClientRequest(req,response) {
+async function getDocumentbyRequestId(req,response) {
 
-    console.log('=========== Start: getClientServiceRequet =========',req);
-    console.log("select * from client_service_request where requestId='"+req+"'");
-	var query = "select * from client_service_request where "+"\"requestId\""+"='"+req+"'";
-	
+    console.log('=========== Start: getDocumentServiceRequet =========',req);
+    console.log("select * from document where requestId='"+req+"' order by timestamp desc");
+        var query = "select * from document where "+"\"requestId\""+"='"+req+"' order by timestamp desc";
+
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {         
            if (err) {
@@ -77,11 +77,11 @@ async function getClientRequest(req,response) {
    });
 };
 
-async function getClientRequestextn(req,response) {
+async function getDocumentbyhashcode(req,response) {
 
-    console.log('=========== Start: getClientServiceRequest extn =========',req);
-    console.log("select * from client_service_req_extn where requestId='"+req+"'");
-    var query = "select * from client_service_req_extn where "+"\"requestId\""+"='"+req+"'";
+    console.log('=========== Start: getdocumentRequest by dochashcode  =========',req);
+    console.log("select * from document where doc_hash_code='"+req+"' order by timestamp desc");
+    var query = "select * from document where "+"\"doc_hash_code\""+"='"+req+"' order by timestamp desc";
 
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {
@@ -111,4 +111,4 @@ async function getClientRequestextn(req,response) {
       //})
    // }
 
-module.exports = {getContactRequest,getClientRequest,getClientRequestextn}
+module.exports = {getContactRequest,getDocumentbyRequestId,getDocumentbyhashcode}
