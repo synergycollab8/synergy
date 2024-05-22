@@ -21,7 +21,7 @@ client.connect();
 
 // async function getContactRequest(req,response) {
    //     console.log('=========== Start: getContactServiceRequest =========',req.body);
-//	console.log("select * from contact where email='"+req.body.email+"'");
+//      console.log("select * from contact where email='"+req.body.email+"'");
 
 //        client.query("select * from contact where email='"+req.body.email+"'", (error, results) => {
   //    if (error) {
@@ -40,14 +40,14 @@ async function getContactRequest(req,response) {
     var query = "select * from contact where email='"+req+"'";
 
     return new Promise(function (resolve, reject) {
-	console.log(query);
+        console.log(query);
        client.query(query, function(err, result) {
            if (err) {
-	      console.log(err);
+              console.log(err);
               return reject(err);
            } else {
               if (result.rowCount > 0) {
-		  console.log(result);
+                  console.log(result);
                   return resolve(result.rows);
               }
            }
@@ -60,9 +60,11 @@ async function getContactRequest(req,response) {
 async function getChatRequest(req,response) {
 
     console.log('=========== Start: getChatServiceRequet =========',req);
-    console.log("select * from chat where room_id='"+req+"'");
-	var query = "select * from chat where "+"\"room_id\""+"='"+req+"'";
-	
+    console.log("select room_name,room_id,\"userId\",\"userName\",to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat where room_id='"+req+"' order by timestam
+p desc");
+        var query = "select room_name,room_id,\"userId\",\"userName\",to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat where "+"\"room_id\""+"='"+req+"' ord
+er by timestamp desc";
+
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {         
            if (err) {
@@ -77,11 +79,53 @@ async function getChatRequest(req,response) {
    });
 };
 
+async function getUserChatRequest(req,response) {
+
+    console.log('=========== Start: getChatServiceRequet =========',req);
+    console.log("select room_name,room_id,\"userId\",\"userName\",to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat where \"userId\"='"+req+"' order by times
+tamp desc");
+        var query = "select room_name,room_id,\"userId\",\"userName\",to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat where "+"\"userId\""+"='"+req+"' orde
+r by timestamp desc";
+
+    return new Promise(function (resolve, reject) {
+       client.query(query, function(err, result) {
+           if (err) {
+              return reject(err);
+           } else {
+              if (result.rowCount > 0) {
+                  return resolve(result.rows);
+              }
+           }
+           return resolve(false);
+       });
+   });
+};
+
 async function getChathistory(req,response) {
 
     console.log('=========== Start: getChathistory request =========',req);
-    console.log("select * from chat_history where room_id='"+req+"'");
-    var query = "select * from chat_history where "+"\"room_id\""+"='"+req+"'";
+    console.log("select room_id,\"userID\",message from chat_history where room_id='"+req+"' order by timestamp desc");
+    var query = "select room_id,\"userID\",message from chat_history where "+"\"room_id\""+"='"+req+"' order by timestamp desc";
+
+    return new Promise(function (resolve, reject) {
+       client.query(query, function(err, result) {
+           if (err) {
+              return reject(err);
+           } else {
+              if (result.rowCount > 0) {
+                  return resolve(result.rows);
+              }
+           }
+           return resolve(false);
+       });
+   });
+};
+
+async function getUserChathistory(req,response) {
+
+    console.log('=========== Start: getChathistory request =========',req);
+    console.log("select room_id,\"userID\",message from chat_history where \"userID\"='"+req+"' order by timestamp desc");
+    var query = "select room_id,\"userID\",message from chat_history where "+"\"userID\""+"='"+req+"' order by timestamp desc";
 
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {
@@ -111,4 +155,4 @@ async function getChathistory(req,response) {
       //})
    // }
 
-module.exports = {getContactRequest,getChatRequest,getChathistory}
+module.exports = {getContactRequest,getChatRequest,getUserChatRequest,getChathistory,getUserChathistory}
