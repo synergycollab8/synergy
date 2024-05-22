@@ -55,6 +55,8 @@ const peer_name = config.peer_name;
 const use_couchdb = config.use_couchdb;
 const couchdb_address = config.couchdb_address;
 
+const apiUrl = 'http://localhost:3000/api/notifyClientMessage';
+
 const configPath = path.resolve(__dirname, 'nextblock.txt');
 
 const nano = require('nano')(couchdb_address);
@@ -112,14 +114,14 @@ async function main() {
         }
 
         // Create a new file system based wallet for managing identities.
-        const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org2', 'ccp-Org2.json');
+        const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
-           const issue_typeName = 'User1@Org2';
+           const issue_typeName = 'User1@Org1';
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
         await gateway.connect(ccp, { wallet, identity: issue_typeName, discovery: { enabled: true, asLocalhost: false } });
@@ -137,9 +139,10 @@ async function main() {
             event = JSON.parse(event);
             console.log("******************************************");
             console.log(event);
-            console.log(`${event.room_id}, ${event.room_name}, ${event.userId}, ${event.userName}`);
+            console.log(`${event.room_id}, ${event.room_name}, ${event.userId}, ${event.userName},${event.message}`);
             console.log("******************************************");
             const room_id =  event.room_id;
+            const message = event.message;
             
             if(room_id){
 
@@ -152,7 +155,9 @@ async function main() {
                   }
                    //console.log(res);
                  });
-                const query = `INSERT INTO public."chat"(room_id,room_name, "userId", "userName","timestamp") VALUES ('${event.room_id}', '${event.room_name}', '${event.userId}','${event.userName}',current_timestamp) ON CONFLICT ("room_id") DO UPDATE SET room_id=excluded.room_id, room_name=excluded.room_name, "userId"=excluded."userId", "userName"=excluded."userName","timestamp"=current_timestamp`;
+                const query = `INSERT INTO public."chat"(room_id,room_name, "userId", "userName","timestamp") VALUES ('${event.room_id}', '${event.room_name}', 
+'${event.userId}','${event.userName}',current_timestamp) ON CONFLICT ("room_id") DO UPDATE SET room_id=excluded.room_id, room_name=excluded.room_name, "userId"=
+excluded."userId", "userName"=excluded."userName","timestamp"=current_timestamp`;
                 client.query(query, (err, res) => {
                     if (err) {
                         console.error(err);
@@ -160,6 +165,44 @@ async function main() {
                     }
                     console.log('Data insert successful for chat');   
                 });
+
+
+                if(message){
+
+                const query2 = `INSERT INTO public."chat_history"(room_id, "userID", "message","timestamp") VALUES ('${event.room_id}', '${event.userId}','${eve
+nt.message}',current_timestamp) ON CONFLICT ("room_id") DO UPDATE SET room_id=excluded.room_id, "userID"=excluded."userID", "message"=excluded."message","timest
+amp"=current_timestamp`;
+                client.query(query2, (err, res) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    console.log('Data insert successful for chat_history');   
+                });
+            }
+
+            
+            var date = Date.now();
+                    // Create a Date
+            const time = new Date();
+            let text1 = time.toLocaleString();
+
+
+            // Make a POST request
+            fetch(apiUrl,{
+                method: 'POST',
+                body: `{"roomId":"${event.room_id}","user":"${event.userId} ","message":"${event.message}", "time":"${text1}"}`
+                  // body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
+               
+          }).then(response => {
+              if (!response.ok) {
+              throw new Error('Network response was not ok');
+              }
+              }).then(data => {
+             console.log(data);
+          }).catch(error => {
+          console.error('Error:', error);
+          });
             
         }} );
        // console.log(`Listening for block events, nextblock: ${nextBlock}`);
