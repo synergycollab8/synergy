@@ -37,36 +37,25 @@ curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createC
 curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:Response All fields are cleared and processed the request","created_by":"testorg1","status":"Processed","message_from":"RM-Akesh-Org2","messageinsert":"yes"}'
 
 
-
-
-
-
-
-
-
-
+curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:System Update-All the steps completed for LC segment","created_by":"testorg1","status":"Closed","message_from":"Auto-Bot","messageinsert":"yes"}'
 
 
 **********************************
 Chat
 ****************************************
 
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/createChat -d '{"room_id":"room_id123","room_name":"roomname_456","userId":"1113466","userName":"testUser1","message":"Chatinitiationmessage"}'
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000/createChat -d '{"room_id":"room_id123","room_name":"roomname_456","userId":"1113466","userName":"testUser1","message":"Chatinitiationmessage"}'
 
 
--- contacts API
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getChatRequest -d '{"room_id":"room_id123"}'
+-- ChatRequest-withroomid API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000/getChatRequest -d '{"room_id":"room_id123"}'
 
--- client_messages_list API
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000//getUserChatRequest -d '{"userId":"1113466"}'
+-- ChatRequest with userID API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000//getUserChatRequest -d '{"userId":"1113466"}'
 
---Client_request_API
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getChathistory -d '{"room_id":"room_id123"}'
-
-
---Client_request_API
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4000/getUserChathistory -d '{"userId":"1113466"}'
+--Chathistory request with roomID API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000/getChathistory -d '{"room_id":"room_id123"}'
 
 
-
-curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createClientServiceRequest -d '{"requestId":"YYYY","issue_type":"request","product":"Letter of credit","subject":"LC Issuance on data seg","description":"getting details on LC segment","message":"Event:System Update-All the steps completed for LC segment","created_by":"testorg1","status":"Closed","message_from":"Auto-Bot","messageinsert":"yes"}'
+--Chathistory request with userID API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000/getUserChathistory -d '{"userId":"1113466"}'
