@@ -112,14 +112,14 @@ async function main() {
         }
 
         // Create a new file system based wallet for managing identities.
-        const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org2', 'ccp-Org2.json');
+        const ccpPath = path.resolve(__dirname, '..', 'organizations', 'peerOrganizations', 'Org1', 'ccp-Org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
-           const issue_typeName = 'User1@Org2';
+           const issue_typeName = 'User1@Org1';
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
         await gateway.connect(ccp, { wallet, identity: issue_typeName, discovery: { enabled: true, asLocalhost: false } });
@@ -152,7 +152,9 @@ async function main() {
                   }
                    //console.log(res);
                  });
-                const query = `INSERT INTO public."document"(doc_hash_code,"requestId",doc_name,doc_type,"timestamp") VALUES ('${event.doc_hash_code}', '${event.requestId}', '${event.doc_name}','${event.doc_type}',current_timestamp) ON CONFLICT ("doc_hash_code") DO UPDATE SET doc_hash_code=excluded.doc_hash_code, "requestId"=excluded."requestId", doc_name=excluded.doc_name,doc_type=excluded.doc_type,"timestamp"=current_timestamp`;
+                const query = `INSERT INTO public."document"(doc_hash_code,"requestId",doc_name,doc_type,"timestamp") VALUES ('${event.doc_hash_code}', '${event
+.requestId}', '${event.doc_name}','${event.doc_type}',current_timestamp) ON CONFLICT ("doc_hash_code") DO UPDATE SET doc_hash_code=excluded.doc_hash_code, "requ
+estId"=excluded."requestId", doc_name=excluded.doc_name,doc_type=excluded.doc_type,"timestamp"=current_timestamp`;
                 client.query(query, (err, res) => {
                     if (err) {
                         console.error(err);
