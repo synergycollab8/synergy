@@ -44,21 +44,32 @@ curl -H "Content-Type: application/json" -X POST http://10.148.0.12:4000/createC
 Chat
 ****************************************
 
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000/createChat -d '{"room_id":"room_id123","room_name":"roomname_456","userId":"1113466","userName":"testUser1","message":"Chatinitiationmessage"}'
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4040/createChat -d '{"room_id":"test_messagedesc_roomidXXX","room_name":"roomname_XXX","userId":"1113466","userName":"testUser1","message":"Chatinitiationmessage","messageid":"Messageid_1223","description":"description_123"}'
 
-
+RM-145689
 -- ChatRequest-withroomid API
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000/getChatRequest -d '{"room_id":"room_id123"}'
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4040/getChatRequest -d '{"room_id":"test_messagedesc_roomidXXX"}'
 
 -- ChatRequest with userID API
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000//getUserChatRequest -d '{"userId":"1113466"}'
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4040//getUserChatRequest -d '{"userId":"1113466"}'
 
 --Chathistory request with roomID API
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000/getChathistory -d '{"room_id":"room_id123"}'
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4040/getChathistory -d '{"room_id":"test_messagedesc_roomidXXX"}'
 
 
 --Chathistory request with userID API
-curl -H "Content-Type: application/json" -X POST http://10.148.0.11:6000/getUserChathistory -d '{"userId":"1113466"}'
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4040/getUserChathistory -d '{"userId":"1113466"}'
+
+
+--Chathistory request with roomID API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4040/getOnlineUser -d '{"room_id":"test_messagedesc_roomidXXX"}'
+
+
+--Chathistory request with roomID API
+curl -H "Content-Type: application/json" -X POST http://10.148.0.11:4040/getDistinctUserChat -d '{"room_id":"test_messagedesc_roomidXXX"}'
+
+
+{getContactRequest,getChatRequest,getUserChatRequest,getChathistory,getUserChathistory,getDistinctUserChat,getOnlineUser}
 
 
 **********************************
