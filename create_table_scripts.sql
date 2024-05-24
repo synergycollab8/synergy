@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS public.chat
      messageid character varying(100) COLLATE pg_catalog."default",
     description character varying(1000) COLLATE pg_catalog."default",
     "timestamp" timestamp without time zone,
-    CONSTRAINT room_id_unique_constraint UNIQUE (room_id)
+    CONSTRAINT messageid_unique_constraint UNIQUE (messageid)
 )
 
 TABLESPACE pg_default;
