@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS public.chat
     room_id character varying(100) COLLATE pg_catalog."default",
     "userId" character varying(100) COLLATE pg_catalog."default",
     "userName" character varying(100) COLLATE pg_catalog."default",
+     message character varying(100) COLLATE pg_catalog."default",
      messageid character varying(100) COLLATE pg_catalog."default",
     description character varying(1000) COLLATE pg_catalog."default",
     "timestamp" timestamp without time zone,
