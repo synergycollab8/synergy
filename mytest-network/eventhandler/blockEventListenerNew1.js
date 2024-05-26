@@ -207,7 +207,8 @@ mestamp`;
                 if (messageinsert){
                 console.log('message insert triggered');
                const queryextn = `INSERT INTO public."client_service_req_extn"("requestId",message,message_from,messageid,date) VALUES ('${event.requestId}','${
-event.message}','${event.message_from}','${event.messageid}',current_timestamp)`;
+event.message}','${event.message_from}','${event.messageid}',current_timestamp) ON CONFLICT ("messageid") DO UPDATE SET "requestId"=excluded."requestId",message
+=excluded.message,message_from=excluded.message_from,messageid=excluded.messageid,date=current_timestamp`;
                 client.query(queryextn, (err, res) => {
                     if (err) {
                         console.error(err);
