@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 //start app 
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 4040;
 
 
 const chatServicerequest = require('./createChatRequest');
@@ -45,7 +45,7 @@ app.post('/createChat',async(req,res) => {
     //room_name,room_id,userId,userName
     console.log(req.body.room_name,req.body.room_id,`create chatServiceRequest`);
     const chatrequest = await chatServicerequest.chatRequestDetails(`${req.body.room_id}`,`${req.body.room_name}`,`${req.body.userId}`,`${req.body.userName}`,`$
-{req.body.message}`);
+{req.body.message}`,`${req.body.messageid}`,`${req.body.description}`);
     console.log(chatrequest);
     console.log("chat request creation successful");
     res.setHeader('Content-Type', 'application/json');
@@ -195,7 +195,35 @@ app.post('/getChatHistoryRequests',async(req,res) => {
   }
 })
 
+app.post('/getDistinctUserChat',async(req,res) => {
 
+  try{
+    console.log('request received at chatrequests for distinct userchat:',req.body.room_id);
+    console.log(`received req`);
+    const reqdata = await getChatContactData.getDistinctUserChat(`${req.body.room_id}`);
+    console.log(reqdata);
+    res.setHeader('Content-Type', 'application/json');
+    res.json(reqdata);
+  }catch(error){
+    console.log(error);
+    res.status(500).send(error);
+  }
+})
+
+app.post('/getOnlineUser',async(req,res) => {
+
+  try{
+    console.log('request received at chatrequests for online userchat:',req.body.room_id);
+    console.log(`received req`);
+    const reqdata = await getChatContactData.getOnlineUser(`${req.body.room_id}`);
+    console.log(reqdata);
+    res.setHeader('Content-Type', 'application/json');
+    res.json(reqdata);
+  }catch(error){
+    console.log(error);
+    res.status(500).send(error);
+  }
+})
 
 
 app.listen(port, function(){
