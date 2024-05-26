@@ -30,7 +30,7 @@ async function main(room_id,room_name,userId,userName,message) {
        const contract = network.getContract('chatcc');
         console.log('Submit Chat Contact creation transaction.');
     
-        const chatRequestBuffer = await contract.submitTransaction("createChatRequest",room_id,room_name,userId,userName,message);
+        const chatRequestBuffer = await contract.submitTransaction("createChatRequest",room_id,room_name,userId,userName,message,messageid,description);
         
         let newChatRequest = JSON.parse(chatRequestBuffer.toString());
         console.log(`${newChatRequest.room_id}  successfully created`);
@@ -47,7 +47,7 @@ async function main(room_id,room_name,userId,userName,message) {
 }
 
 module.exports = {
-    chatRequestDetails: async function(room_id,room_name,userId,userName,message) {
+    chatRequestDetails: async function(room_id,room_name,userId,userName,message,messageid,description) {
 
     try {
        //const contract = await getContractInstance();
@@ -55,7 +55,7 @@ module.exports = {
        const contract = network.getContract('chatcc');
         console.log('Submit Chat Contact creation transaction.');
     
-        const chatRequestBuffer = await contract.submitTransaction("createChatRequest",room_id,room_name,userId,userName,message);
+        const chatRequestBuffer = await contract.submitTransaction("createChatRequest",room_id,room_name,userId,userName,message,messageid,description);
         
         let newChatRequest = JSON.parse(chatRequestBuffer.toString());
         console.log(`${newChatRequest.room_id}  successfully created`);
@@ -74,7 +74,7 @@ module.exports = {
 }
 
 
-main("10000_room", "Suresh_chat_room", "user_1234","user_name_1234","message_123" ).then(() => {
+main("10000_room", "Suresh_chat_room", "user_1234","user_name_1234","message_123","messageid_456","description_456" ).then(() => {
 
     console.log('ChatRequest created successfully.');
 
