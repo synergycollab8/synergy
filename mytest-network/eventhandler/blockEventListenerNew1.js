@@ -220,7 +220,8 @@ event.message}','${event.message_from}','${event.messageid}',current_timestamp)`
                 // Make a POST request
                 fetch(apiUrl,{
                       method: 'POST',
-                      body: `{"user":"${createdby}","title":"${eventid} for ${requestid}","message":"${text}","component":"notificationBar", "time":"${text1}"}`
+                      body: `{"user":"${createdby}","title":"${eventid} for ${requestid}","message":"${text}","component":"notificationBar","eventype":"serviceR
+equest","eventid":"${eventid}" "time":"${text1}"}`
                         // body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
                      
                 }).then(response => {
