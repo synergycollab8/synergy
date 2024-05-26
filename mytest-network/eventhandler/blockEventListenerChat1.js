@@ -56,6 +56,7 @@ const use_couchdb = config.use_couchdb;
 const couchdb_address = config.couchdb_address;
 
 const apiUrl = 'http://localhost:3000/api/notifyClientMessage';
+const apiUrl2 = 'http://localhost:3000/api/refreshComponent?component=servicerequest';
 
 const configPath = path.resolve(__dirname, 'nextblock.txt');
 
@@ -139,25 +140,18 @@ async function main() {
             event = JSON.parse(event);
             console.log("******************************************");
             console.log(event);
-            console.log(`${event.room_id}, ${event.room_name}, ${event.userId}, ${event.userName},${event.message}`);
+            console.log(`${event.room_id}, ${event.room_name}, ${event.userId}, ${event.userName},${event.message},${event.messageid},${event.description}`);
             console.log("******************************************");
             const room_id =  event.room_id;
             const message = event.message;
             
             if(room_id){
 
-                const query1 = `set search_path to mynetwork`;
 
-                client.query(query1, (err, res) => {
-                  if (err) {
-                    console.error(err);
-                     return;
-                  }
-                   //console.log(res);
-                 });
-                const query = `INSERT INTO public."chat"(room_id,room_name, "userId", "userName","timestamp") VALUES ('${event.room_id}', '${event.room_name}', 
-'${event.userId}','${event.userName}',current_timestamp) ON CONFLICT ("room_id") DO UPDATE SET room_id=excluded.room_id, room_name=excluded.room_name, "userId"=
-excluded."userId", "userName"=excluded."userName","timestamp"=current_timestamp`;
+                const query = `INSERT INTO public."chat"(room_id,room_name, "userId", "userName",message,"messageid","description","timestamp") VALUES ('${event
+.room_id}', '${event.room_name}', '${event.userId}','${event.userName}','${event.message}','${event.messageid}','${event.description}',current_timestamp) ON CON
+FLICT ("room_id") DO UPDATE SET room_id=excluded.room_id, room_name=excluded.room_name, "userId"=excluded."userId", "userName"=excluded."userName","message"=exc
+luded."message","messageid"=excluded."messageid","description"=excluded."description","timestamp"=current_timestamp`;
                 client.query(query, (err, res) => {
                     if (err) {
                         console.error(err);
@@ -169,9 +163,13 @@ excluded."userId", "userName"=excluded."userName","timestamp"=current_timestamp`
 
                 if(message){
 
-                const query2 = `INSERT INTO public."chat_history"(room_id, "userID", "message","timestamp") VALUES ('${event.room_id}', '${event.userId}','${eve
-nt.message}',current_timestamp) ON CONFLICT ("room_id") DO UPDATE SET room_id=excluded.room_id, "userID"=excluded."userID", "message"=excluded."message","timest
-amp"=current_timestamp`;
+                const query2 = `INSERT INTO public."chat_history"(room_id,room_name, "userID", "message","messageid","description","timestamp") VALUES ('${event
+.room_id}', '${event.room_name}','${event.userId}','${event.message}','${event.messageid}','${event.description}',current_timestamp) ON CONFLICT("messageid") DO
+ UPDATE SET room_id=excluded.room_id, room_name=excluded.room_name, "userID"=excluded."userID", message=excluded.message,messageid=excluded.messageid, descripti
+on=excluded.description,"timestamp"=current_timestamp`;
+                console.log('before promise');
+              new Promise(function (resolve, reject) {
+                console.log('Data insertion started for chat_history');
                 client.query(query2, (err, res) => {
                     if (err) {
                         console.error(err);
@@ -179,6 +177,7 @@ amp"=current_timestamp`;
                     }
                     console.log('Data insert successful for chat_history');   
                 });
+               });
             }
 
             
@@ -191,9 +190,28 @@ amp"=current_timestamp`;
             // Make a POST request
             fetch(apiUrl,{
                 method: 'POST',
-                body: `{"roomId":"${event.room_id}","user":"${event.userId} ","message":"${event.message}", "time":"${text1}"}`
+                body: `{"roomId":"${event.room_id}","user":"${event.userId}","message":"${event.message}","description":"${event.description}","messageid":"${ev
+ent.messageid}", "eventype":"chat","eventid":"${event.room_id}","time":"${text1}"}`
                   // body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
                
+          }).then(response => {
+              if (!response.ok) {
+              throw new Error('Network response was not ok');
+              }
+              }).then(data => {
+             console.log(data);
+          }).catch(error => {
+          console.error('Error:', error);
+          });
+
+          // Make a POST request
+            console.log("second post request call");
+            fetch(apiUrl2,{
+                method: 'POST',
+                body: `{"roomId":"${event.room_id}","user":"${event.userId}","message":"${event.message}","description":"${event.description}","messageid":"${ev
+ent.messageid}","eventype":"chat","eventid":"${event.room_id}", "time":"${text1}"}`
+                  // body: '{\"message\":\"Request created from ${event.created_by} having request ID : ${event.requestId}\"}'
+
           }).then(response => {
               if (!response.ok) {
               throw new Error('Network response was not ok');
