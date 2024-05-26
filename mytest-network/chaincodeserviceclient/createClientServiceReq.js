@@ -22,7 +22,7 @@ const yaml = require('js-yaml');
 const path = require('path');
 const { getNetworkInstance, disconnect } = require('./util/networkutil');
 // Main program function
-async function main(requestId,issue_type,product,subject,description,message,created_by,status,message_from,messageinsert) {
+async function main(requestId,issue_type,product,subject,description,message,created_by,status,message_from,messageinsert,messageid) {
 
     try {
        //const contract = await getContractInstance();
@@ -30,7 +30,8 @@ async function main(requestId,issue_type,product,subject,description,message,cre
        const contract = network.getContract('clientservicecontract1');
         console.log('Submit Contact creation transaction.');
     
-        const clientServiceRequestBuffer = await contract.submitTransaction("createClientServiceRequest",requestId,issue_type,product,subject,description,message,created_by,status,message_from,messageinsert);
+        const clientServiceRequestBuffer = await contract.submitTransaction("createClientServiceRequest",requestId,issue_type,product,subject,description,messag
+e,created_by,status,message_from,messageinsert,messageid);
         
         let newClientServiceRequest = JSON.parse(clientServiceRequestBuffer.toString());
         console.log(`${newClientServiceRequest.requestId}  successfully created`);
@@ -47,7 +48,7 @@ async function main(requestId,issue_type,product,subject,description,message,cre
 }
 
 module.exports = {
-    createRequestDetails: async function(requestId,issue_type,product,subject,description,message,created_by,status,message_from,messageinsert) {
+    createRequestDetails: async function(requestId,issue_type,product,subject,description,message,created_by,status,message_from,messageinsert,messageid) {
 
     try {
        //const contract = await getContractInstance();
@@ -55,11 +56,12 @@ module.exports = {
        const contract = network.getContract('clientservicecontract1');
         console.log('Submit Request details creation transaction.');
     
-        const clientServiceRequestBuffer = await contract.submitTransaction("createClientServiceRequest",requestId,issue_type,product,subject,description,message,created_by,status,message_from,messageinsert);
+        const clientServiceRequestBuffer = await contract.submitTransaction("createClientServiceRequest",requestId,issue_type,product,subject,description,messag
+e,created_by,status,message_from,messageinsert,messageid);
         
         let newClientServiceRequest = JSON.parse(clientServiceRequestBuffer.toString());
         console.log(`${newClientServiceRequest.requestId}  successfully created`);
-	console.log(`${newClientServiceRequest.description}`);
+        console.log(`${newClientServiceRequest.description}`);
         console.log('Transaction complete.');
         return newClientServiceRequest;
     } catch (error) {
@@ -75,7 +77,8 @@ module.exports = {
 }
 
 
-main("10000", "Req by prabhat", "BG","Subjecton Guarantee","Request for Guarantee product-approve suresh","description for raisedreq","messageforreq","tesorg1","pending","messagefromuser1","messageinsert" ).then(() => {
+main("10000", "Req by prabhat", "BG","Subjecton Guarantee","Request for Guarantee product-approve suresh","description for raisedreq","messageforreq","tesorg1",
+"pending","messagefromuser1","messageinsert" ).then(() => {
 
     console.log('ClientServiceRequest created successfully.');
 
