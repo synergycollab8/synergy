@@ -60,10 +60,10 @@ async function getContactRequest(req,response) {
 async function getChatRequest(req,response) {
 
     console.log('=========== Start: getChatServiceRequet =========',req);
-    console.log("select room_name,room_id,\"userId\",\"userName\",to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat where room_id='"+req+"' order by timestam
-p desc");
-        var query = "select room_name,room_id,\"userId\",\"userName\",to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat where "+"\"room_id\""+"='"+req+"' ord
-er by timestamp desc";
+    console.log("select room_name,room_id,\"userId\",\"userName\",messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat where room_id='"+re
+q+"' order by timestamp desc");
+        var query = "select room_name,room_id,\"userId\",\"userName\",messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat where "+"\"room
+_id\""+"='"+req+"' order by timestamp desc";
 
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {         
@@ -79,13 +79,31 @@ er by timestamp desc";
    });
 };
 
+async function getDistinctUserChat(req,response) {
+
+    console.log('=========== Start: getDistinctUserChatRequest =========',req);
+    console.log("select distinct \"userID\" from chat_history where room_id='"+req+"'");
+        var query = "select distinct \"userID\" from chat_history where "+"\"room_id\""+"='"+req+"'";
+
+    return new Promise(function (resolve, reject) {
+       client.query(query, function(err, result) {
+           if (err) {
+              return reject(err);
+           } else {
+              if (result.rowCount > 0) {
+                  return resolve(result.rows);
+              }
+           }
+           return resolve(false);
+       });
+   });
+};
+
 async function getUserChatRequest(req,response) {
 
-    console.log('=========== Start: getChatServiceRequet =========',req);
-    console.log("select room_name,room_id,\"userId\",\"userName\",to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat where \"userId\"='"+req+"' order by times
-tamp desc");
-        var query = "select room_name,room_id,\"userId\",\"userName\",to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat where "+"\"userId\""+"='"+req+"' orde
-r by timestamp desc";
+    console.log('=========== Start: getUserChatRequest =========',req);
+    console.log("select distinct room_id,room_name,description from chat_history where \"userID\"='"+req+"'");
+        var query = "select distinct room_id,room_name,description from chat_history where "+"\"userID\""+"='"+req+"'";
 
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {
@@ -104,8 +122,34 @@ r by timestamp desc";
 async function getChathistory(req,response) {
 
     console.log('=========== Start: getChathistory request =========',req);
-    console.log("select room_id,\"userID\",message from chat_history where room_id='"+req+"' order by timestamp desc");
-    var query = "select room_id,\"userID\",message from chat_history where "+"\"room_id\""+"='"+req+"' order by timestamp desc";
+    console.log("select room_id,\"userID\",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='"+req+"' or
+der by timestamp desc");
+    var query = "select room_id,\"userID\",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where "+"\"room_id\""+"='"
++req+"' order by timestamp desc";
+
+    return new Promise(function (resolve, reject) {
+       client.query(query, function(err, result) {
+           if (err) {
+              return reject(err);
+           } else {
+              if (result.rowCount > 0) {
+                  return resolve(result.rows);
+              }
+           }
+           return resolve(false);
+       });
+   });
+};
+
+async function getOnlineUser(req,response) {
+
+    console.log('=========== Start: getOnlineUser request =========',req);
+    console.log("select * from (select distinct CONCAT(\"userID\",'_YES' )as \"userid\" ,cn.user from chat_history c join contact cn on c.\"userId\"=cn.\"contac
+tId\" where room_id='"+req+"' union select CONCAT(cn.\"contactId\",'_NO') as \"userid\",cn.user from contact cn join chat c on cn.\"contactId\" != c.\"userId\" 
+where room_id='"+req+"' ) as usertable order by usertable asc");
+    var query = "select * from (select distinct CONCAT(\"userID\",'_YES' )as \"userid\",cn.user from chat_history c join contact cn on c.\"userId\"=cn.\"contact
+Id\" where room_id='"+req+"' union select CONCAT(cn.\"contactId\",'_NO') as \"userid\",cn.user from contact cn join chat c on cn.\"contactId\" != c.\"userId\" w
+here room_id='"+req+"' ) as usertable order by usertable asc";
 
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {
@@ -124,8 +168,10 @@ async function getChathistory(req,response) {
 async function getUserChathistory(req,response) {
 
     console.log('=========== Start: getChathistory request =========',req);
-    console.log("select room_id,\"userID\",message from chat_history where \"userID\"='"+req+"' order by timestamp desc");
-    var query = "select room_id,\"userID\",message from chat_history where "+"\"userID\""+"='"+req+"' order by timestamp desc";
+    console.log("select room_id,\"userID\",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where \"userID\"='"+req+"'
+ order by timestamp desc");
+    var query = "select room_id,\"userID\",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where "+"\"userID\""+"='"+
+req+"' order by timestamp desc";
 
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {
@@ -155,4 +201,4 @@ async function getUserChathistory(req,response) {
       //})
    // }
 
-module.exports = {getContactRequest,getChatRequest,getUserChatRequest,getChathistory,getUserChathistory}
+module.exports = {getContactRequest,getChatRequest,getUserChatRequest,getChathistory,getUserChathistory,getDistinctUserChat,getOnlineUser}
