@@ -147,3 +147,8 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.request_details
     OWNER to postgres;
+
+
+INSERT INTO public.contact(
+	"contactId", "user", phone, email, status, organization, role)
+	VALUES('223457', 'test-user3', '65789456', 'test-user3@org1.com', 'Active', 'org1', 'test-user2-role');
