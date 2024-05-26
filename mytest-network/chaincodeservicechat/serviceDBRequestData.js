@@ -144,12 +144,12 @@ der by timestamp desc");
 async function getOnlineUser(req,response) {
 
     console.log('=========== Start: getOnlineUser request =========',req);
-    console.log("select * from (select distinct CONCAT(\"userID\",'_YES' )as \"userid\" ,cn.user from chat_history c join contact cn on c.\"userId\"=cn.\"contac
-tId\" where room_id='"+req+"' union select CONCAT(cn.\"contactId\",'_NO') as \"userid\",cn.user from contact cn join chat c on cn.\"contactId\" != c.\"userId\" 
-where room_id='"+req+"' ) as usertable order by usertable asc");
-    var query = "select * from (select distinct CONCAT(\"userID\",'_YES' )as \"userid\",cn.user from chat_history c join contact cn on c.\"userId\"=cn.\"contact
-Id\" where room_id='"+req+"' union select CONCAT(cn.\"contactId\",'_NO') as \"userid\",cn.user from contact cn join chat c on cn.\"contactId\" != c.\"userId\" w
-here room_id='"+req+"' ) as usertable order by usertable asc";
+    console.log("select * from (select distinct CONCAT(\"userID\",'_YES' )as \"userid\" ,cn.user from chat_history c join contact cn on c.\"userID\"=cn.\"contac
+tId\" where room_id='"+req+"' union select CONCAT(cn.\"contactId\",'_NO') as \"userid\",cn.user from contact cn join chat_history c on cn.\"contactId\" != c.\"u
+serID\" where room_id='"+req+"' ) as usertable order by usertable asc");
+    var query = "select * from (select distinct CONCAT(\"userID\",'_YES' )as \"userid\",cn.user from chat_history c join contact cn on c.\"userID\"=cn.\"contact
+Id\" where room_id='"+req+"' union select CONCAT(cn.\"contactId\",'_NO') as \"userid\",cn.user from contact cn join chat_history c on cn.\"contactId\" != c.\"us
+erID\" where room_id='"+req+"' ) as usertable order by usertable asc";
 
     return new Promise(function (resolve, reject) {
        client.query(query, function(err, result) {
