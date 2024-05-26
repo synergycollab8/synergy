@@ -57,6 +57,29 @@ async function getContactRequest(req,response) {
 };
 
 
+async function getAllContacts(req,response) {
+
+    console.log('=========== Start: getAllContacts =========',req);
+    console.log("select * from contact");
+    var query = "select * from contact";
+
+    return new Promise(function (resolve, reject) {
+        console.log(query);
+       client.query(query, function(err, result) {
+           if (err) {
+              console.log(err);
+              return reject(err);
+           } else {
+              if (result.rowCount > 0) {
+                  console.log(result);
+                  return resolve(result.rows);
+              }
+           }
+           return resolve(false);
+       });
+   });
+};
+
 async function getClientRequest(req,response) {
 
     console.log('=========== Start: getClientServiceRequet =========',req);
@@ -115,4 +138,4 @@ te,'MON-DD-YYYY HH12:MIPM'),messageid  from client_service_req_extn where "+"\"r
       //})
    // }
 
-module.exports = {getContactRequest,getClientRequest,getClientRequestextn}
+module.exports = {getContactRequest,getAllContacts,getClientRequest,getClientRequestextn}
