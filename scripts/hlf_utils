@@ -1,0 +1,192 @@
+#!/bin/bash
+
+### Dammavalam, Srirangam
+### 08-MAY-2024
+
+_scripts_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+#. $_scripts_dir/set_env
+. $_scripts_dir/helper_utils
+
+TEMP_LOG="log.txt"
+
+create_channel() {
+  _org=$1
+  _channel_id=$2
+  _channel_tx_file=$3
+  _channel_block_file=${4:-$(dirname $_channel_tx_file)/"${_channel_id}.block"}
+
+  print_header "Create Channel" "Org: $_org" "Channel: $_channel_id" "Channel Tx file: $_channel_tx_file"
+  infoln "Setting up env for Org'$_org' ..."
+  set_org_env $_org
+  infoln "Creating channel '$_channel_id'"
+  set -x
+  peer channel create -c ${_channel_id} -f ${_channel_tx_file} -o ${HLF_ORDR_HOST}:${HLF_ORDR_PORT} --ordererTLSHostnameOverride $HLF_ORDR_ID --outputBlock ${_channel_block_file} --tls --cafile $ORDERER_CA >&${TEMP_LOG} &
+  { set +x; } 2>/dev/null
+  _mypid=$!
+  wait_for_process $_mypid
+  wait $_mypid
+  res=$?
+  cat ${TEMP_LOG}
+  verify_result $res "Channel '${_channel_id}' creation failed"
+  successln "Channel '${_channel_id}' created successfully"
+}
+
+join_channel() {
+  _org=$1
+  _peer=$2
+  _channel_id=$3
+  _channel_block_file=${4:-"${_channel_id}.block"}
+
+  print_header "Join Channel" "Org: $_org" "Peer: $_peer" "Channel: $_channel_id" "Channel block file: $_channel_block_file"
+  infoln "Setting up env for peer '$_peer' in Org'$_org'"
+  set_org_env $_org $_peer
+  if [ ! -f "$_channel_block_file" ]; then
+    infoln "Channel block file NOT found, fetching from channel"
+    set -x
+    peer channel fetch 0 $_channel_block_file -o ${HLF_ORDR_HOST}:${HLF_ORDR_PORT} --ordererTLSHostnameOverride $HLF_ORDR_ID -c ${_channel_id} --tls --cafile $ORDERER_CA >&${TEMP_LOG} &
+    { set +x; } 2>/dev/null
+    _mypid=$!
+    wait_for_process $_mypid
+    wait $_mypid
+    res=$?
+    cat ${TEMP_LOG}
+    verify_result $res "Failed to fetch channel '${_channel_id}' block"
+    successln "Fetched Channel '${_channel_id}' block successfully"
+  fi
+  infoln "Joining channel '$_channel_id'"
+  set -x
+  peer channel join -b $_channel_block_file >&${TEMP_LOG} &
+  { set +x; } 2>/dev/null
+  _mypid=$!
+  wait_for_process $_mypid
+  wait $_mypid
+  res=$?
+  cat ${TEMP_LOG}
+  verify_result $res "Org_$_org $PEER_ID failed to join Channel '${_channel_id}'"
+  successln "Org$_org $PEER_ID joined Channel '${_channel_id}' successfully"
+}
+
+fetch_channel_config() {
+  _org=$1
+  _channel_id=$2
+  _output_file=$3
+  _type=${4:-"config"}
+
+  print_header "Fetch Channel Config" "Org: $_org" "Channel: $_channel_id"
+  set_org_env $_org
+  infoln "Fetching the most recent configuration block for the channel"
+  set -x
+  peer channel fetch $_type config_block.pb -o ${HLF_ORDR_HOST}:${HLF_ORDR_PORT} --ordererTLSHostnameOverride $HLF_ORDR_ID -c ${_channel_id} --tls --cafile $ORDERER_CA >&${TEMP_LOG} &
+  { set +x; } 2>/dev/null
+  _mypid=$!
+  wait_for_process $_mypid
+  wait $_mypid
+  res=$?
+  cat ${TEMP_LOG}
+  verify_result $res "Failed fetch config from channel '${_channel_id}'"
+  successln "Fetched config from Channel '${_channel_id}' successfully"
+  if [ "$_type" = "config" ]; then
+    infoln "Decoding config block to JSON and isolating config to ${_output_file}"
+    set -x
+    configtxlator proto_decode --input config_block.pb --type common.Block | jq .data.data[0].payload.data.config >"${_output_file}"
+    { set +x; } 2>/dev/null
+  else
+    cp config_block.pb $_output_file
+  fi
+  rm config_block.pb 2>/dev/null
+}
+
+update_channel_config() {
+  _org=$1
+  _channel_id=$2
+  _update_config=$3
+
+  print_header "Update Channel Config" "Channel: $_channel_id" "Org: $_org"
+  set_org_env $_org
+  infoln "Updating channel '$_channel_id' config ..."
+  set -x
+  peer channel update -o ${HLF_ORDR_HOST}:${HLF_ORDR_PORT} --ordererTLSHostnameOverride $HLF_ORDR_ID -c ${_channel_id} -f ${_update_config} --tls --cafile $ORDERER_CA >&${TEMP_LOG} &
+  { set +x; } 2>/dev/null
+  _mypid=$!
+  wait_for_process $_mypid
+  wait $_mypid
+  res=$?
+  cat ${TEMP_LOG}
+  verify_result $res "Channel '${_channel_id}' config update failed"
+  successln "Channel '${_channel_id}' config updated successfully"
+}
+
+prepare_config_update() {
+  _channel_id=$1
+  _original_config=$2
+  _modified_config=$3
+  _output_file=$4
+
+  print_header "Prepare Config" "Channel: $_channel_id" "Original Config: $_original_config" "Modified Config: $_modified_config"
+  infoln "Preparing the config update for '$_original_config' and '$_modified_config'"
+  set -x
+  configtxlator proto_encode --input "${_original_config}" --type common.Config >original_config.pb
+  configtxlator proto_encode --input "${_modified_config}" --type common.Config >modified_config.pb
+  configtxlator compute_update --channel_id "${_channel_id}" --original original_config.pb --updated modified_config.pb >config_update.pb
+  configtxlator proto_decode --input config_update.pb --type common.ConfigUpdate >config_update.json
+  echo '{"payload":{"header":{"channel_header":{"channel_id":"'$_channel_id'", "type":2}},"data":{"config_update":'$(cat config_update.json)'}}}' | jq . >config_update_in_envelope.json
+  configtxlator proto_encode --input config_update_in_envelope.json --type common.Envelope >${_output_file}
+  { set +x; } 2>/dev/null
+  infoln "Cleaning up ..."
+  rm original_config.pb modified_config.pb config_update.pb config_update.json config_update_in_envelope.json 2>/dev/null
+}
+
+sign_configtx() {
+  _org=$1
+  _config_tx_file=$2
+
+  print_header "Sign Configtx" "Org: $_org"
+  infoln "Signing the configtx ..."
+  set_org_env $_org
+  set -x
+  peer channel signconfigtx -f "${_config_tx_file}" >&${TEMP_LOG} &
+  { set +x; } 2>/dev/null
+  _mypid=$!
+  wait_for_process $_mypid
+  wait $_mypid
+  res=$?
+  cat ${TEMP_LOG}
+  verify_result $res "Sign configtx failed"
+  successln "Sign configtx successful"
+}
+
+set_org_env() {
+  _script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+  test -f ${_script_dir}/../Org${1}_network.conf && _org_conf_file=${_script_dir}/../Org${1}_network.conf || _org_conf_file=${_script_dir}/../network.conf
+  #[[ $1 > =2 ]] && { _org_conf_file=${_script_dir}/../Org${1}_network.conf; } || { _org_conf_file=${_script_dir}/../network.conf; }
+  test -f $_org_conf_file && source ${_org_conf_file} || fatalln "$_org_conf_file NOT found!!"
+  [[ -n $2 ]] && { _peer_num=$2; } || { _peer_num=1; }
+  PEER_ID=$(get_val HLF_ORG_PEER${_peer_num}_ID)
+  PEER_PORT=$(get_val HLF_ORG_PEER${_peer_num}_PORT)
+  CORE_PEER_LOCALMSPID=${ORG_MSPID}
+  CORE_PEER_ADDRESS=${HLF_CA_HOST}:${PEER_PORT}
+  CORE_PEER_MSPCONFIGPATH=$HLF_NETWORK_DIR/organizations/peerOrganizations/${ORG_NAME}/users/Admin@${ORG_NAME}/msp
+  CORE_PEER_TLS_ENABLED=true
+  CORE_PEER_TLS_ROOTCERT_FILE=$HLF_NETWORK_DIR/organizations/peerOrganizations/${ORG_NAME}/peers/${PEER_ID}/tls/tlscacerts/tls-cacert.pem
+  ORDERER_CA=$HLF_NETWORK_DIR/organizations/ordererOrganizations/${HLF_ORDR_ORG_NAME}/msp/tlscacerts/tls-cacert.pem
+  ORDERER_ADDRESS=${HLF_ORDR_HOST}:${HLF_ORDR_PORT}
+}
+
+parse_peer_connection_parameters() {
+  PEER_CONN_PARMS=""
+  PEERS=""
+  while [ "$#" -gt 0 ]; do
+    set_org_env $1
+    PEER="${HLF_ORG_PEER1_ID}"
+    ## Set peer addresses
+    PEERS="$PEERS $PEER"
+    PEER_CONN_PARMS="$PEER_CONN_PARMS --peerAddresses $CORE_PEER_ADDRESS"
+    ## Set path to TLS certificate
+    TLSINFO=$(echo "--tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE")
+    PEER_CONN_PARMS="$PEER_CONN_PARMS $TLSINFO"
+    # shift by one to get to the next organization
+    shift
+  done
+  # remove leading space for output
+  PEERS="$(echo -e "$PEERS" | sed -e 's/^[[:space:]]*//')"
+}

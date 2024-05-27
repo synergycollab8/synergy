@@ -3,7 +3,10 @@
 ### Dammavalam, Srirangam
 ### 01-JUN-2021
 
-. $(dirname $0)/set_env "$@"
+_scripts_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+. $_scripts_dir/set_env
+. $_scripts_dir/helper_utils
+. $_scripts_dir/hlf_utils
 
 cd $HLF_NETWORK_DIR
 
@@ -11,32 +14,46 @@ cd $HLF_NETWORK_DIR
 # Start Peers
 ########################################
 
-echo "========>>>> Starting Peers ..."
+print_header ">>>> Starting Peers >>>>"
 export COMPOSE_PROJECT_NAME=net
 docker-compose -f docker/docker-compose-org.yaml up -d
-sleep 60
-echo "----- PEERS >>> S T A R T E D -------" 
+wait_for_seconds 60
+successln "----- PEERS >>> S T A R T E D -------"
 
+_org_n=$(echo $ORG_NAME | sed -n 's/^Org\([0-9]*\).*$/\1/p')
+CHANNEL_TX_FILE="./channel-artifacts/${HLF_NETWORK_CHANNEL_ID}.tx"
+CHANNEL_BLOCK_FILE="./channel-artifacts/${HLF_NETWORK_CHANNEL_ID}.block"
 if [ "${HLF_CHANNEL_CREATOR}" = "Y" ]; then
-    echo "========>>>> Creating Channel ${HLF_NETWORK_CHANNEL_ID} ..."
-    peer channel create -c ${HLF_NETWORK_CHANNEL_ID} -f ./channel-artifacts/${HLF_NETWORK_CHANNEL_ID}.tx -o ${HLF_ORDR_HOST}:${HLF_ORDR_PORT} --ordererTLSHostnameOverride $HLF_ORDR_ID --outputBlock ./channel-artifacts/${HLF_NETWORK_CHANNEL_ID}.block --tls --cafile $ORDERER_CA
-    sleep 30
-    echo "========>>>> Joining Channel ${HLF_NETWORK_CHANNEL_ID} ..."
-    peer channel join -b ./channel-artifacts/${HLF_NETWORK_CHANNEL_ID}.block
-else
-    peer channel fetch 0 ./channel-artifacts/${HLF_NETWORK_CHANNEL_ID}.block -o ${HLF_ORDR_HOST}:${HLF_ORDR_PORT} --ordererTLSHostnameOverride $HLF_ORDR_ID -c ${HLF_NETWORK_CHANNEL_ID} --tls --cafile $ORDERER_CA
-    echo "========>>>> Joining Channel ${HLF_NETWORK_CHANNEL_ID} ..."
-    peer channel join -b ./channel-artifacts/${HLF_NETWORK_CHANNEL_ID}.block
+    print_header ">>>> Creating Channel ${HLF_NETWORK_CHANNEL_ID} >>>>"
+    create_channel $_org_n $HLF_NETWORK_CHANNEL_ID $CHANNEL_TX_FILE $CHANNEL_BLOCK_FILE
+    wait_for_seconds 30
 fi
 
-echo "========>>>> Setting Anchor Peers ..."
+print_header ">>>> Fetch Config from Channel ${HLF_NETWORK_CHANNEL_ID} >>>>"
+test ! -f $CHANNEL_BLOCK_FILE && fetch_channel_config $_org_n $HLF_NETWORK_CHANNEL_ID $CHANNEL_BLOCK_FILE 0
+
+print_header ">>>> Joining Channel ${HLF_NETWORK_CHANNEL_ID} >>>>"
+_peer_num=1
+while [ ${_peer_num} -le ${HLF_ORG_PEERS_COUNT} ]; do
+    join_channel $_org_n $_peer_num $HLF_NETWORK_CHANNEL_ID $CHANNEL_BLOCK_FILE
+    let _peer_num=_peer_num+1
+done
+unset _peer_num
+
+# Some ad-hoc tasks for CouchDB containers (to avoid errors / warnings in the log)
+_peer_num=1
+while [ ${_peer_num} -le ${HLF_ORG_PEERS_COUNT} ]; do
+    HLF_ORG_PEER_COUCHDB_USER=$(get_val HLF_ORG_PEER${_peer_num}_COUCHDB_USER)
+    HLF_ORG_PEER_COUCHDB_PASSWD=$(get_val HLF_ORG_PEER${_peer_num}_COUCHDB_PASSWD)
+    HLF_ORG_PEER_COUCHDB_PORT=$(get_val HLF_ORG_PEER${_peer_num}_COUCHDB_PORT)
+    curl --version >&/dev/null && curl -X PUT http://${HLF_ORG_PEER_COUCHDB_USER}:${HLF_ORG_PEER_COUCHDB_PASSWD}@localhost:${HLF_ORG_PEER_COUCHDB_PORT}/_users
+    let _peer_num=_peer_num+1
+done
+unset _peer_num
+
 #-----------------------------------
 ## set anchor peer(s)
 #-----------------------------------
-get_val() {
-   var1=$1
-   echo ${!var1} 
-}
 
 HLF_ORG_ANCHOR_PEERS=$(echo ${HLF_ORG_ANCHOR_PEERS} | sed 's/,/ /g')
 _anchor_peers_list=""
@@ -44,22 +61,21 @@ echo $HLF_ORG_ANCHOR_PEERS
 for _peer_num_ in ${HLF_ORG_ANCHOR_PEERS}; do
     HLF_ORG_PEER_ID=$(get_val HLF_ORG_PEER${_peer_num_}_ID)
     HLF_ORG_PEER_PORT=$(get_val HLF_ORG_PEER${_peer_num_}_PORT)
-    [[ -z "${_anchor_peers_list}" ]] && { _anchor_peers_list="{\"host\": \"${HLF_ORG_PEER_ID}\",\"port\": ${HLF_ORG_PEER_PORT}}"; } || { \
-        _anchor_peers_list="$(echo ${_anchor_peers_list}),{\"host\":\"${HLF_ORG_PEER_ID}\",\"port\":${HLF_ORG_PEER_PORT}}"; }
+    [[ -z "${_anchor_peers_list}" ]] && { _anchor_peers_list="{\"host\": \"${HLF_ORG_PEER_ID}\",\"port\": ${HLF_ORG_PEER_PORT}}"; } || {
+        _anchor_peers_list="$(echo ${_anchor_peers_list}),{\"host\":\"${HLF_ORG_PEER_ID}\",\"port\":${HLF_ORG_PEER_PORT}}"
+    }
 done
 unset _peer_num_
 
-echo "=====>>> Anchor Peers: $_anchor_peers_list"
-peer channel fetch config ./channel-artifacts/config_block.pb -o ${HLF_ORDR_HOST}:${HLF_ORDR_PORT} --ordererTLSHostnameOverride $HLF_ORDR_ID -c ${HLF_NETWORK_CHANNEL_ID} --tls --cafile $ORDERER_CA
-configtxlator proto_decode --input ./channel-artifacts/config_block.pb --type common.Block | jq .data.data[0].payload.data.config > ./channel-artifacts/${ORG_MSPID}config.json
-jq ".channel_group.groups.Application.groups.${ORG_MSPID}.values += {\"AnchorPeers\":{\"mod_policy\": \"Admins\",\"value\":{\"anchor_peers\": [${_anchor_peers_list}]},\"version\": \"0\"}}" ./channel-artifacts/${ORG_MSPID}config.json > ./channel-artifacts/${ORG_MSPID}modified_config.json
-configtxlator proto_encode --input "./channel-artifacts/${ORG_MSPID}config.json" --type common.Config >./channel-artifacts/original_config.pb
-configtxlator proto_encode --input "./channel-artifacts/${ORG_MSPID}modified_config.json" --type common.Config >./channel-artifacts/modified_config.pb
-configtxlator compute_update --channel_id "${HLF_NETWORK_CHANNEL_ID}" --original ./channel-artifacts/original_config.pb --updated ./channel-artifacts/modified_config.pb >./channel-artifacts/config_update.pb
-configtxlator proto_decode --input ./channel-artifacts/config_update.pb --type common.ConfigUpdate >./channel-artifacts/config_update.json
-echo '{"payload":{"header":{"channel_header":{"channel_id":"'${HLF_NETWORK_CHANNEL_ID}'", "type":2}},"data":{"config_update":'$(cat ./channel-artifacts/config_update.json)'}}}' | jq . >./channel-artifacts/config_update_in_envelope.json
-configtxlator proto_encode --input ./channel-artifacts/config_update_in_envelope.json --type common.Envelope >./channel-artifacts/${ORG_MSPID}anchors.tx
+print_header ">>>> Setting Anchor Peers >>>>" "Anchor Peers: $_anchor_peers_list"
 
-peer channel update -o ${HLF_ORDR_HOST}:${HLF_ORDR_PORT} --ordererTLSHostnameOverride $HLF_ORDR_ID -c ${HLF_NETWORK_CHANNEL_ID} -f ./channel-artifacts/${ORG_MSPID}anchors.tx --tls --cafile $ORDERER_CA
+_channel_config="./channel-artifacts/channel_config.json"
+_modified_channel_config="./channel-artifacts/modified_channel_config.json"
+_anchor_peers_config="./channel-artifacts/anchors.tx"
 
-echo "----------- CHANNEL UPDATE >>> C O M P L E T E D >>> ----------"
+fetch_channel_config $_org_n $HLF_NETWORK_CHANNEL_ID $_channel_config
+jq ".channel_group.groups.Application.groups.${ORG_MSPID}.values += {\"AnchorPeers\":{\"mod_policy\": \"Admins\",\"value\":{\"anchor_peers\": [${_anchor_peers_list}]},\"version\": \"0\"}}" $_channel_config >$_modified_channel_config
+prepare_config_update $HLF_NETWORK_CHANNEL_ID $_channel_config $_modified_channel_config $_anchor_peers_config
+update_channel_config $_org_n $HLF_NETWORK_CHANNEL_ID $_anchor_peers_config
+
+successln "----------- CHANNEL UPDATE >>> C O M P L E T E D >>> ----------"

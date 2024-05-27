@@ -13,7 +13,7 @@ organizations:
     peers:
     - PEER_ID
     certificateAuthorities:
-    - ORG_NAME-ca-org
+    - CA_NAME
 peers:
   PEER_ID:
     url: grpcs://CA_HOST:PEER_PORT
@@ -24,9 +24,9 @@ peers:
       ssl-target-name-override: PEER_ID
       hostnameOverride: PEER_ID
 certificateAuthorities:
-  ORG_NAME-ca-org:
+  CA_NAME:
     url: https://CA_HOST:CA_PORT
-    caName: ORG_NAME-ca-org
+    caName: CA_NAME
     tlsCACerts:
       pem: 
         - |
