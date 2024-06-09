@@ -95,7 +95,7 @@ https://keycloak.ch/keycloak-tutorials/tutorial-1-installing-and-running-keycloa
 docker run -p 8080:8080 quay.io/keycloak/keycloak start-dev
 
 
-
+directory : /app/hyperledger-fabric/mytest-network/keycloak-24.0.5/bin
 ./kcadm.sh config credentials --server http://0.0.0.0:8082 --realm master --user admin –-password admin
 ./kcadm.sh update --server http://localhost:8082 realms/master -s sslRequired=NONE --user admin --password admin
 ** start keycloak for second time **
