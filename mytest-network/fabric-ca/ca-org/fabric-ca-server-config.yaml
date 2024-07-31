@@ -40,7 +40,7 @@
 version: 1.4.9
 
 # Server's listening port (default: 7054)
-port: 7056
+port: 7066
 
 # Cross-Origin Resource Sharing (CORS)
 cors:
@@ -49,7 +49,7 @@ cors:
       - "*"
 
 # Enables debug logging (default: false)
-debug: true
+debug: false
 
 # Size limit of an acceptable CRL in bytes (default: 512000)
 crlsizelimit: 512000
@@ -86,7 +86,7 @@ tls:
 #############################################################################
 ca:
   # Name of this CA
-  name: Org1-ca-org
+  name: Org2-ca-org
   # Key file (is only used to import a private key into BCCSP)
   keyfile:
   # Certificate file (default: ca-cert.pem)
@@ -243,7 +243,7 @@ ldap:
 # which are always stored in lower case.
 #############################################################################
 affiliations:
-   Org1:
+   Org2:
 #      - department1
 #      - department2
 
@@ -305,7 +305,7 @@ signing:
 #     CA certificates though it can still issue end entity certificates.
 ###########################################################################
 csr:
-   cn: Org1-ca-org
+   cn: Org2-ca-org
    keyrequest:
      algo: ecdsa
      size: 256
@@ -313,10 +313,10 @@ csr:
       - C: SG
         ST: Singapore
         L: 
-        O: Org1
+        O: Org2
         OU: bc
    hosts:
-     - centos81
+     - hlf-node2
    ca:
       expiry: 131400h
       pathlength: 0

@@ -1,0 +1,51 @@
+listening on *:7000
+Wallet path: /app/hyperledger-fabric/mytest-network/chaincodeservicedocument/wallet
+Use network channel for new services: synergychannel.
+Submit document contract creation transaction.
+doc_hash_code_123  successfully created
+Transaction complete.
+Disconnect from Fabric gateway.
+DocumentRequest created successfully.
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Parser.parseErrorMessage (/app/hyperledger-fabric/mytest-network/chaincodeservicedocument/node_modules/pg-protocol/dist/parser.js:283:98)
+    at Parser.handlePacket (/app/hyperledger-fabric/mytest-network/chaincodeservicedocument/node_modules/pg-protocol/dist/parser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/chaincodeservicedocument/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeservicedocument/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/chaincodeservicedocument/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/chaincodeservicedocument/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/chaincodeservicedocument/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/chaincodeservicedocument/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeservicedocument/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  severity: 'FATAL',
+  code: '57P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postgres.c',
+  line: '3040',
+  routine: 'ProcessInterrupts'
+}
+
+Node.js v20.9.0

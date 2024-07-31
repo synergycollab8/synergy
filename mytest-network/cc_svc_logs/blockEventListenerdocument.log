@@ -1,0 +1,165 @@
+Wallet path: /app/hyperledger-fabric/mytest-network/eventhandler/wallet
+<ref *1> ContractImpl {
+  contractListeners: Map(0) {},
+  network: <ref *2> NetworkImpl {
+    contracts: Map(1) { 'documentcc:' => [Circular *1] },
+    initialized: true,
+    commitListeners: Map(0) {},
+    blockListeners: Map(0) {},
+    gateway: Gateway {
+      networks: [Map],
+      options: [Object],
+      client: [Client],
+      identity: [Object],
+      identityContext: [IdentityContext]
+    },
+    channel: Channel {
+      type: 'Channel',
+      name: 'mytestchannel',
+      client: [Client],
+      endorsers: [Map],
+      committers: [Map],
+      msps: [Map]
+    },
+    eventServiceManager: EventServiceManager {
+      eventServices: Map(0) {},
+      network: [Circular *2],
+      channel: [Channel],
+      mspId: 'Org2MSP',
+      identityContext: [IdentityContext]
+    },
+    realtimeFilteredBlockEventSource: BlockEventSource {
+      listeners: Set(0) {},
+      state: 'ready',
+      eventServiceManager: [EventServiceManager],
+      blockQueue: [OrderedBlockQueue],
+      asyncNotifier: [AsyncNotifier],
+      blockType: 'filtered'
+    },
+    realtimeFullBlockEventSource: BlockEventSource {
+      listeners: Set(0) {},
+      state: 'ready',
+      eventServiceManager: [EventServiceManager],
+      blockQueue: [OrderedBlockQueue],
+      asyncNotifier: [AsyncNotifier],
+      blockType: 'full'
+    },
+    realtimePrivateBlockEventSource: BlockEventSource {
+      listeners: Set(0) {},
+      state: 'ready',
+      eventServiceManager: [EventServiceManager],
+      blockQueue: [OrderedBlockQueue],
+      asyncNotifier: [AsyncNotifier],
+      blockType: 'private'
+    },
+    discoveryService: DiscoveryService {
+      type: 'DiscoveryService',
+      name: 'mytestchannel',
+      channel: [Channel],
+      client: [Client],
+      refreshAge: undefined,
+      refreshRunning: false,
+      discoveryResults: [Object],
+      asLocalhost: false,
+      currentTarget: [Discoverer],
+      targets: [Array],
+      _action: [Object],
+      _payload: <Buffer 0a d5 07 0a b0 07 0a 07 4f 72 67 32 4d 53 50 12 a4 07 2d 2d 2d 2d 2d 42 45 47 49 4e 20 43 45 52 54 49 46 49 43 41 54 45 2d 2d 2d 2d 2d 0a 4d 49 49 43 ... 972 more bytes>,
+      _signature: <Buffer 30 45 02 21 00 b7 d7 36 df 09 20 2f 75 8a 26 5f 8f 9f 15 b7 b7 c7 6b ba b9 fb 67 c2 a4 08 53 70 b7 9c 2f cc 1f 02 20 01 fd f3 e7 6b df 77 c1 f8 e4 d8 ... 21 more bytes>,
+      requestTimeout: undefined
+    },
+    queryHandler: SingleQueryHandler { currentPeerIndex: 0, peers: [Array] }
+  },
+  chaincodeId: 'documentcc',
+  gateway: Gateway {
+    networks: Map(1) { 'mytestchannel' => [NetworkImpl] },
+    options: {
+      queryHandlerOptions: [Object],
+      eventHandlerOptions: [Object],
+      discovery: [Object],
+      wallet: [Wallet],
+      identity: 'User1@Org2'
+    },
+    client: Client {
+      type: 'Client',
+      name: 'gateway client',
+      mspid: null,
+      _tls_mutual: [Object],
+      endorsers: [Map],
+      committers: Map(0) {},
+      channels: [Map],
+      centralizedOptions: null
+    },
+    identity: { credentials: [Object], mspId: 'Org2MSP', type: 'X.509' },
+    identityContext: IdentityContext {
+      type: 'IdentityContext',
+      client: [Client],
+      user: [User],
+      name: 'User1@Org2',
+      mspid: 'Org2MSP',
+      transactionId: null,
+      nonce: null
+    }
+  },
+  namespace: '',
+  discoveryInterests: [ { name: 'documentcc' } ]
+}
+******************************************
+{
+  doc_hash_code: 'doc_hash_code_123',
+  requestId: 'RequestID_123',
+  doc_name: 'Trade_doc',
+  doc_type: 'docx'
+}
+doc_hash_code_123, RequestID_123, Trade_doc, docx
+******************************************
+Data insert successful for document
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Parser.parseErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:283:98)
+    at Parser.handlePacket (node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Parser.parseErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:283:98)
+    at Parser.handlePacket (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  severity: 'FATAL',
+  code: '57P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postgres.c',
+  line: '3040',
+  routine: 'ProcessInterrupts'
+}
+
+Node.js v20.9.0

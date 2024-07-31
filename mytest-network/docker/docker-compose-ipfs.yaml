@@ -3,34 +3,33 @@ version: '3.4'
 networks:
   mytest:
 
-#volumes:
-#  ipfs-org1:
-#  ipfs-cluster-org1:
+volumes:
+  ipfs-org2:
+  ipfs-cluster-org2:
 
 services:
 
-  ipfs-org1:
-    container_name: ipfs-org1
+  ipfs-org2:
+    container_name: ipfs-org2
     image: ipfs/kubo:release
     ports:
       - "4001:4001" # ipfs swarm - expose if needed/wanted
       - "5001:5001" # ipfs api - expose if needed/wanted
       - "8080:8080" # ipfs gateway - expose if needed/wanted
     volumes:
-      - /app/hyperledger-fabric/mytest-network/ipfs-data/ipfs-org1:/data/ipfs
-     #- ipfs-org1:/data/ipfs
+     - ipfs-org2:/data/ipfs
     networks:
       - mytest
   
-  ipfs-cluster-org1:
-    container_name: ipfs-cluster-org1
+  ipfs-cluster-org2:
+    container_name: ipfs-cluster-org2
     image: ipfs/ipfs-cluster:latest
     depends_on:
-      - ipfs-org1
+      - ipfs-org2
     environment:
-      CLUSTER_PEERNAME: ipfs-cluster-org1
+      CLUSTER_PEERNAME: ipfs-cluster-org2
       CLUSTER_SECRET: ${IPFS_CLUSTER_SECRET}
-      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs-org1/tcp/5001
+      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs-org2/tcp/5001
       CLUSTER_CRDT_TRUSTEDPEERS: '*' # Trust all peers in Cluster
       CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094 # Expose API
       CLUSTER_MONITORPINGINTERVAL: 2s # Speed up peer discovery
@@ -40,19 +39,11 @@ services:
       - "9095:9095" # Cluster IPFS Proxy endpoint
       - "9096:9096" # Cluster swarm endpoint
     volumes:
-        - /app/hyperledger-fabric/mytest-network/ipfs-data/ipfs-cluster-org1:/data/ipfs-cluster
-       #- ipfs-cluster-org1:/data/ipfs-cluster
+      - ipfs-cluster-org2:/data/ipfs-cluster
+    command:
+      - "daemon --bootstrap ${IPFS_CLUSTER_BOOTSTRAP_PEERS}" # add multiple peers with comma seperated
     extra_hosts:
-      - "hlf-node1:10.148.0.11"
-      - "ipfs-org1:10.148.0.11"
-      - "ipfs-cluster-org1:10.148.0.11"
       - "hlf-node2:10.148.0.12"
       - "ipfs-org2:10.148.0.12"
-      - "ipfs-cluster-org2:10.148.0.12"
-      - "hlf-node3:10.148.0.13"
-      - "ipfs-org3:10.148.0.13"
-      - "ipfs-cluster-org3:10.148.0.13"
     networks:
       - mytest
-
-

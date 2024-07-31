@@ -1,0 +1,1018 @@
+Wallet path: /app/hyperledger-fabric/mytest-network/eventhandler/wallet
+<ref *1> ContractImpl {
+  contractListeners: Map(0) {},
+  network: <ref *2> NetworkImpl {
+    contracts: Map(1) { 'chatcc:' => [Circular *1] },
+    initialized: true,
+    commitListeners: Map(0) {},
+    blockListeners: Map(0) {},
+    gateway: Gateway {
+      networks: [Map],
+      options: [Object],
+      client: [Client],
+      identity: [Object],
+      identityContext: [IdentityContext]
+    },
+    channel: Channel {
+      type: 'Channel',
+      name: 'mytestchannel',
+      client: [Client],
+      endorsers: [Map],
+      committers: [Map],
+      msps: [Map]
+    },
+    eventServiceManager: EventServiceManager {
+      eventServices: Map(0) {},
+      network: [Circular *2],
+      channel: [Channel],
+      mspId: 'Org2MSP',
+      identityContext: [IdentityContext]
+    },
+    realtimeFilteredBlockEventSource: BlockEventSource {
+      listeners: Set(0) {},
+      state: 'ready',
+      eventServiceManager: [EventServiceManager],
+      blockQueue: [OrderedBlockQueue],
+      asyncNotifier: [AsyncNotifier],
+      blockType: 'filtered'
+    },
+    realtimeFullBlockEventSource: BlockEventSource {
+      listeners: Set(0) {},
+      state: 'ready',
+      eventServiceManager: [EventServiceManager],
+      blockQueue: [OrderedBlockQueue],
+      asyncNotifier: [AsyncNotifier],
+      blockType: 'full'
+    },
+    realtimePrivateBlockEventSource: BlockEventSource {
+      listeners: Set(0) {},
+      state: 'ready',
+      eventServiceManager: [EventServiceManager],
+      blockQueue: [OrderedBlockQueue],
+      asyncNotifier: [AsyncNotifier],
+      blockType: 'private'
+    },
+    discoveryService: DiscoveryService {
+      type: 'DiscoveryService',
+      name: 'mytestchannel',
+      channel: [Channel],
+      client: [Client],
+      refreshAge: undefined,
+      refreshRunning: false,
+      discoveryResults: [Object],
+      asLocalhost: false,
+      currentTarget: [Discoverer],
+      targets: [Array],
+      _action: [Object],
+      _payload: <Buffer 0a d5 07 0a b0 07 0a 07 4f 72 67 32 4d 53 50 12 a4 07 2d 2d 2d 2d 2d 42 45 47 49 4e 20 43 45 52 54 49 46 49 43 41 54 45 2d 2d 2d 2d 2d 0a 4d 49 49 43 ... 972 more bytes>,
+      _signature: <Buffer 30 44 02 20 5c 8b 22 d4 61 4c 66 4d e8 2c 28 8e 7f 83 38 5a c6 70 e8 5c 45 5d da d6 bb d8 79 60 30 8e f1 90 02 20 5b db f4 9c 3f c6 4a de 1e c5 51 a3 ... 20 more bytes>,
+      requestTimeout: undefined
+    },
+    queryHandler: SingleQueryHandler { currentPeerIndex: 0, peers: [Array] }
+  },
+  chaincodeId: 'chatcc',
+  gateway: Gateway {
+    networks: Map(1) { 'mytestchannel' => [NetworkImpl] },
+    options: {
+      queryHandlerOptions: [Object],
+      eventHandlerOptions: [Object],
+      discovery: [Object],
+      wallet: [Wallet],
+      identity: 'User1@Org2'
+    },
+    client: Client {
+      type: 'Client',
+      name: 'gateway client',
+      mspid: null,
+      _tls_mutual: [Object],
+      endorsers: [Map],
+      committers: Map(0) {},
+      channels: [Map],
+      centralizedOptions: null
+    },
+    identity: { credentials: [Object], mspId: 'Org2MSP', type: 'X.509' },
+    identityContext: IdentityContext {
+      type: 'IdentityContext',
+      client: [Client],
+      user: [User],
+      name: 'User1@Org2',
+      mspid: 'Org2MSP',
+      transactionId: null,
+      nonce: null
+    }
+  },
+  namespace: '',
+  discoveryInterests: [ { name: 'chatcc' } ]
+}
+******************************************
+{
+  room_id: '82817',
+  room_name: 'test websocket',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### Uploaded by user',
+  messageid: '996462',
+  description: 'Issue Type: Issue Product: Loan'
+}
+82817, test websocket, 223456, test-user1,sample.txt #### Uploaded by user,996462,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '82817',
+  room_name: 'test websocket',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  messageid: '887075',
+  description: 'Issue Type: Issue Product: Loan'
+}
+82817, test websocket, 223456, test-user1,epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu,887075,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '82817',
+  room_name: 'test websocket',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  messageid: '512162',
+  description: 'Issue Type: Issue Product: Loan'
+}
+82817, test websocket, 223456, test-user1,epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu,512162,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '82817',
+  room_name: 'test websocket',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  messageid: '582055',
+  description: 'Issue Type: Issue Product: Loan'
+}
+82817, test websocket, 223456, test-user1,AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,582055,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [erroData insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '82817',
+  room_name: 'test websocket',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  messageid: '639702',
+  description: 'Issue Type: Issue Product: Loan'
+}
+82817, test websocket, 223456, test-user1,AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,639702,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '82817',
+  room_name: 'test websocket',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  messageid: '937034',
+  description: 'Issue Type: Issue Product: Loan'
+}
+82817, test websocket, 223456, test-user1,epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu,937034,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '82817',
+  room_name: 'test websocket',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  messageid: '985367',
+  description: 'Issue Type: Issue Product: Loan'
+}
+82817, test websocket, 223456, test-user1,epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu,985367,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [erroData insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '82817',
+  room_name: 'test websocket',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  messageid: '388418',
+  description: 'Issue Type: Issue Product: Loan'
+}
+82817, test websocket, 223456, test-user1,epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu,388418,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '54073',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'chat initiation message',
+  messageid: '854323',
+  description: 'Issue Type: Issue Product: Loan'
+}
+54073, test refresh chat, 223456, test-user1,chat initiation message,854323,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '54073',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: '101545637870-UAN.pdf #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1',
+  messageid: '650374',
+  description: 'Issue Type: Issue Product: Loan'
+}
+54073, test refresh chat, 223456, test-user1,101545637870-UAN.pdf #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1,650374,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '54073',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  messageid: '812589',
+  description: 'Issue Type: Issue Product: Loan'
+}
+54073, test refresh chat, 223456, test-user1,AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,812589,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '54073',
+  room_name: 'test refresh chat',
+  userId: '223459',
+  userName: '223459',
+  message: '223459 added to room',
+  messageid: '677109',
+  description: 'Issue Type: Issue Product: Loan'
+}
+54073, test refresh chat, 223459, 223459,223459 added to room,677109,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+******************************************
+{
+  room_id: '54073',
+  room_name: 'test refresh chat',
+  userId: '223460',
+  userName: '223460',
+  message: '223460 added to room',
+  messageid: '838638',
+  description: 'Issue Type: Issue Product: Loan'
+}
+54073, test refresh chat, 223460, 223460,223460 added to room,838638,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '54073',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  messageid: '149317',
+  description: 'Issue Type: Issue Product: Loan'
+}
+54073, test refresh chat, 223456, test-user1,sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,149317,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+ Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [erroData insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  messageid: '369088',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,369088,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  messageid: '5438',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,5438,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  messageid: '970671',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,970671,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  messageid: '583330',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,583330,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  messageid: '245659',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,245659,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  messageid: '739918',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,739918,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  messageid: '313503',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,313503,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  messageid: '694941',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,694941,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  messageid: '296566',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu,296566,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [erroData insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  messageid: '354287',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,354287,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '23268',
+  room_name: 'test refresh chat',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  messageid: '998089',
+  description: 'Issue Type: Issue Product: Loan'
+}
+23268, test refresh chat, 223456, test-user1,sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,998089,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful for chat
+Data insert successful for chat_history
+******************************************
+{
+  room_id: '19866',
+  room_name: 'Need cash for test',
+  userId: '223460',
+  userName: 'org2-user1',
+  message: 'chat initiation message',
+  messageid: '443064',
+  description: 'Issue Type: Service Request Product: Cash'
+}
+19866, Need cash for test, 223460, org2-user1,chat initiation message,443064,Issue Type: Service Request Product: Cash
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Data insert successful for chat_history
+undefined
+******************************************
+{
+  room_id: '19866',
+  room_name: 'Need cash for test',
+  userId: '223460',
+  userName: 'org2-user1',
+  message: 'chat initiation message',
+  messageid: '980919',
+  description: 'Issue Type: Service Request Product: Cash'
+}
+19866, Need cash for test, 223460, org2-user1,chat initiation message,980919,Issue Type: Service Request Product: Cash
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Data insert successful for chat_history
+undefined
+******************************************
+{
+  room_id: '19866',
+  room_name: 'Need cash for test',
+  userId: '223460',
+  userName: 'org2-user1',
+  message: 'hello ..need urgent cash for suresh travel',
+  messageid: '849128',
+  description: 'Issue Type: Service Request Product: Cash'
+}
+19866, Need cash for test, 223460, org2-user1,hello ..need urgent cash for suresh travel,849128,Issue Type: Service Request Product: Cash
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Data insert successful for chat_history
+undefined
+******************************************
+{
+  room_id: '19866',
+  room_name: 'Need cash for test',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'chat initiation message',
+  messageid: '260022',
+  description: 'Issue Type: Service Request Product: Cash'
+}
+19866, Need cash for test, 223456, test-user1,chat initiation message,260022,Issue Type: Service Request Product: Cash
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Data insert successful for chat_history
+undefined
+******************************************
+{
+  room_id: '19866',
+  room_name: 'Need cash for test',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'declined ..as no reason',
+  messageid: '927297',
+  description: 'Issue Type: Service Request Product: Cash'
+}
+19866, Need cash for test, 223456, test-user1,declined ..as no reason,927297,Issue Type: Service Request Product: Cash
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Data insert successful for chat_history
+undefined
+******************************************
+{
+  room_id: '19866',
+  room_name: 'Need cash for test',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'tomJerry.pdf #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr',
+  messageid: '894842',
+  description: 'Issue Type: Service Request Product: Cash'
+}
+19866, Need cash for test, 223456, test-user1,tomJerry.pdf #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr,894842,Issue Type: Service Request Product: Cash
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Data insert successful for chat_history
+undefined
+******************************************
+{
+  room_id: '86833',
+  room_name: 'Christus need 1000M',
+  userId: '223460',
+  userName: 'org2-user1',
+  message: 'chat initiation message',
+  messageid: '598919',
+  description: 'Issue Type: Issue Product: Loan'
+}
+86833, Christus need 1000M, 223460, org2-user1,chat initiation message,598919,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Data insert successful for chat_history
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerChat1.js:212:21
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+******************************************
+{
+  room_id: '86833',
+  room_name: 'Christus need 1000M',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'chat initiation message',
+  messageid: '91584',
+  description: 'Issue Type: Issue Product: Loan'
+}
+86833, Christus need 1000M, 223456, test-user1,chat initiation message,91584,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Data insert successful for chat_history
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerChat1.js:212:21
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+******************************************
+{
+  room_id: '86833',
+  room_name: 'Christus need 1000M',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  messageid: '570944',
+  description: 'Issue Type: Issue Product: Loan'
+}
+86833, Christus need 1000M, 223456, test-user1,AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,570944,Issue Type: Issue Product: Loan
+******************************************
+test message before insert1
+test message before insert
+before promise
+Data insertion started for chat_history
+Data insert successful for chat
+Data insert successful for chat_history
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerChat1.js:212:21
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Parser.parseErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:283:98)
+    at Parser.handlePacket (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  severity: 'FATAL',
+  code: '57P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postgres.c',
+  line: '3040',
+  routine: 'ProcessInterrupts'
+}
+
+Node.js v20.9.0

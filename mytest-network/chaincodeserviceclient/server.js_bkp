@@ -1,0 +1,113 @@
+const express = require('express');
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+const app = express();
+let fileBuffer;
+// enable files upload
+app.use(fileUpload({
+    createParentPath: true
+}));
+const fs = require('fs');
+const ipfsClient = require('ipfs-http-client');
+const ipfs = new ipfsClient({host:'localhost',port:'5001',protocol:'http'});
+const ipfs1 = new ipfsClient({host:'localhost',port:'5002',protocol:'http'});
+//add other middleware
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+//start app 
+const port = process.env.PORT || 4000;
+
+
+app.post('/upload-avatar', async (req, res) => {
+  try {
+     console.log("req.file",req.files);
+     if(!req.files) {
+        res.send({
+            status: false,
+            message: 'No file uploaded'
+        });
+      } else {
+          //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
+          let avatar = req.files.avatar;
+          console.log("avatar ",avatar);
+          //Use the mv() method to place the file in upload directory (i.e. "uploads")
+          
+          iwrite(avatar.data).then(function(res,err){
+            if(res){
+              console.log("res ",res);
+              //call read only after write is successful
+              iread(res.path).then(function(res,err){
+                if(res){
+                  console.log("res in iread ",res);
+                }
+                if(err){
+                  console.log("err in iread ",err);
+                }
+              })
+            }
+            if(err){
+              console.log("err ",err);
+            }
+          });
+         // avatar.mv('./uploads/' + avatar.name);
+
+         
+          //send response
+          res.send({
+              status: true,
+              message: 'File is uploaded',
+              data: {
+                  name: avatar.name,
+                  mimetype: avatar.mimetype,
+                  size: avatar.size
+              }
+          });
+      }
+  } catch (err) {
+      res.status(500).send(err);
+  }
+});
+async function iwrite (file) {
+  try{
+    const results = await ipfs.add(file);
+    //console.log(filepath);
+    console.log('results', results);
+    return results;
+  }catch (error) {
+      console.error(`Failed to write: ${error}`);
+  }
+}	
+
+async function iread (docHash) {
+  try{
+      const invfile = await ipfs1.get(docHash);
+      const currentDir = process.cwd();
+      console.log("invfile ",invfile," currentDir ",currentDir);
+      let chunks =[];
+      for await (const file of ipfs1.get(docHash)) {
+        console.log("...............",file.path);
+        
+        for await (const chunk of file.content) {
+          chunks.push(chunk);
+        }
+        fileBuffer = Buffer.concat(chunks);
+        var url = currentDir+'/'+docHash+'.svg';	
+        var writeStream = fs.createWriteStream(url);
+        writeStream.write(fileBuffer.toString('utf8'));
+        writeStream.end();
+      
+        //console.log(content.toString())
+      }
+
+  }catch(error){
+      console.log(error);
+  }
+}
+
+app.listen(port, function(){
+  console.log(`listening on *:${port}`);
+});

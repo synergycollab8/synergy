@@ -1,0 +1,1416 @@
+Wallet path: /app/hyperledger-fabric/mytest-network/eventhandler/wallet
+<ref *1> ContractImpl {
+  contractListeners: Map(0) {},
+  network: <ref *2> NetworkImpl {
+    contracts: Map(1) { 'clientservicecontract1:' => [Circular *1] },
+    initialized: true,
+    commitListeners: Map(0) {},
+    blockListeners: Map(0) {},
+    gateway: Gateway {
+      networks: [Map],
+      options: [Object],
+      client: [Client],
+      identity: [Object],
+      identityContext: [IdentityContext]
+    },
+    channel: Channel {
+      type: 'Channel',
+      name: 'mytestchannel',
+      client: [Client],
+      endorsers: [Map],
+      committers: [Map],
+      msps: [Map]
+    },
+    eventServiceManager: EventServiceManager {
+      eventServices: Map(0) {},
+      network: [Circular *2],
+      channel: [Channel],
+      mspId: 'Org2MSP',
+      identityContext: [IdentityContext]
+    },
+    realtimeFilteredBlockEventSource: BlockEventSource {
+      listeners: Set(0) {},
+      state: 'ready',
+      eventServiceManager: [EventServiceManager],
+      blockQueue: [OrderedBlockQueue],
+      asyncNotifier: [AsyncNotifier],
+      blockType: 'filtered'
+    },
+    realtimeFullBlockEventSource: BlockEventSource {
+      listeners: Set(0) {},
+      state: 'ready',
+      eventServiceManager: [EventServiceManager],
+      blockQueue: [OrderedBlockQueue],
+      asyncNotifier: [AsyncNotifier],
+      blockType: 'full'
+    },
+    realtimePrivateBlockEventSource: BlockEventSource {
+      listeners: Set(0) {},
+      state: 'ready',
+      eventServiceManager: [EventServiceManager],
+      blockQueue: [OrderedBlockQueue],
+      asyncNotifier: [AsyncNotifier],
+      blockType: 'private'
+    },
+    discoveryService: DiscoveryService {
+      type: 'DiscoveryService',
+      name: 'mytestchannel',
+      channel: [Channel],
+      client: [Client],
+      refreshAge: undefined,
+      refreshRunning: false,
+      discoveryResults: [Object],
+      asLocalhost: false,
+      currentTarget: [Discoverer],
+      targets: [Array],
+      _action: [Object],
+      _payload: <Buffer 0a d5 07 0a b0 07 0a 07 4f 72 67 32 4d 53 50 12 a4 07 2d 2d 2d 2d 2d 42 45 47 49 4e 20 43 45 52 54 49 46 49 43 41 54 45 2d 2d 2d 2d 2d 0a 4d 49 49 43 ... 972 more bytes>,
+      _signature: <Buffer 30 44 02 20 10 62 ad c0 1d 81 30 1a 2d 9f ae 47 4a 0a 59 db 6d b9 86 d4 d3 7d 6c 27 23 01 64 a6 73 a3 f7 7c 02 20 0f 11 66 7f d5 17 0f 7e f3 f5 6a 5d ... 20 more bytes>,
+      requestTimeout: undefined
+    },
+    queryHandler: SingleQueryHandler { currentPeerIndex: 0, peers: [Array] }
+  },
+  chaincodeId: 'clientservicecontract1',
+  gateway: Gateway {
+    networks: Map(1) { 'mytestchannel' => [NetworkImpl] },
+    options: {
+      queryHandlerOptions: [Object],
+      eventHandlerOptions: [Object],
+      discovery: [Object],
+      wallet: [Wallet],
+      identity: 'User1@Org2'
+    },
+    client: Client {
+      type: 'Client',
+      name: 'gateway client',
+      mspid: null,
+      _tls_mutual: [Object],
+      endorsers: [Map],
+      committers: Map(0) {},
+      channels: [Map],
+      centralizedOptions: null
+    },
+    identity: { credentials: [Object], mspId: 'Org2MSP', type: 'X.509' },
+    identityContext: IdentityContext {
+      type: 'IdentityContext',
+      client: [Client],
+      user: [User],
+      name: 'User1@Org2',
+      mspid: 'Org2MSP',
+      transactionId: null,
+      nonce: null
+    }
+  },
+  namespace: '',
+  discoveryInterests: [ { name: 'clientservicecontract1' } ]
+}
+******************************************
+{
+  requestId: '10000',
+  issue_type: 'Req by prabhat',
+  product: 'BG',
+  subject: 'Subjecton Guarantee',
+  description: 'Request for Guarantee product-approve suresh',
+  message: 'description for raisedreq',
+  created_by: 'messageforreq',
+  status: 'tesorg1',
+  message_from: 'pending',
+  messageinsert: 'messagefromuser1',
+  messageid: 'messageinsert'
+}
+10000, Req by prabhat, BG, Subjecton Guarantee,Request for Guarantee product-approve suresh,description for raisedreq,messageforreq,$
+{event.messageid}
+******************************************
+print date format
+print values: description for raisedreq -1  description for raisedreq 10000 messageforreq 1721549123426 2024-07-21T08:05:23.426Z 7/21/2024, 8:05:23 AM
+{"user":"messageforreq","title":" for 10000" ,"message":"description for raisedreq","component":"notificationBar", "time":"7/21/2024, 8:05:23 AM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '3190',
+  issue_type: 'null',
+  product: 'undefined',
+  subject: 'undefined',
+  description: 'Issue Type: Issue Product: Loan',
+  message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  created_by: 'test-user1/org1',
+  status: 'undefined',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '91901'
+}
+3190, null, undefined, undefined,Issue Type: Issue Product: Loan,AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh -1  AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh 3190 test-user1/org1 1721580694967 2024-07-21T16:51:34.967Z 7/21/2024, 4:51:34 PM
+{"user":"test-user1/org1","title":" for 3190" ,"message":"AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh","component":"notificationBar", "time":"7/21/2024, 4:51:34 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '34641',
+  issue_type: 'undefined',
+  product: 'undefined',
+  subject: 'undefined',
+  description: 'Issue Type: Issue Product: Loan',
+  message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  created_by: 'test-user1/org1',
+  status: 'undefined',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '75092'
+}
+34641, undefined, undefined, undefined,Issue Type: Issue Product: Loan,epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu -1  epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu 34641 test-user1/org1 1721581562493 2024-07-21T17:06:02.493Z 7/21/2024, 5:06:02 PM
+{"user":"test-user1/org1","title":" for 34641" ,"message":"epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu","component":"notificationBar", "time":"7/21/2024, 5:06:02 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '62768',
+  issue_type: 'undefined',
+  product: 'undefined',
+  subject: 'undefined',
+  description: 'undefined',
+  message: 'Event:  epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  created_by: 'test-user1/org1',
+  status: 'undefined',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '54704'
+}
+62768, undefined, undefined, undefined,undefined,Event:  epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:  epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu -1  Event:  epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu 62768 test-user1/org1 1721581739651 2024-07-21T17:08:59.651Z 7/21/2024, 5:08:59 PM
+{"user":"test-user1/org1","title":" for 62768" ,"message":"Event:  epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu","component":"notificationBar", "time":"7/21/2024, 5:08:59 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '82817',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'Initiate chat from node 1',
+  description: 'Initiate chat from node 1',
+  message: 'Event:  epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '96934'
+}
+82817, Issue, Loan, Initiate chat from node 1,Initiate chat from node 1,Event:  epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:  epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu -1  Event:  epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu 82817 test-user1/org1 1721582212051 2024-07-21T17:16:52.051Z 7/21/2024, 5:16:52 PM
+{"user":"test-user1/org1","title":" for 82817" ,"message":"Event:  epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu","component":"notificationBar", "time":"7/21/2024, 5:16:52 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '54073',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test refresh chat',
+  description: 'test refresh chat',
+  message: 'Event:Request Created',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '2663'
+}
+54073, Issue, Loan, test refresh chat,test refresh chat,Event:Request Created,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:Request Created -1  Event:Request Created 54073 test-user1/org1 1721582704870 2024-07-21T17:25:04.870Z 7/21/2024, 5:25:04 PM
+{"user":"test-user1/org1","title":" for 54073" ,"message":"Event:Request Created","component":"notificationBar", "time":"7/21/2024, 5:25:04 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '54073',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test refresh chat',
+  description: 'test refresh chat',
+  message: 'Event:  101545637870-UAN.pdf Uploaded #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '59863'
+}
+54073, Issue, Loan, test refresh chat,test refresh chat,Event:  101545637870-UAN.pdf Uploaded #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:  101545637870-UAN.pdf Uploaded #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1 20 Event:  101545637870 UAN.pdf Uploaded #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1 54073 test-user1/org1 1721583362748 2024-07-21T17:36:02.748Z 7/21/2024, 5:36:02 PM
+{"user":"test-user1/org1","title":"Event:  101545637870 for 54073" ,"message":"UAN.pdf Uploaded #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1","component":"notificationBar", "time":"7/21/2024, 5:36:02 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '54073',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test refresh chat',
+  description: 'test refresh chat',
+  message: 'Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '99896'
+}
+54073, Issue, Loan, test refresh chat,test refresh chat,Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh 18 Event:File Upload   AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh 54073 test-user1/org1 1721584049044 2024-07-21T17:47:29.044Z 7/21/2024, 5:47:29 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 54073" ,"message":" AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh","component":"notificationBar", "time":"7/21/2024, 5:47:29 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '54073',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test refresh chat',
+  description: 'test refresh chat',
+  message: 'Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '73235'
+}
+54073, Issue, Loan, test refresh chat,test refresh chat,Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 18 Event:File Upload   sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 54073 test-user1/org1 1721584195463 2024-07-21T17:49:55.463Z 7/21/2024, 5:49:55 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 54073" ,"message":" sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm","component":"notificationBar", "time":"7/21/2024, 5:49:55 PM"}
+
+message insert triggered
+Data insert successful
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '18616'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh 18 Event:File Upload   AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh 23268 test-user1/org1 1721724777809 2024-07-23T08:52:57.809Z 7/23/2024, 8:52:57 AM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh","component":"notificationBar", "time":"7/23/2024, 8:52:57 AM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '92659'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh 18 Event:File Upload   AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh 23268 test-user1/org1 1721753313979 2024-07-23T16:48:33.979Z 7/23/2024, 4:48:33 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh","component":"notificationBar", "time":"7/23/2024, 4:48:33 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '83910'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 18 Event:File Upload   sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 23268 test-user1/org1 1721753583378 2024-07-23T16:53:03.378Z 7/23/2024, 4:53:03 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm","component":"notificationBar", "time":"7/23/2024, 4:53:03 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '74138'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 18 Event:File Upload   sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 23268 test-user1/org1 1721753699863 2024-07-23T16:54:59.863Z 7/23/2024, 4:54:59 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm","component":"notificationBar", "time":"7/23/2024, 4:54:59 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '88325'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 18 Event:File Upload   sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 23268 test-user1/org1 1721753786095 2024-07-23T16:56:26.095Z 7/23/2024, 4:56:26 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm","component":"notificationBar", "time":"7/23/2024, 4:56:26 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '84282'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 18 Event:File Upload   sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 23268 test-user1/org1 1721753841807 2024-07-23T16:57:21.807Z 7/23/2024, 4:57:21 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm","component":"notificationBar", "time":"7/23/2024, 4:57:21 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '13920'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 18 Event:File Upload   sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 23268 test-user1/org1 1721754100026 2024-07-23T17:01:40.026Z 7/23/2024, 5:01:40 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm","component":"notificationBar", "time":"7/23/2024, 5:01:40 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '233762'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 18 Event:File Upload   sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 23268 test-user1/org1 1721755131801 2024-07-23T17:18:51.801Z 7/23/2024, 5:18:51 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm","component":"notificationBar", "time":"7/23/2024, 5:18:51 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '53170'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu 18 Event:File Upload   epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu 23268 test-user1/org1 1721755148715 2024-07-23T17:19:08.715Z 7/23/2024, 5:19:08 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" epfo.pdf Uploaded #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu","component":"notificationBar", "time":"7/23/2024, 5:19:08 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '655629'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 18 Event:File Upload   sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 23268 test-user1/org1 1721755350075 2024-07-23T17:22:30.075Z 7/23/2024, 5:22:30 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm","component":"notificationBar", "time":"7/23/2024, 5:22:30 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '23268',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'test collab from node 1',
+  description: 'test collab from node 1',
+  message: 'Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+  created_by: 'test-user1/org1',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '964041'
+}
+23268, Issue, Loan, test collab from node 1,test collab from node 1,Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm,test-user1/org1,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 18 Event:File Upload   sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm 23268 test-user1/org1 1721755428519 2024-07-23T17:23:48.519Z 7/23/2024, 5:23:48 PM
+{"user":"test-user1/org1","title":"Event:File Upload  for 23268" ,"message":" sample.txt Uploaded #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm","component":"notificationBar", "time":"7/23/2024, 5:23:48 PM"}
+
+message insert triggered
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Error: TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11372:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1114:18)
+      at afterConnectMultiple (node:net:1667:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Data insert successful
+Message data insert successful
+******************************************
+{
+  requestId: '19866',
+  issue_type: 'Service Request',
+  product: 'Cash',
+  subject: 'Need cash for test',
+  description: 'Need cash for test',
+  message: 'Event:Request Created',
+  created_by: 'org2-user1/Org2',
+  status: 'open',
+  message_from: 'org2-user1/Org2',
+  messageinsert: 'yes',
+  messageid: '77011'
+}
+19866, Service Request, Cash, Need cash for test,Need cash for test,Event:Request Created,org2-user1/Org2,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:Request Created -1  Event:Request Created 19866 org2-user1/Org2 1721818062915 2024-07-24T10:47:42.915Z 7/24/2024, 10:47:42 AM
+{"user":"org2-user1/Org2","title":" for 19866" ,"message":"Event:Request Created","component":"notificationBar", "time":"7/24/2024, 10:47:42 AM"}
+
+message insert triggered
+Data insert successful
+Message data insert successful
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:195:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:223:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+******************************************
+{
+  requestId: '19866',
+  issue_type: 'Service Request',
+  product: 'Cash',
+  subject: 'Need cash for test',
+  description: 'Need cash for test',
+  message: 'Event:File Upload - tomJerry.pdf Uploaded #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr',
+  created_by: 'org2-user1/Org2',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '473808'
+}
+19866, Service Request, Cash, Need cash for test,Need cash for test,Event:File Upload - tomJerry.pdf Uploaded #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr,org2-user1/Org2,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - tomJerry.pdf Uploaded #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr 18 Event:File Upload   tomJerry.pdf Uploaded #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr 19866 org2-user1/Org2 1721818534083 2024-07-24T10:55:34.083Z 7/24/2024, 10:55:34 AM
+{"user":"org2-user1/Org2","title":"Event:File Upload  for 19866" ,"message":" tomJerry.pdf Uploaded #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr","component":"notificationBar", "time":"7/24/2024, 10:55:34 AM"}
+
+message insert triggered
+Data insert successful
+Message data insert successful
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:223:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:195:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+******************************************
+{
+  requestId: '86833',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'Christus need 1000M',
+  description: 'Christus need 1000 M',
+  message: 'Event:Request Created',
+  created_by: 'org2-user1/Org2',
+  status: 'open',
+  message_from: 'org2-user1/Org2',
+  messageinsert: 'yes',
+  messageid: '8440'
+}
+86833, Issue, Loan, Christus need 1000M,Christus need 1000 M,Event:Request Created,org2-user1/Org2,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:Request Created -1  Event:Request Created 86833 org2-user1/Org2 1721830714841 2024-07-24T14:18:34.841Z 7/24/2024, 2:18:34 PM
+{"user":"org2-user1/Org2","title":" for 86833" ,"message":"Event:Request Created","component":"notificationBar", "time":"7/24/2024, 2:18:34 PM"}
+
+message insert triggered
+Data insert successful
+Message data insert successful
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:195:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:223:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+******************************************
+{
+  requestId: '86833',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'Christus need 1000M',
+  description: 'Christus need 1000 M',
+  message: 'Event:User Message-hi',
+  created_by: 'org2-user1/Org2',
+  status: 'open',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '222856'
+}
+86833, Issue, Loan, Christus need 1000M,Christus need 1000 M,Event:User Message-hi,org2-user1/Org2,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:User Message-hi 18 Event:User Message hi 86833 org2-user1/Org2 1721830871232 2024-07-24T14:21:11.232Z 7/24/2024, 2:21:11 PM
+{"user":"org2-user1/Org2","title":"Event:User Message for 86833" ,"message":"hi","component":"notificationBar", "time":"7/24/2024, 2:21:11 PM"}
+
+message insert triggered
+Data insert successful
+Message data insert successful
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:195:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:223:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+******************************************
+{
+  requestId: '86833',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'Christus need 1000M',
+  description: 'Christus need 1000 M',
+  message: 'Event:Status Change - Status changed from open to In progress',
+  created_by: 'org2-user1/Org2',
+  status: 'In progress',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '35073'
+}
+86833, Issue, Loan, Christus need 1000M,Christus need 1000 M,Event:Status Change - Status changed from open to In progress,org2-user1/Org2,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:Status Change - Status changed from open to In progress 20 Event:Status Change   Status changed from open to In progress 86833 org2-user1/Org2 1721830890877 2024-07-24T14:21:30.877Z 7/24/2024, 2:21:30 PM
+{"user":"org2-user1/Org2","title":"Event:Status Change  for 86833" ,"message":" Status changed from open to In progress","component":"notificationBar", "time":"7/24/2024, 2:21:30 PM"}
+
+message insert triggered
+Data insert successful
+Message data insert successful
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:195:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:223:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+******************************************
+{
+  requestId: '86833',
+  issue_type: 'Issue',
+  product: 'Loan',
+  subject: 'Christus need 1000M',
+  description: 'Christus need 1000 M',
+  message: 'Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+  created_by: 'org2-user1/Org2',
+  status: 'In progress',
+  message_from: 'test-user1/org1',
+  messageinsert: 'yes',
+  messageid: '863424'
+}
+86833, Issue, Loan, Christus need 1000M,Christus need 1000 M,Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh,org2-user1/Org2,$
+{event.messageid}
+******************************************
+print date format
+print values: Event:File Upload - AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh 18 Event:File Upload   AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh 86833 org2-user1/Org2 1721831468750 2024-07-24T14:31:08.750Z 7/24/2024, 2:31:08 PM
+{"user":"org2-user1/Org2","title":"Event:File Upload  for 86833" ,"message":" AnnexureF.pdf Uploaded #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh","component":"notificationBar", "time":"7/24/2024, 2:31:08 PM"}
+
+message insert triggered
+Data insert successful
+Message data insert successful
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:195:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Error: Error: Network response was not ok
+    at /app/hyperledger-fabric/mytest-network/eventhandler/blockEventListenerNew1.js:223:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Parser.parseErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:283:98)
+    at Parser.handlePacket (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  sevnode:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Parser.parseErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:283:98)
+    at Parser.handlePacket (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  sevnode:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Parser.parseErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:283:98)
+    at Parser.handlePacket (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  severity: 'FATAL',
+  code: '57P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postgres.c',
+  line: '3040',
+  routine: 'ProcessInterrupts'
+}
+
+Node.js v20.9.0
+ser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  sevnode:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Parser.parseErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:283:98)
+    at Parser.handlePacket (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  severity: 'FATAL',
+  code: '57P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postgres.c',
+  line: '3040',
+  routine: 'ProcessInterrupts'
+}
+
+Node.js v20.9.0
+ser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  sevnode:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Parser.parseErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:283:98)
+    at Parser.handlePacket (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  severity: 'FATAL',
+  code: '57P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postgres.c',
+  line: '3040',
+  routine: 'ProcessInterrupts'
+}
+
+Node.js v20.9.0
+ser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/eventhandler/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  severity: 'FATAL',
+  code: '57P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postgres.c',
+  line: '3040',
+  routine: 'ProcessInterrupts'
+}
+
+Node.js v20.9.0

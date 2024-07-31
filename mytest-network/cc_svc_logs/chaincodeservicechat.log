@@ -1,0 +1,3347 @@
+listening on *:4040
+Wallet path: /app/hyperledger-fabric/mytest-network/chaincodeservicechat/wallet
+Wallet path: /app/hyperledger-fabric/mytest-network/chaincodeservicechat/wallet
+2024-07-21T08:04:22.346Z - [31merror[39m: [ServiceEndpoint]: This service endpoint peer1-org2-grpcs://hlf-node2:7051 has an active grpc service connection
+2024-07-21T08:04:22.353Z - [32minfo[39m: [NetworkConfig]: buildPeer - Unable to connect to the endorser peer1-org2 due to Error: This service endpoint peer1-org2-grpcs://hlf-node2:7051 has an active grpc service connection
+    at Endorser.connect (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/fabric-common/lib/ServiceEndpoint.js:105:10)
+    at buildPeer (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/fabric-network/lib/impl/ccp/networkconfig.js:125:20)
+    at async Object.loadFromConfig (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/fabric-network/lib/impl/ccp/networkconfig.js:48:13)
+    at async Gateway.connect (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/fabric-network/lib/gateway.js:303:13)
+    at async module.exports.getNetworkInstance (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/util/networkutil.js:82:3)
+    at async main (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/createChatHistoryData.js:29:24)
+Use network channel for new services: synergychannel.
+Use network channel for new services: synergychannel.
+2024-07-21T08:04:22.601Z - [31merror[39m: [Channel]: addCommitter[mytestchannel] - error::Committer orderer1-org1:7050 already exists
+2024-07-21T08:04:22.601Z - [31merror[39m: [DiscoveryResultsProcessor]: _buildOrderer[mytestchannel] - Unable to connect to the discovered orderer orderer1-org1:7050 due to Error: Committer orderer1-org1:7050 already exists
+Submit Chat Contact creation transaction.
+Error processing transaction. ReferenceError: messageid is not defined
+ReferenceError: messageid is not defined
+    at main (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/createChatRequest.js:33:130)
+Disconnect from Fabric gateway.
+ChatRequest created successfully.
+2024-07-21T08:04:22.676Z - [31merror[39m: [Channel]: Endorser peer1-org3:7051 already exists
+2024-07-21T08:04:22.676Z - [31merror[39m: [DiscoveryResultsProcessor]: _buildPeer[mytestchannel] - Unable to connect to the discovered peer peer1-org3:7051 due to Error: Endorser peer1-org3:7051 already exists
+Submit Chat history Contract creation transaction.
+2024-07-21T08:04:22.871Z - [31merror[39m: [DiscoveryResultsProcessor]: parseDiscoveryResults[chathistorycc] - Channel:mytestchannel received discovery error:failed constructing descriptor for chaincodes:<name:"chathistorycc" > 
+Error processing transaction. Error: DiscoveryService: chathistorycc error: failed constructing descriptor for chaincodes:<name:"chathistorycc" > 
+Error: DiscoveryService: chathistorycc error: failed constructing descriptor for chaincodes:<name:"chathistorycc" > 
+    at DiscoveryResultsProcessor.parseDiscoveryResults (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/fabric-common/lib/DiscoveryResultsProcessor.js:31:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async DiscoveryService.send (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/fabric-common/lib/DiscoveryService.js:341:19)
+    at async ContractImpl.newDiscoveryService (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/fabric-network/lib/contract.js:281:9)
+    at async ContractImpl.getDiscoveryHandler (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/fabric-network/lib/contract.js:258:25)
+    at async Transaction.submit (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/fabric-network/lib/transaction.js:236:43)
+    at async main (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/createChatHistoryData.js:33:42)
+Disconnect from Fabric gateway.
+ChatRequest created successfully.
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests for online userchat: 62019
+received req
+=========== Start: getOnlineUser request ========= 62019
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='62019' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='62019' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 62019
+received req
+=========== Start: getChathistory request ========= 62019
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='62019' order by timestamp asc
+[
+  {
+    room_id: '62019',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '412290',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-09-2024 02:57PM'
+  },
+  {
+    room_id: '62019',
+    userID: '223458',
+    message: '223458 added to room',
+    messageid: '362217',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-09-2024 03:11PM'
+  },
+  {
+    room_id: '62019',
+    userID: '223456',
+    message: 'hi',
+    messageid: '996807',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-09-2024 03:12PM'
+  },
+  {
+    room_id: '62019',
+    userID: '223458',
+    message: 'hello',
+    messageid: '258834',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-09-2024 03:12PM'
+  },
+  {
+    room_id: '62019',
+    userID: '223456',
+    message: 'hi',
+    messageid: '316750',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-10-2024 10:32AM'
+  },
+  {
+    room_id: '62019',
+    userID: '223456',
+    message: 'hi',
+    messageid: '551664',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-10-2024 10:36AM'
+  },
+  {
+    room_id: '62019',
+    userID: '223456',
+    message: 'hi',
+    messageid: '880382',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:28PM'
+  }
+]
+request received at chatrequests for online userchat: 23268
+received req
+=========== Start: getOnlineUser request ========= 23268
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='23268' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='23268' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 23268
+received req
+=========== Start: getChathistory request ========= 23268
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='23268' order by timestamp asc
+[
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '293622',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:32PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '765246',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:34PM'
+  }
+]
+request received at chatrequests for online userchat: 10000
+received req
+=========== Start: getOnlineUser request ========= 10000
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='10000' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='10000' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 10000
+received req
+=========== Start: getChathistory request ========= 10000
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='10000' order by timestamp asc
+[
+  {
+    room_id: '10000',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '521203',
+    description: 'Issue Type: Req by prabhat Product: BG',
+    to_char: 'JUN-07-2024 04:29PM'
+  },
+  {
+    room_id: '10000',
+    userID: '223457',
+    message: '223457 added to room',
+    messageid: '685136',
+    description: 'Issue Type: Req by prabhat Product: BG',
+    to_char: 'JUN-07-2024 05:42PM'
+  }
+]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+test websocket 82817 create chatServiceRequest
+Wallet path: /app/hyperledger-fabric/mytest-network/chaincodeservicechat/wallet
+Use network channel for new services: synergychannel.
+Submit Chat Contact creation transaction.
+82817  successfully created
+Transaction complete.
+Disconnect from Fabric gateway.
+{
+  room_id: '82817',
+  room_name: 'test websocket',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'sample.txt #### Uploaded by user',
+  messageid: '996462',
+  description: 'Issue Type: Issue Product: Loan'
+}
+chat request creation successful
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  },
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'sample.txt #### Uploaded by user',
+    messageid: '996462',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 09:55AM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  },
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'sample.txt #### Uploaded by user',
+    messageid: '996462',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 09:55AM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+test websocket 82817 create chatServiceRequest
+Wallet path: /app/hyperledger-fabric/mytest-network/chaincodeservicechat/wallet
+Use network channel for new services: synergychannel.
+Submit Chat Contact creation transaction.
+82817  successfully created
+Transaction complete.
+Disconnect from Fabric gateway.
+{
+  room_id: '82817',
+  room_name: 'test websocket',
+  userId: '223456',
+  userName: 'test-user1',
+  message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+  messageid: '887075',
+  description: 'Issue Type: Issue Product: Loan'
+}
+chat request creation successful
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  },
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'sample.txt #### Uploaded by user',
+    messageid: '996462',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 09:55AM'
+  },
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+    messageid: '887075',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 01:42PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223456
+received req
+=========== Start: getUserChatRequest ========= 223456
+select distinct room_id,room_name,description from chat_history where "userID"='223456'
+[
+  {
+    room_id: '6959',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '6959',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'test websocket',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '10000',
+    room_name: 'Subjecton Guarantee',
+    description: 'Issue Type: Req by prabhat Product: BG'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '62019',
+    room_name: 'test socket user1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '82817',
+    room_name: 'Initiate chat from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 82817
+received req
+=========== Start: getChathistory request ========= 82817
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='82817' order by timestamp asc
+[
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '666835',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:45PM'
+  },
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'sample.txt #### Uploaded by user',
+    messageid: '996462',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 09:55AM'
+  },
+  {
+    room_id: '82817',
+    userID: '223456',
+    message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+    messageid: '887075',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 01:42PM'
+  }
+]
+request received at chatrequests for online userchat: 82817
+received req
+=========== Start: getOnlineUser request ========= 82817
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='82817' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='82817' ) as usertable order by usertable asc
+[ { userid: '223460_NO', user: 'org2-user1' } ]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 23268
+received req
+=========== Start: getChathistory request ========= 23268
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='23268' order by timestamp asc
+[
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '293622',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:32PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '765246',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:34PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '369088',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 08:52AM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '5438',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:48PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '970671',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:53PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '583330',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:54PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '245659',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:56PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '739918',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:57PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '313503',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:01PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '694941',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:18PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+    messageid: '296566',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:19PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '354287',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:22PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '998089',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:23PM'
+  }
+]
+request received at chatrequests for online userchat: 23268
+received req
+=========== Start: getOnlineUser request ========= 23268
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='23268' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='23268' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 23268
+received req
+=========== Start: getChathistory request ========= 23268
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='23268' order by timestamp asc
+[
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '293622',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:32PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '765246',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:34PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '369088',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 08:52AM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '5438',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:48PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '970671',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:53PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '583330',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:54PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '245659',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:56PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '739918',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:57PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '313503',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:01PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '694941',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:18PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+    messageid: '296566',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:19PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '354287',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:22PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '998089',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:23PM'
+  }
+]
+request received at chatrequests for online userchat: 23268
+received req
+=========== Start: getOnlineUser request ========= 23268
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='23268' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='23268' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 23268
+received req
+=========== Start: getChathistory request ========= 23268
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='23268' order by timestamp asc
+[
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '293622',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:32PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '765246',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:34PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '369088',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 08:52AM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '5438',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:48PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '970671',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:53PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '583330',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:54PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '245659',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:56PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '739918',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:57PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '313503',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:01PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '694941',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:18PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+    messageid: '296566',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:19PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '354287',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:22PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '998089',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:23PM'
+  }
+]
+request received at chatrequests for online userchat: 23268
+received req
+=========== Start: getOnlineUser request ========= 23268
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='23268' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='23268' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+Need cash for test 19866 create chatServiceRequest
+Wallet path: /app/hyperledger-fabric/mytest-network/chaincodeservicechat/wallet
+Use network channel for new services: synergychannel.
+Submit Chat Contact creation transaction.
+19866  successfully created
+Transaction complete.
+Disconnect from Fabric gateway.
+{
+  room_id: '19866',
+  room_name: 'Need cash for test',
+  userId: '223460',
+  userName: 'org2-user1',
+  message: 'chat initiation message',
+  messageid: '443064',
+  description: 'Issue Type: Service Request Product: Cash'
+}
+chat request creation successful
+Need cash for test 19866 create chatServiceRequest
+Wallet path: /app/hyperledger-fabric/mytest-network/chaincodeservicechat/wallet
+Use network channel for new services: synergychannel.
+Submit Chat Contact creation transaction.
+19866  successfully created
+Transaction complete.
+Disconnect from Fabric gateway.
+{
+  room_id: '19866',
+  room_name: 'Need cash for test',
+  userId: '223460',
+  userName: 'org2-user1',
+  message: 'chat initiation message',
+  messageid: '980919',
+  description: 'Issue Type: Service Request Product: Cash'
+}
+chat request creation successful
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 19866
+received req
+=========== Start: getChathistory request ========= 19866
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='19866' order by timestamp asc
+[
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '443064',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '980919',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  }
+]
+request received at chatrequests for online userchat: 19866
+received req
+=========== Start: getOnlineUser request ========= 19866
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='19866' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='19866' ) as usertable order by usertable asc
+[ { userid: '223460_YES', user: 'org2-user1' } ]
+Need cash for test 19866 create chatServiceRequest
+Wallet path: /app/hyperledger-fabric/mytest-network/chaincodeservicechat/wallet
+Use network channel for new services: synergychannel.
+Submit Chat Contact creation transaction.
+19866  successfully created
+Transaction complete.
+Disconnect from Fabric gateway.
+{
+  room_id: '19866',
+  room_name: 'Need cash for test',
+  userId: '223460',
+  userName: 'org2-user1',
+  message: 'hello ..need urgent cash for suresh travel',
+  messageid: '849128',
+  description: 'Issue Type: Service Request Product: Cash'
+}
+chat request creation successful
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 19866
+received req
+=========== Start: getChathistory request ========= 19866
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='19866' order by timestamp asc
+[
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '443064',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '980919',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'hello ..need urgent cash for suresh travel',
+    messageid: '849128',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '260022',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'declined ..as no reason',
+    messageid: '927297',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  }
+]
+request received at chatrequests for online userchat: 19866
+received req
+=========== Start: getOnlineUser request ========= 19866
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='19866' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='19866' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 19866
+received req
+=========== Start: getChathistory request ========= 19866
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='19866' order by timestamp asc
+[
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '443064',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '980919',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'hello ..need urgent cash for suresh travel',
+    messageid: '849128',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '260022',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'declined ..as no reason',
+    messageid: '927297',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'tomJerry.pdf #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr',
+    messageid: '894842',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:55AM'
+  }
+]
+request received at chatrequests for online userchat: 19866
+received req
+=========== Start: getOnlineUser request ========= 19866
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='19866' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='19866' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 19866
+received req
+=========== Start: getChathistory request ========= 19866
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='19866' order by timestamp asc
+[
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '443064',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '980919',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'hello ..need urgent cash for suresh travel',
+    messageid: '849128',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '260022',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'declined ..as no reason',
+    messageid: '927297',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'tomJerry.pdf #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr',
+    messageid: '894842',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:55AM'
+  }
+]
+request received at chatrequests for online userchat: 19866
+received req
+=========== Start: getOnlineUser request ========= 19866
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='19866' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='19866' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 19866
+received req
+=========== Start: getChathistory request ========= 19866
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='19866' order by timestamp asc
+[
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '443064',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '980919',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'hello ..need urgent cash for suresh travel',
+    messageid: '849128',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '260022',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'declined ..as no reason',
+    messageid: '927297',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'tomJerry.pdf #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr',
+    messageid: '894842',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:55AM'
+  }
+]
+request received at chatrequests for online userchat: 19866
+received req
+=========== Start: getOnlineUser request ========= 19866
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='19866' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='19866' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 19866
+received req
+=========== Start: getChathistory request ========= 19866
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='19866' order by timestamp asc
+[
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '443064',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '980919',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'hello ..need urgent cash for suresh travel',
+    messageid: '849128',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '260022',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'declined ..as no reason',
+    messageid: '927297',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'tomJerry.pdf #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr',
+    messageid: '894842',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:55AM'
+  }
+]
+request received at chatrequests for online userchat: 19866
+received req
+=========== Start: getOnlineUser request ========= 19866
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='19866' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='19866' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 19866
+received req
+=========== Start: getChathistory request ========= 19866
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='19866' order by timestamp asc
+[
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '443064',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '980919',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223460',
+    message: 'hello ..need urgent cash for suresh travel',
+    messageid: '849128',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:49AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '260022',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'declined ..as no reason',
+    messageid: '927297',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:51AM'
+  },
+  {
+    room_id: '19866',
+    userID: '223456',
+    message: 'tomJerry.pdf #### QmcaUat66p8R6QCKdv6HFuXcpFv669b6zYSaLhmrA9sSNr',
+    messageid: '894842',
+    description: 'Issue Type: Service Request Product: Cash',
+    to_char: 'JUL-24-2024 10:55AM'
+  }
+]
+request received at chatrequests for online userchat: 19866
+received req
+=========== Start: getOnlineUser request ========= 19866
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='19866' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='19866' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 54073
+received req
+=========== Start: getChathistory request ========= 54073
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='54073' order by timestamp asc
+[
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '854323',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:35PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: '101545637870-UAN.pdf #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1',
+    messageid: '650374',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:36PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '812589',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:47PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223459',
+    message: '223459 added to room',
+    messageid: '677109',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:48PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '838638',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:48PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '149317',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:49PM'
+  }
+]
+request received at chatrequests for online userchat: 54073
+received req
+=========== Start: getOnlineUser request ========= 54073
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='54073' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='54073' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 54073
+received req
+=========== Start: getChathistory request ========= 54073
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='54073' order by timestamp asc
+[
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '854323',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:35PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: '101545637870-UAN.pdf #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1',
+    messageid: '650374',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:36PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '812589',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:47PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223459',
+    message: '223459 added to room',
+    messageid: '677109',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:48PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '838638',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:48PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '149317',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:49PM'
+  }
+]
+request received at chatrequests for online userchat: 54073
+received req
+=========== Start: getOnlineUser request ========= 54073
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='54073' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='54073' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 54073
+received req
+=========== Start: getChathistory request ========= 54073
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='54073' order by timestamp asc
+[
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '854323',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:35PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: '101545637870-UAN.pdf #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1',
+    messageid: '650374',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:36PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '812589',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:47PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223459',
+    message: '223459 added to room',
+    messageid: '677109',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:48PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '838638',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:48PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '149317',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:49PM'
+  }
+]
+request received at chatrequests for online userchat: 54073
+received req
+=========== Start: getOnlineUser request ========= 54073
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='54073' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='54073' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 54073
+received req
+=========== Start: getChathistory request ========= 54073
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='54073' order by timestamp asc
+[
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '854323',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:35PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: '101545637870-UAN.pdf #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1',
+    messageid: '650374',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:36PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '812589',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:47PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223459',
+    message: '223459 added to room',
+    messageid: '677109',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:48PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '838638',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:48PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '149317',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:49PM'
+  }
+]
+request received at chatrequests for online userchat: 54073
+received req
+=========== Start: getOnlineUser request ========= 54073
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='54073' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='54073' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  },
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  }
+]
+request received at chatrequests API: 54073
+received req
+=========== Start: getChathistory request ========= 54073
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='54073' order by timestamp asc
+[
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '854323',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:35PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: '101545637870-UAN.pdf #### QmQevmY7Yruz6gSNbTKr6H2dMmhRdT2uyVtRo2nQC6rFv1',
+    messageid: '650374',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:36PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '812589',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:47PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223459',
+    message: '223459 added to room',
+    messageid: '677109',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:48PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '838638',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:48PM'
+  },
+  {
+    room_id: '54073',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '149317',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-21-2024 05:49PM'
+  }
+]
+request received at chatrequests for online userchat: 54073
+received req
+=========== Start: getOnlineUser request ========= 54073
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='54073' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='54073' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+Christus need 1000M 86833 create chatServiceRequest
+Wallet path: /app/hyperledger-fabric/mytest-network/chaincodeservicechat/wallet
+Use network channel for new services: synergychannel.
+Submit Chat Contact creation transaction.
+86833  successfully created
+Transaction complete.
+Disconnect from Fabric gateway.
+{
+  room_id: '86833',
+  room_name: 'Christus need 1000M',
+  userId: '223460',
+  userName: 'org2-user1',
+  message: 'chat initiation message',
+  messageid: '598919',
+  description: 'Issue Type: Issue Product: Loan'
+}
+chat request creation successful
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '86833',
+    room_name: 'Christus need 1000M',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  }
+]
+request received at chatrequests API: 86833
+received req
+=========== Start: getChathistory request ========= 86833
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='86833' order by timestamp asc
+[
+  {
+    room_id: '86833',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '598919',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-24-2024 02:26PM'
+  }
+]
+request received at chatrequests for online userchat: 86833
+received req
+=========== Start: getOnlineUser request ========= 86833
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='86833' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='86833' ) as usertable order by usertable asc
+[ { userid: '223460_YES', user: 'org2-user1' } ]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '86833',
+    room_name: 'Christus need 1000M',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  }
+]
+request received at chatrequests API: 86833
+received req
+=========== Start: getChathistory request ========= 86833
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='86833' order by timestamp asc
+[
+  {
+    room_id: '86833',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '598919',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-24-2024 02:26PM'
+  },
+  {
+    room_id: '86833',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '91584',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-24-2024 02:27PM'
+  },
+  {
+    room_id: '86833',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '570944',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-24-2024 02:31PM'
+  }
+]
+request received at chatrequests for online userchat: 86833
+received req
+=========== Start: getOnlineUser request ========= 86833
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='86833' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='86833' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '86833',
+    room_name: 'Christus need 1000M',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  }
+]
+request received at chatrequests API: 23268
+received req
+=========== Start: getChathistory request ========= 23268
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='23268' order by timestamp asc
+[
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '293622',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:32PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '765246',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:34PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '369088',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 08:52AM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '5438',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:48PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '970671',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:53PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '583330',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:54PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '245659',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:56PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '739918',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:57PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '313503',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:01PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '694941',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:18PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+    messageid: '296566',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:19PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '354287',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:22PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '998089',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:23PM'
+  }
+]
+request received at chatrequests for online userchat: 23268
+received req
+=========== Start: getOnlineUser request ========= 23268
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='23268' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='23268' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests for online userchat: 86833
+received req
+=========== Start: getOnlineUser request ========= 86833
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='86833' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='86833' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 86833
+received req
+=========== Start: getChathistory request ========= 86833
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='86833' order by timestamp asc
+[
+  {
+    room_id: '86833',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '598919',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-24-2024 02:26PM'
+  },
+  {
+    room_id: '86833',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '91584',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-24-2024 02:27PM'
+  },
+  {
+    room_id: '86833',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '570944',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-24-2024 02:31PM'
+  }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '86833',
+    room_name: 'Christus need 1000M',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  }
+]
+request received at chatrequests API: 23268
+received req
+=========== Start: getChathistory request ========= 23268
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='23268' order by timestamp asc
+[
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '293622',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:32PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223460',
+    message: '223460 added to room',
+    messageid: '765246',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUN-14-2024 01:34PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '369088',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 08:52AM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '5438',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:48PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '970671',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:53PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '583330',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:54PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '245659',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:56PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '739918',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 04:57PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '313503',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:01PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '694941',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:18PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'epfo.pdf #### QmeekBbth9goTXZJftcRZFm54yxVQfEtr2DrKieuiB9BXu',
+    messageid: '296566',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:19PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '354287',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:22PM'
+  },
+  {
+    room_id: '23268',
+    userID: '223456',
+    message: 'sample.txt #### QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm',
+    messageid: '998089',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-23-2024 05:23PM'
+  }
+]
+request received at chatrequests for online userchat: 23268
+received req
+=========== Start: getOnlineUser request ========= 23268
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='23268' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='23268' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+request received at chatrequests API: 223460
+received req
+=========== Start: getUserChatRequest ========= 223460
+select distinct room_id,room_name,description from chat_history where "userID"='223460'
+[
+  {
+    room_id: '23268',
+    room_name: 'test collab from node 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '43581',
+    room_name: 'testing collab from org 1',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '86833',
+    room_name: 'Christus need 1000M',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '54073',
+    room_name: 'test refresh chat',
+    description: 'Issue Type: Issue Product: Loan'
+  },
+  {
+    room_id: '19866',
+    room_name: 'Need cash for test',
+    description: 'Issue Type: Service Request Product: Cash'
+  }
+]
+request received at chatrequests API: 86833
+received req
+=========== Start: getChathistory request ========= 86833
+select room_id,"userID",message,messageid,description,to_char(timestamp,'MON-DD-YYYY HH12:MIPM') from chat_history where room_id='86833' order by timestamp asc
+[
+  {
+    room_id: '86833',
+    userID: '223460',
+    message: 'chat initiation message',
+    messageid: '598919',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-24-2024 02:26PM'
+  },
+  {
+    room_id: '86833',
+    userID: '223456',
+    message: 'chat initiation message',
+    messageid: '91584',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-24-2024 02:27PM'
+  },
+  {
+    room_id: '86833',
+    userID: '223456',
+    message: 'AnnexureF.pdf #### Qmc2gVhEhb3rgoYRME5MTGe8CrzV6LrTnKiyVR1PWAxHnh',
+    messageid: '570944',
+    description: 'Issue Type: Issue Product: Loan',
+    to_char: 'JUL-24-2024 02:31PM'
+  }
+]
+request received at chatrequests for online userchat: 86833
+received req
+=========== Start: getOnlineUser request ========= 86833
+select * from (select distinct CONCAT("userID",'_YES' )as "userid" ,cn.user from chat_history c join contact cn on c."userID"=cn."contactId" where room_id='86833' union select CONCAT(cn."contactId",'_NO') as "userid",cn.user from contact cn join chat_history c on cn."contactId" != c."userID" where room_id='86833' ) as usertable order by usertable asc
+[
+  { userid: '223460_NO', user: 'org2-user1' },
+  { userid: '223460_YES', user: 'org2-user1' }
+]
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Parser.parseErrorMessage (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/pg-protocol/dist/parser.js:283:98)
+    at Parser.handlePacket (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/pg-protocol/dist/parser.js:122:29)
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/pg-protocol/dist/parser.js:35:38)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/pg-protocol/dist/index.js:11:42)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:376:12)
+    at readableAddChunk (node:internal/streams/readable:349:9)
+    at Readable.push (node:internal/streams/readable:286:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+Emitted 'error' event on Client instance at:
+    at Client._handleErrorEvent (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/pg/lib/client.js:341:10)
+    at Client._handleErrorMessage (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/pg/lib/client.js:352:12)
+    at Connection.emit (node:events:514:28)
+    at /app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/pg/lib/connection.js:117:12
+    at Parser.parse (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/pg-protocol/dist/parser.js:36:17)
+    at Socket.<anonymous> (/app/hyperledger-fabric/mytest-network/chaincodeservicechat/node_modules/pg-protocol/dist/index.js:11:42)
+    [... lines matching original stack trace ...]
+    at Readable.push (node:internal/streams/readable:286:10) {
+  length: 116,
+  severity: 'FATAL',
+  code: '57P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postgres.c',
+  line: '3040',
+  routine: 'ProcessInterrupts'
+}
+
+Node.js v20.9.0

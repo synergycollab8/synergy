@@ -1,0 +1,10 @@
+version: 0
+tlsconfig:
+  certpath: ""
+  keypath: ""
+  peercacertpath: /app/hyperledger-fabric/mytest-network/organizations/peerOrganizations/Org2/peers/peer1-org2/tls/tlscacerts/tls-cacert.pem
+  timeout: 0s
+signerconfig:
+  mspid: Org2MSP
+  identitypath: /app/hyperledger-fabric/mytest-network/organizations/peerOrganizations/Org2/users/User1@Org2/msp/signcerts/cert.pem
+  keypath: /app/hyperledger-fabric/mytest-network/organizations/peerOrganizations/Org2/users/User1@Org2/msp/keystore/e5022cef0285c144a075d0004e60c4bed9da6405365d2a5c849dc6e500611f1e_sk

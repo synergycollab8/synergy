@@ -20,7 +20,7 @@ Organizations:
         ID: Orderer1MSP
 
         # MSPDir is the filesystem path which contains the MSP configuration
-        MSPDir: /app/hlf/mytest-network/organizations/ordererOrganizations/Org1/msp
+        MSPDir: /msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -47,7 +47,7 @@ Organizations:
         # ID to load the MSP definition as
         ID: Org1MSP
 
-        MSPDir: /app/hlf/mytest-network/organizations/peerOrganizations/Org1/msp
+        MSPDir: /app/hyperledger-fabric/mytest-network/organizations/peerOrganizations/Org2/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -74,7 +74,7 @@ Organizations:
         # ID to load the MSP definition as
         ID: Org2MSP
 
-        MSPDir: /app/hlf/mytest-network/organizations/peerOrganizations/Org1/../Org2/msp
+        MSPDir: /app/hyperledger-fabric/mytest-network/organizations/peerOrganizations/Org2/../Org2/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -210,8 +210,8 @@ Orderer: &OrdererDefaults
         Consenters:
         - Host: orderer1-org1
           Port: 7050
-          ClientTLSCert: /app/hlf/mytest-network/organizations/ordererOrganizations/Org1/orderers/orderer1-org1/tls/signcerts/cert.pem
-          ServerTLSCert: /app/hlf/mytest-network/organizations/ordererOrganizations/Org1/orderers/orderer1-org1/tls/signcerts/cert.pem
+          ClientTLSCert: /tls/signcerts/cert.pem
+          ServerTLSCert: /tls/signcerts/cert.pem
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
@@ -319,3 +319,41 @@ Profiles:
                 - *Org2
             Capabilities:
                 <<: *ApplicationCapabilities
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+---
+################################################################################
+#
+#   Section: Organizations
+#
+#   - This section defines the different organizational identities which will
+#   be referenced later in the configuration.
+#
+################################################################################
+Organizations:
+    - &Org2
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: Org2MSP
+
+        # ID to load the MSP definition as
+        ID: Org2MSP
+
+        MSPDir: /app/hyperledger-fabric/mytest-network/organizations/peerOrganizations/Org2/msp
+
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('Org2MSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('Org2MSP.peer')"
