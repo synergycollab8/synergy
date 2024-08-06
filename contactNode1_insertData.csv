@@ -1,0 +1,7 @@
+"contactId","user","phone","email","status","organization","role"
+"223456","test-user1","65789456","test-user1@org1.com","Active","org1","test-user1-role"
+"223457","test-user3","65789456","test-user3@org1.com","Active","org1","test-user2-role"
+"223458","test-user4","65789456","test-user4@org1.com","Active","org1","test-user4-role"
+"223459","test-user5","65789456","test-user5@org1.com","Active","org1","test-user5-role"
+"223460","org2-user1","65789456","org2-user1@org2.com","Active","org2","test-userorg2-role"
+"223461","org2-user2","65789456","org2-user2@org2.com","Active","org2","test-userorg2-role"
